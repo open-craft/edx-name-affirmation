@@ -3,6 +3,12 @@ Custom exceptions for edx_name_affirmation.
 """
 
 
+class VerifiedNameDoesNotExist(Exception):
+    """
+    The requested VerifiedName does not exist.
+    """
+
+
 class VerifiedNameEmptyString(Exception):
     """
     An empty string was supplied for verified_name or profile_name.

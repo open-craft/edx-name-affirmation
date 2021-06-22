@@ -14,4 +14,4 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 * Initialize project along with `VerifiedName` model.
-* Create API methods `create_verified_name` and `get_verified_name`.
+* Create API methods `create_verified_name`, `get_verified_name`, and `update_verification_attempt_id`.

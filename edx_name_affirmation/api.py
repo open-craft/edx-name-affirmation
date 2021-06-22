@@ -4,7 +4,11 @@ Python API for edx_name_affirmation.
 
 import logging
 
-from edx_name_affirmation.exceptions import VerifiedNameEmptyString, VerifiedNameMultipleAttemptIds
+from edx_name_affirmation.exceptions import (
+    VerifiedNameDoesNotExist,
+    VerifiedNameEmptyString,
+    VerifiedNameMultipleAttemptIds
+)
 from edx_name_affirmation.models import VerifiedName
 
 log = logging.getLogger(__name__)
@@ -87,3 +91,57 @@ def get_verified_name(user, is_verified=False):
         return verified_name_qs.filter(is_verified=True).first()
 
     return verified_name_qs.first()
+
+
+def update_verification_attempt_id(user, verification_attempt_id):
+    """
+    Update the `verification_attempt_id` for the user's most recent VerifiedName.
+
+    If the VerifiedName already has a linked verification or proctored exam attempt, create a new
+    VerifiedName instead, using the same `verified_name` and `profile_name`.
+
+    This will raise an exception if the user does not have an existing VerifiedName.
+
+    Arguments:
+        * `user` (User object)
+        * `verification_attempt_id` (int)
+    """
+    verified_name_obj = get_verified_name(user)
+
+    if not verified_name_obj:
+        err_msg = (
+            'Attempted to update most recent VerifiedName for user_id={user_id} with '
+            'verification_attempt_id={verification_attempt_id}, but this user does not have '
+            'an existing VerifiedName.'.format(
+                user_id=user.id, verification_attempt_id=verification_attempt_id
+            )
+        )
+        raise VerifiedNameDoesNotExist(err_msg)
+
+    if verified_name_obj.verification_attempt_id or verified_name_obj.proctored_exam_attempt_id:
+        log_msg = (
+            'Attempted to update VerifiedName id={id} with '
+            'verification_attempt_id={verification_attempt_id}, but it already has a linked attempt. '
+            'Creating a new VerifiedName for user_id={user_id}'.format(
+                id=verified_name_obj.id, verification_attempt_id=verification_attempt_id, user_id=user.id,
+            )
+        )
+        log.warning(log_msg)
+
+        create_verified_name(
+            user=user,
+            verified_name=verified_name_obj.verified_name,
+            profile_name=verified_name_obj.profile_name,
+            verification_attempt_id=verification_attempt_id,
+        )
+
+    verified_name_obj.verification_attempt_id = verification_attempt_id
+    verified_name_obj.save()
+
+    log_msg = (
+        'Updated VerifiedName id={id} with verification_attempt_id={verification_attempt_id} '
+        'for user_id={user_id}'.format(
+            id=verified_name_obj.id, verification_attempt_id=verification_attempt_id, user_id=user.id,
+        )
+    )
+    log.info(log_msg)

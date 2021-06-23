@@ -3,4 +3,4 @@ branch = True
 data_file = .coverage
 source=edx_name_affirmation
 omit =
-    tests
+    */migrations/*

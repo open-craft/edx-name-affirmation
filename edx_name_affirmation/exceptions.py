@@ -35,3 +35,10 @@ class VerifiedNameMultipleAttemptIds(Exception):
     Both a verification_attempt_id and proctored_exam_attempt_id were supplied for
     the same VerifiedName.
     """
+
+
+class VerifiedNameAttemptIdNotGiven(Exception):
+    """
+    Neither a verification_attempt_id or a proctored_exam_attempt_id was given for a
+    function that requires it.
+    """

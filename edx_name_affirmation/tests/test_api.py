@@ -7,8 +7,14 @@ import ddt
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from edx_name_affirmation.api import create_verified_name, get_verified_name, update_verification_attempt_id
+from edx_name_affirmation.api import (
+    create_verified_name,
+    get_verified_name,
+    update_is_verified_status,
+    update_verification_attempt_id
+)
 from edx_name_affirmation.exceptions import (
+    VerifiedNameAttemptIdNotGiven,
     VerifiedNameDoesNotExist,
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
@@ -25,6 +31,8 @@ class TestVerifiedNameAPI(TestCase):
     """
     VERIFIED_NAME = 'Jonathan Doe'
     PROFILE_NAME = 'Jon Doe'
+    VERIFICATION_ATTEMPT_ID = 123
+    PROCTORED_EXAM_ATTEMPT_ID = 456
 
     def setUp(self):
         super().setUp()
@@ -68,7 +76,11 @@ class TestVerifiedNameAPI(TestCase):
         """
         with self.assertRaises(VerifiedNameMultipleAttemptIds):
             create_verified_name(
-                self.user, self.VERIFIED_NAME, self.PROFILE_NAME, 123, 456,
+                self.user,
+                self.VERIFIED_NAME,
+                self.PROFILE_NAME,
+                self.VERIFICATION_ATTEMPT_ID,
+                self.PROCTORED_EXAM_ATTEMPT_ID,
             )
 
     @ddt.data(
@@ -142,17 +154,17 @@ class TestVerifiedNameAPI(TestCase):
         first_verified_name_id = self._create_verified_name().id
         second_verified_name_id = self._create_verified_name().id
 
-        update_verification_attempt_id(self.user, 123)
+        update_verification_attempt_id(self.user, self.VERIFICATION_ATTEMPT_ID)
 
         first_verified_name_obj = VerifiedName.objects.get(id=first_verified_name_id)
         second_verified_name_obj = VerifiedName.objects.get(id=second_verified_name_id)
 
         self.assertIsNone(first_verified_name_obj.verification_attempt_id)
-        self.assertEqual(second_verified_name_obj.verification_attempt_id, 123)
+        self.assertEqual(second_verified_name_obj.verification_attempt_id, self.VERIFICATION_ATTEMPT_ID)
 
     @ddt.data(
-        (123, None),
-        (None, 456),
+        (VERIFICATION_ATTEMPT_ID, None),
+        (None, PROCTORED_EXAM_ATTEMPT_ID),
     )
     @ddt.unpack
     def test_update_verification_attempt_id_already_exists(
@@ -177,7 +189,51 @@ class TestVerifiedNameAPI(TestCase):
         `update_verification_attempt_id` will raise an exception.
         """
         with self.assertRaises(VerifiedNameDoesNotExist):
-            update_verification_attempt_id(self.user, 123)
+            update_verification_attempt_id(self.user, self.VERIFICATION_ATTEMPT_ID)
+
+    @ddt.data(
+        (VERIFICATION_ATTEMPT_ID, None),
+        (None, PROCTORED_EXAM_ATTEMPT_ID)
+    )
+    @ddt.unpack
+    def test_update_is_verified_status(
+        self, verification_attempt_id, proctored_exam_attempt_id,
+    ):
+        """
+        Test that VerifiedName status can be updated with a given attempt ID.
+        """
+        self._create_verified_name(verification_attempt_id, proctored_exam_attempt_id)
+        update_is_verified_status(
+            self.user, True, verification_attempt_id, proctored_exam_attempt_id,
+        )
+        verified_name_obj = get_verified_name(self.user)
+        self.assertTrue(verified_name_obj.is_verified)
+
+    def test_update_is_verified_no_attempt_id(self):
+        """
+        Test that `update_is_verified_by_attempt_id` will raise an exception with no attempt
+        ID given.
+        """
+        with self.assertRaises(VerifiedNameAttemptIdNotGiven):
+            update_is_verified_status(self.user, True)
+
+    def test_update_is_verified_multiple_attempt_ids(self):
+        """
+        Test that `update_is_verified_by_attempt_id` will raise an exception with multiple attempt
+        IDs given.
+        """
+        with self.assertRaises(VerifiedNameMultipleAttemptIds):
+            update_is_verified_status(
+                self.user, True, self.VERIFICATION_ATTEMPT_ID, self.PROCTORED_EXAM_ATTEMPT_ID,
+            )
+
+    def test_update_is_verified_does_not_exist(self):
+        """
+        Test that `update_is_verified_by_attempt_id` will raise an exception if a VerifiedName does
+        not exist for the attempt ID given.
+        """
+        with self.assertRaises(VerifiedNameDoesNotExist):
+            update_is_verified_status(self.user, True, self.VERIFICATION_ATTEMPT_ID)
 
     def _create_verified_name(
         self, verification_attempt_id=None, proctored_exam_attempt_id=None, is_verified=False,

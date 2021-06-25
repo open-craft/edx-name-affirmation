@@ -13,6 +13,7 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
-* Initialize project along with `VerifiedName` model.
-* Create API methods `create_verified_name`, `get_verified_name`, `update_verification_attempt_id`,
-  and `update_is_verified_status`.
+
+[0.1.0] - 2021-06-30
+~~~~~~~~~~~~~~~~~~~~
+* Initialize project along with `VerifiedName` model, Python API, and REST endpoints.

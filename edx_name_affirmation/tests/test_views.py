@@ -24,15 +24,15 @@ class VerifiedNameViewTests(LoggedInTestCase):
     OTHER_VERIFIED_NAME = 'Robert Smith'
     OTHER_PROFILE_NAME = 'Bob Smith'
 
+    ATTEMPT_ID = 11111
+
     def test_verified_name(self):
         create_verified_name(self.user, self.VERIFIED_NAME, self.PROFILE_NAME, is_verified=True)
         verified_name = get_verified_name(self.user, is_verified=True)
 
         expected_data = {
-            'id': verified_name.id,
-            'modified': verified_name.modified.isoformat(),
             'created': verified_name.created.isoformat(),
-            'user': {'id': self.user.id, 'username': self.user.username, 'email': self.user.email},
+            'username': self.user.username,
             'verified_name': verified_name.verified_name,
             'profile_name': verified_name.profile_name,
             'verification_attempt_id': verified_name.verification_attempt_id,
@@ -63,10 +63,8 @@ class VerifiedNameViewTests(LoggedInTestCase):
 
         # expected data should match the verifiedname from the other user
         expected_data = {
-            'id': other_user_verified_name.id,
-            'modified': other_user_verified_name.modified.isoformat(),
             'created': other_user_verified_name.created.isoformat(),
-            'user': {'id': other_user.id, 'username': other_user.username, 'email': other_user.email},
+            'username': other_user.username,
             'verified_name': other_user_verified_name.verified_name,
             'profile_name': other_user_verified_name.profile_name,
             'verification_attempt_id': other_user_verified_name.verification_attempt_id,
@@ -82,3 +80,93 @@ class VerifiedNameViewTests(LoggedInTestCase):
     def test_404_if_no_verified_name(self):
         response = self.client.get(reverse('edx_name_affirmation:verified_name'))
         self.assertEqual(response.status_code, 404)
+
+    def test_post_200(self):
+        verified_name_data = {
+            'username': self.user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': self.VERIFIED_NAME,
+            'verification_attempt_id': self.ATTEMPT_ID
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 200)
+
+        created_name = get_verified_name(self.user, is_verified=False)
+        self.assertEqual(created_name.user.username, self.user.username)
+        self.assertEqual(created_name.profile_name, self.PROFILE_NAME)
+        self.assertEqual(created_name.verified_name, self.VERIFIED_NAME)
+        self.assertEqual(created_name.verification_attempt_id, self.ATTEMPT_ID)
+
+    def test_post_200_if_staff(self):
+        self.user.is_staff = True
+        self.user.save()
+
+        other_user = User(username='other_tester', email='other@test.com')
+        other_user.save()
+
+        verified_name_data = {
+            'username': other_user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': self.VERIFIED_NAME,
+            'proctored_exam_attempt_id': self.ATTEMPT_ID,
+            'is_verified': True
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 200)
+
+        created_name = get_verified_name(other_user, is_verified=True)
+        self.assertEqual(created_name.user.username, other_user.username)
+        self.assertEqual(created_name.profile_name, self.PROFILE_NAME)
+        self.assertEqual(created_name.verified_name, self.VERIFIED_NAME)
+        self.assertEqual(created_name.proctored_exam_attempt_id, self.ATTEMPT_ID)
+
+    def test_post_403_non_staff(self):
+        other_user = User(username='other_tester', email='other@test.com')
+        other_user.save()
+
+        verified_name_data = {
+            'username': other_user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': self.VERIFIED_NAME,
+            'verification_attempt_id': self.ATTEMPT_ID,
+            'is_verified': True
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_post_400_invalid_serializer(self):
+        verified_name_data = {
+            'username': self.user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': self.VERIFIED_NAME,
+            'verification_attempt_id': 'xxyz',
+            'is_verified': True
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_post_400_two_attempt_ids(self):
+        verified_name_data = {
+            'username': self.user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': self.VERIFIED_NAME,
+            'verification_attempt_id': self.ATTEMPT_ID,
+            'proctored_exam_attempt_id': self.ATTEMPT_ID
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 400)

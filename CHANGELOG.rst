@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.1.2] - 2021-07-02
+~~~~~~~~~~~~~~~~~~~~
+* Add plugin support.
+
 [0.1.1] - 2021-06-30
 ~~~~~~~~~~~~~~~~~~~~
 * Fix typo in publish-pypi job.

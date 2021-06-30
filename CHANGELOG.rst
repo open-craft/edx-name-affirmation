@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.1.1] - 2021-06-30
+~~~~~~~~~~~~~~~~~~~~
+* Fix typo in publish-pypi job.
+
 [0.1.0] - 2021-06-30
 ~~~~~~~~~~~~~~~~~~~~
 * Initialize project along with `VerifiedName` model, Python API, and REST endpoints.

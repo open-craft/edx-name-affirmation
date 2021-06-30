@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'edx_name_affirmation',
+    'waffle',
 )
 
 LOCALE_PATHS = [

@@ -13,6 +13,7 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+* Add PR template
 
 [0.1.2] - 2021-07-02
 ~~~~~~~~~~~~~~~~~~~~

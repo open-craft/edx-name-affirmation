@@ -9,7 +9,9 @@ from django.test import TestCase
 
 from edx_name_affirmation.api import (
     create_verified_name,
+    create_verified_name_config,
     get_verified_name,
+    should_use_verified_name_for_certs,
     update_is_verified_status,
     update_verification_attempt_id
 )
@@ -19,7 +21,7 @@ from edx_name_affirmation.exceptions import (
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
 )
-from edx_name_affirmation.models import VerifiedName
+from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
 
 User = get_user_model()
 
@@ -246,3 +248,47 @@ class TestVerifiedNameAPI(TestCase):
             proctored_exam_attempt_id, is_verified
         )
         return get_verified_name(self.user)
+
+    @ddt.data(
+        (True, True),
+        (True, False),
+        (False, False),
+    )
+    @ddt.unpack
+    def test_should_use_verified_name_for_certs(self, create_config, expected_value):
+        """
+        Test that the correct config value is returned from `should_use_verified_name_for_certs`
+        """
+        if create_config:
+            VerifiedNameConfig.objects.create(user=self.user, use_verified_name_for_certs=expected_value)
+
+        # create config for other user, make sure it is the opposite of the expected value.
+        # we want to add an additional config to make sure that caching by user works properly
+        other_user = User(username='bobsmith', email='bobsmith@test.com')
+        other_user.save()
+        VerifiedNameConfig.objects.create(user=other_user, use_verified_name_for_certs=(not expected_value))
+
+        should_use_for_certs = should_use_verified_name_for_certs(self.user)
+        self.assertEqual(should_use_for_certs, expected_value)
+
+    def test_create_verified_name_config(self):
+        """
+        Test that verified name config is created and updated successfully
+        """
+        create_verified_name_config(self.user)
+
+        # check that one record exists
+        configs = VerifiedNameConfig.objects.filter(user=self.user)
+        self.assertEqual(len(configs), 1)
+        config_obj = configs[0]
+        self.assertFalse(config_obj.use_verified_name_for_certs)
+        self.assertEqual(config_obj.user, self.user)
+
+        create_verified_name_config(self.user, use_verified_name_for_certs=True)
+
+        # check that new record was created
+        configs = VerifiedNameConfig.objects.filter(user=self.user).order_by('change_date')
+        self.assertEqual(len(configs), 2)
+        config_obj = configs[1]
+        self.assertTrue(config_obj.use_verified_name_for_certs)
+        self.assertEqual(config_obj.user, self.user)

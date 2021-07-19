@@ -10,7 +10,7 @@ from edx_name_affirmation.exceptions import (
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
 )
-from edx_name_affirmation.models import VerifiedName
+from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
 
 log = logging.getLogger(__name__)
 
@@ -212,3 +212,38 @@ def update_is_verified_status(
         )
     )
     log.info(log_msg)
+
+
+def create_verified_name_config(user, use_verified_name_for_certs=None):
+    """
+    Create verified name configuration for the given user.
+    Arguments:
+        * `user` (User object)
+        * `use_verified_name_for_certs` (bool): If True, certificates will prioritize
+          the user's verified name over their profile name.
+    """
+    fields = {'user': user}
+    if use_verified_name_for_certs is not None:
+        fields['use_verified_name_for_certs'] = use_verified_name_for_certs
+
+    config_obj = VerifiedNameConfig.objects.create(**fields)
+
+    log_msg = (
+        'Created verified name config for user_id={user_id} with '
+        'use_verified_name_for_certs={use_verified_name_for_certs}'.format(
+            user_id=config_obj.user.id,
+            use_verified_name_for_certs=config_obj.use_verified_name_for_certs,
+        )
+    )
+    log.info(log_msg)
+
+
+def should_use_verified_name_for_certs(user):
+    """
+    Returns a boolean describing whether the user has opted to use their verified
+    name over their profile name for certificates.
+    Arguments:
+        * `user` (User object)
+    """
+    config_obj = VerifiedNameConfig.current(user)
+    return config_obj.use_verified_name_for_certs

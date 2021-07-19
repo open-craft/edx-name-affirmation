@@ -2,6 +2,7 @@
 Database models for edx_name_affirmation.
 """
 
+from config_models.models import ConfigurationModel
 from model_utils.models import TimeStampedModel
 
 from django.contrib.auth import get_user_model
@@ -35,3 +36,20 @@ class VerifiedName(TimeStampedModel):
         """ Meta class for this Django model """
         db_table = 'nameaffirmation_verifiedname'
         verbose_name = 'verified name'
+
+
+class VerifiedNameConfig(ConfigurationModel):
+    """
+    This model provides various configuration fields for users regarding their
+    verified name.
+    .. no_pii: This model has no PII.
+    """
+    KEY_FIELDS = ('user',)
+
+    user = models.ForeignKey(User, db_index=True, on_delete=models.CASCADE, related_name='verified_name_config')
+    use_verified_name_for_certs = models.BooleanField(default=False)
+
+    class Meta:
+        """ Meta class for this Django model """
+        db_table = 'nameaffirmation_verifiednameconfig'
+        verbose_name = 'verified name config'

@@ -14,6 +14,7 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 * Add PR template
+* Add VerifiedNameConfig model and API functions
 
 [0.1.2] - 2021-07-02
 ~~~~~~~~~~~~~~~~~~~~

@@ -14,6 +14,7 @@ from django.contrib.auth import get_user_model
 from edx_name_affirmation.api import create_verified_name, get_verified_name
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
 from edx_name_affirmation.serializers import VerifiedNameSerializer
+from edx_name_affirmation.toggles import is_verified_name_enabled
 
 
 class AuthenticatedAPIView(APIView):
@@ -70,6 +71,7 @@ class VerifiedNameView(AuthenticatedAPIView):
             )
 
         serialized_data = VerifiedNameSerializer(verified_name).data
+        serialized_data['verified_name_enabled'] = is_verified_name_enabled()
         return Response(serialized_data)
 
     def post(self, request):

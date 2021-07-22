@@ -13,8 +13,13 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
-* Add PR template
-* Add VerifiedNameConfig model and API functions
+
+
+[0.2.0] - 2021-07-22
+~~~~~~~~~~~~~~~~~~~~
+* Add verified_name_enabled to VerifiedNameView GET response.
+* Add PR template.
+* Add VerifiedNameConfig model and API functions.
 
 [0.1.2] - 2021-07-02
 ~~~~~~~~~~~~~~~~~~~~

@@ -3,10 +3,13 @@ All tests for edx_name_affirmation views
 """
 import json
 
+from edx_toggles.toggles.testutils import override_waffle_flag
+
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from edx_name_affirmation.api import create_verified_name, get_verified_name
+from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 from .utils import LoggedInTestCase
 
@@ -37,7 +40,29 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': verified_name.profile_name,
             'verification_attempt_id': verified_name.verification_attempt_id,
             'proctored_exam_attempt_id': verified_name.proctored_exam_attempt_id,
-            'is_verified': verified_name.is_verified
+            'is_verified': verified_name.is_verified,
+            'verified_name_enabled': False,
+        }
+
+        response = self.client.get(reverse('edx_name_affirmation:verified_name'))
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(data, expected_data)
+
+    @override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
+    def test_verified_name_feature_enabled(self):
+        create_verified_name(self.user, self.VERIFIED_NAME, self.PROFILE_NAME, is_verified=True)
+        verified_name = get_verified_name(self.user, is_verified=True)
+
+        expected_data = {
+            'created': verified_name.created.isoformat(),
+            'username': self.user.username,
+            'verified_name': verified_name.verified_name,
+            'profile_name': verified_name.profile_name,
+            'verification_attempt_id': verified_name.verification_attempt_id,
+            'proctored_exam_attempt_id': verified_name.proctored_exam_attempt_id,
+            'is_verified': verified_name.is_verified,
+            'verified_name_enabled': True,
         }
 
         response = self.client.get(reverse('edx_name_affirmation:verified_name'))
@@ -69,7 +94,8 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': other_user_verified_name.profile_name,
             'verification_attempt_id': other_user_verified_name.verification_attempt_id,
             'proctored_exam_attempt_id': other_user_verified_name.proctored_exam_attempt_id,
-            'is_verified': other_user_verified_name.is_verified
+            'is_verified': other_user_verified_name.is_verified,
+            'verified_name_enabled': False,
         }
 
         response = self.client.get(reverse('edx_name_affirmation:verified_name'), {'username': other_user.username})
@@ -86,7 +112,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'username': self.user.username,
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
-            'verification_attempt_id': self.ATTEMPT_ID
+            'verification_attempt_id': self.ATTEMPT_ID,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),
@@ -112,7 +138,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'proctored_exam_attempt_id': self.ATTEMPT_ID,
-            'is_verified': True
+            'is_verified': True,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),
@@ -135,7 +161,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'verification_attempt_id': self.ATTEMPT_ID,
-            'is_verified': True
+            'is_verified': True,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),

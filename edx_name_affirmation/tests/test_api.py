@@ -5,6 +5,7 @@ Tests for the `edx_name_affirmation` Python API.
 import ddt
 
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import TestCase
 
 from edx_name_affirmation.api import (
@@ -40,6 +41,12 @@ class TestVerifiedNameAPI(TestCase):
         super().setUp()
         self.user = User(username='jondoe', email='jondoe@test.com')
         self.user.save()
+        # Create a fresh config with default values
+        VerifiedNameConfig.objects.create(user=self.user)
+
+    def tearDown(self):
+        super().tearDown()
+        cache.clear()
 
     def test_create_verified_name_defaults(self):
         """
@@ -275,20 +282,18 @@ class TestVerifiedNameAPI(TestCase):
         """
         Test that verified name config is created and updated successfully
         """
-        create_verified_name_config(self.user)
-
-        # check that one record exists
-        configs = VerifiedNameConfig.objects.filter(user=self.user)
-        self.assertEqual(len(configs), 1)
-        config_obj = configs[0]
-        self.assertFalse(config_obj.use_verified_name_for_certs)
-        self.assertEqual(config_obj.user, self.user)
-
         create_verified_name_config(self.user, use_verified_name_for_certs=True)
 
         # check that new record was created
-        configs = VerifiedNameConfig.objects.filter(user=self.user).order_by('change_date')
-        self.assertEqual(len(configs), 2)
-        config_obj = configs[1]
+        config_obj = VerifiedNameConfig.current(self.user)
         self.assertTrue(config_obj.use_verified_name_for_certs)
         self.assertEqual(config_obj.user, self.user)
+
+    def test_create_verified_name_config_no_overwrite(self):
+        """
+        Test that if a field is set to True, it will not be overridden by False
+        if not specified when the config is updated
+        """
+        create_verified_name_config(self.user, use_verified_name_for_certs=True)
+        create_verified_name_config(self.user)
+        self.assertTrue(should_use_verified_name_for_certs(self.user))

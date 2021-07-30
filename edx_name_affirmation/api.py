@@ -223,6 +223,12 @@ def create_verified_name_config(user, use_verified_name_for_certs=None):
           the user's verified name over their profile name.
     """
     fields = {'user': user}
+
+    # Default to the values from the most recent config
+    existing_config = VerifiedNameConfig.objects.filter(user=user).order_by('-change_date').first()
+    if existing_config:
+        fields['use_verified_name_for_certs'] = existing_config.use_verified_name_for_certs
+
     if use_verified_name_for_certs is not None:
         fields['use_verified_name_for_certs'] = use_verified_name_for_certs
 

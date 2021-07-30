@@ -14,6 +14,12 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.3.0] - 2021-08-02
+~~~~~~~~~~~~~~~~~~~~
+* Add `use_verified_name_for_certs` field to the VerifiedNameView
+  response, and create a new endpoint to update the user's verified
+  name config.
+* Admin page configuration for VerifiedName and VerifiedNameConfig.
 
 [0.2.0] - 2021-07-22
 ~~~~~~~~~~~~~~~~~~~~

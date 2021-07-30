@@ -11,9 +11,14 @@ from rest_framework.views import APIView
 
 from django.contrib.auth import get_user_model
 
-from edx_name_affirmation.api import create_verified_name, get_verified_name
+from edx_name_affirmation.api import (
+    create_verified_name,
+    create_verified_name_config,
+    get_verified_name,
+    should_use_verified_name_for_certs
+)
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
-from edx_name_affirmation.serializers import VerifiedNameSerializer
+from edx_name_affirmation.serializers import VerifiedNameConfigSerializer, VerifiedNameSerializer
 from edx_name_affirmation.toggles import is_verified_name_enabled
 
 
@@ -49,6 +54,16 @@ class VerifiedNameView(AuthenticatedAPIView):
         ** Scenarios **
         ?username=jdoe
         returns an existing verified name object matching the username
+        Example response: {
+            "username": "jdoe",
+            "verified_name": "Jonathan Doe",
+            "profile_name": "Jon Doe",
+            "verification_attempt_id": 123,
+            "proctored_exam_attempt_id": None,
+            "is_verified": True,
+            "use_verified_name_for_certs": False,
+            "verified_name_enabled": True
+        }
     """
     def get(self, request):
         """
@@ -69,9 +84,11 @@ class VerifiedNameView(AuthenticatedAPIView):
                 data={'detail': 'There is no verified name related to this user.'}
 
             )
+        use_verified_name_for_certs = should_use_verified_name_for_certs(user)
 
         serialized_data = VerifiedNameSerializer(verified_name).data
         serialized_data['verified_name_enabled'] = is_verified_name_enabled()
+        serialized_data['use_verified_name_for_certs'] = use_verified_name_for_certs
         return Response(serialized_data)
 
     def post(self, request):
@@ -105,4 +122,46 @@ class VerifiedNameView(AuthenticatedAPIView):
         else:
             response_status = status.HTTP_400_BAD_REQUEST
             data = serializer.errors
+        return Response(status=response_status, data=data)
+
+
+class VerifiedNameConfigView(AuthenticatedAPIView):
+    """
+    Endpoint for VerifiedNameConfig.
+    /edx_name_affirmation/v1/verified_name/config
+
+    Supports:
+        HTTP POST: Creates a new VerifiedNameConfig.
+
+    HTTP POST
+    Creates a new VerifiedName.
+    Example POST data: {
+        "username": "jdoe",
+        "use_verified_name_for_certs": True
+    }
+    """
+    def post(self, request):
+        """
+        Create VerifiedNameConfig
+        """
+        username = request.data.get('username')
+        if username != request.user.username and not request.user.is_staff:
+            msg = 'Must be a staff user to override the requested user’s VerifiedNameConfig value'
+            return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': msg})
+
+        serializer = VerifiedNameConfigSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user = get_user_model().objects.get(username=username) if username else request.user
+            create_verified_name_config(
+                user,
+                use_verified_name_for_certs=request.data.get('use_verified_name_for_certs'),
+            )
+            response_status = status.HTTP_201_CREATED
+            data = {}
+
+        else:
+            response_status = status.HTTP_400_BAD_REQUEST
+            data = serializer.errors
+
         return Response(status=response_status, data=data)

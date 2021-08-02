@@ -6,6 +6,8 @@ waffle.Sample:
     ".. no_pii:": "This model has no PII"
 waffle.Switch:
     ".. no_pii:": "This model has no PII"
+admin.LogEntry:
+    ".. no_pii:": "This model has no PII"
 contenttypes.ContentType:
     ".. no_pii:": "This model has no PII"
 auth.User:

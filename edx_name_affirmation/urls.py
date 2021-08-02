@@ -13,5 +13,12 @@ urlpatterns = [
         views.VerifiedNameView.as_view(),
         name='verified_name'
     ),
+
+    url(
+        r'edx_name_affirmation/v1/verified_name/config$',
+        views.VerifiedNameConfigView.as_view(),
+        name='verified_name_config'
+    ),
+
     url(r'^', include('rest_framework.urls', namespace='rest_framework')),
 ]

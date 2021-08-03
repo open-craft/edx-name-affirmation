@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.3.1] - 2021-08-03
+~~~~~~~~~~~~~~~~~~~~
+* Update `MANIFEST.in` to include all directories under `edx_name_affirmation`.
+
 [0.3.0] - 2021-08-02
 ~~~~~~~~~~~~~~~~~~~~
 * Add `use_verified_name_for_certs` field to the VerifiedNameView

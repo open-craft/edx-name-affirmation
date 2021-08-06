@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.6.2
+astroid==2.6.6
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -13,7 +13,7 @@ backports.entry-points-selectable==1.1.0
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-bleach==3.3.1
+bleach==4.0.0
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -22,9 +22,13 @@ certifi==2021.5.30
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
+cffi==1.14.6
+    # via
+    #   -r requirements/quality.txt
+    #   cryptography
 chardet==4.0.0
     # via diff-cover
-charset-normalizer==2.0.3
+charset-normalizer==2.0.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -41,11 +45,11 @@ click-log==0.3.2
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-code-annotations==1.1.2
+code-annotations==1.2.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-codecov==2.1.11
+codecov==2.1.12
     # via -r requirements/ci.txt
 colorama==0.4.4
     # via
@@ -55,7 +59,11 @@ coverage==5.5
     # via
     #   -r requirements/ci.txt
     #   codecov
-diff-cover==6.2.0
+cryptography==3.4.7
+    # via
+    #   -r requirements/quality.txt
+    #   secretstorage
+diff-cover==6.2.1
     # via -r requirements/dev.in
 distlib==0.3.2
     # via
@@ -72,7 +80,7 @@ docutils==0.17.1
     #   -r requirements/quality.txt
     #   readme-renderer
     #   rstcheck
-edx-i18n-tools==0.5.3
+edx-i18n-tools==0.7.0
     # via -r requirements/dev.in
 edx-lint==5.0.0
     # via -r requirements/quality.txt
@@ -86,17 +94,22 @@ idna==3.2
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==4.6.1
+importlib-metadata==4.6.3
     # via
     #   -r requirements/quality.txt
     #   keyring
     #   twine
 inflect==5.3.0
     # via jinja2-pluralize
-isort==5.9.2
+isort==5.9.3
     # via
     #   -r requirements/quality.txt
     #   pylint
+jeepney==0.7.1
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
+    #   secretstorage
 jinja2==3.0.1
     # via
     #   -r requirements/quality.txt
@@ -127,9 +140,7 @@ packaging==21.0
     #   -r requirements/quality.txt
     #   bleach
     #   tox
-path==16.0.0
-    # via path.py
-path.py==12.5.0
+path==16.2.0
     # via edx-i18n-tools
 pbr==5.6.0
     # via
@@ -145,7 +156,7 @@ pkginfo==1.7.1
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==2.0.2
+platformdirs==2.2.0
     # via
     #   -r requirements/ci.txt
     #   virtualenv
@@ -162,6 +173,10 @@ py==1.10.0
     #   tox
 pycodestyle==2.7.0
     # via -r requirements/quality.txt
+pycparser==2.20
+    # via
+    #   -r requirements/quality.txt
+    #   cffi
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
 pygments==2.9.0
@@ -169,7 +184,7 @@ pygments==2.9.0
     #   -r requirements/quality.txt
     #   diff-cover
     #   readme-renderer
-pylint==2.9.3
+pylint==2.9.6
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -228,6 +243,10 @@ rfc3986==1.5.0
     #   twine
 rstcheck==3.3.1
     # via -r requirements/quality.txt
+secretstorage==3.3.1
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
 six==1.16.0
     # via
     #   -r requirements/ci.txt
@@ -260,11 +279,11 @@ toml==0.10.2
     #   -r requirements/quality.txt
     #   pylint
     #   tox
-tomli==1.0.4
+tomli==1.2.0
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
-tox==3.24.0
+tox==3.24.1
     # via
     #   -r requirements/ci.txt
     #   tox-battery
@@ -272,18 +291,18 @@ tox-battery==0.6.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/dev.in
-tqdm==4.61.2
+tqdm==4.62.0
     # via
     #   -r requirements/quality.txt
     #   twine
-twine==3.4.1
+twine==3.4.2
     # via -r requirements/quality.txt
 urllib3==1.26.6
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-virtualenv==20.6.0
+virtualenv==20.7.0
     # via
     #   -r requirements/ci.txt
     #   tox

@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.4.0] - 2021-08-06
+~~~~~~~~~~~~~~~~~~~~
+* Expose API methods through `NameAffirmationService`.
+
 [0.3.1] - 2021-08-03
 ~~~~~~~~~~~~~~~~~~~~
 * Update `MANIFEST.in` to include all directories under `edx_name_affirmation`.

@@ -94,6 +94,17 @@ def get_verified_name(user, is_verified=False):
     return verified_name_qs.first()
 
 
+def get_verified_name_history(user):
+    """
+    Return a QuerySet of all VerifiedNames for a given user, ordered by the date created from
+    most recent.
+
+    Arguments:
+        * `user` (User object)
+    """
+    return VerifiedName.objects.filter(user=user).order_by('-created')
+
+
 def update_verification_attempt_id(user, verification_attempt_id):
     """
     Update the `verification_attempt_id` for the user's most recent VerifiedName.

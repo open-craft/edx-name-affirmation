@@ -15,6 +15,7 @@ from edx_name_affirmation.api import (
     create_verified_name,
     create_verified_name_config,
     get_verified_name,
+    get_verified_name_history,
     should_use_verified_name_for_certs
 )
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
@@ -123,6 +124,35 @@ class VerifiedNameView(AuthenticatedAPIView):
             response_status = status.HTTP_400_BAD_REQUEST
             data = serializer.errors
         return Response(status=response_status, data=data)
+
+
+class VerifiedNameHistoryView(AuthenticatedAPIView):
+    """
+    Endpoint for VerifiedName history.
+    /edx_name_affirmation/v1/verified_name/history?username=xxx
+
+    Supports:
+        HTTP GET: Return a list of VerifiedNames for the given user.
+    """
+    def get(self, request):
+        """
+        Get a list of verified name objects for the given user, ordered by most recently created.
+        """
+        username = request.GET.get('username')
+        if username and not request.user.is_staff:
+            return Response(
+                status=status.HTTP_403_FORBIDDEN,
+                data={"detail": "Must be a Staff User to Perform this request."}
+            )
+
+        user = get_user_model().objects.get(username=username) if username else request.user
+        verified_name_qs = get_verified_name_history(user)
+
+        serialized_data = [
+            VerifiedNameSerializer(verified_name).data for verified_name in verified_name_qs
+        ]
+
+        return Response(serialized_data)
 
 
 class VerifiedNameConfigView(AuthenticatedAPIView):

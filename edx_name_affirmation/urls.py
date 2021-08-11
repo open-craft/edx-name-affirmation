@@ -15,6 +15,12 @@ urlpatterns = [
     ),
 
     url(
+        r'edx_name_affirmation/v1/verified_name/history$',
+        views.VerifiedNameHistoryView.as_view(),
+        name='verified_name_history'
+    ),
+
+    url(
         r'edx_name_affirmation/v1/verified_name/config$',
         views.VerifiedNameConfigView.as_view(),
         name='verified_name_config'

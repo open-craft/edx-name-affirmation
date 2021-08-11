@@ -3,6 +3,7 @@ All tests for edx_name_affirmation views
 """
 import json
 
+import ddt
 from edx_toggles.toggles.testutils import override_waffle_flag
 
 from django.contrib.auth import get_user_model
@@ -13,6 +14,7 @@ from edx_name_affirmation.api import (
     create_verified_name,
     create_verified_name_config,
     get_verified_name,
+    get_verified_name_history,
     should_use_verified_name_for_certs
 )
 from edx_name_affirmation.models import VerifiedNameConfig
@@ -227,6 +229,86 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'use_verified_name_for_certs': use_verified_name_for_certs,
             'verified_name_enabled': verified_name_enabled
         }
+
+
+@ddt.ddt
+class VerifiedNameHistoryViewTests(LoggedInTestCase):
+    """
+    Tests for the VerifiedNameHistoryView
+    """
+    def test_get(self):
+        verified_name_history = self._create_verified_name_history(self.user)
+        expected_response = self._get_expected_response(self.user, verified_name_history)
+
+        response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
+
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(data, expected_response)
+
+    def test_get_no_data(self):
+        response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
+
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(data, [])
+
+    @ddt.data((True, 200), (False, 403))
+    @ddt.unpack
+    def test_get_staff_access(self, is_staff, expected_response):
+        other_user = User(username='other_tester', email='other@test.com')
+        other_user.save()
+
+        if is_staff:
+            self.user.is_staff = True
+            self.user.save()
+
+        response = self.client.get(
+            reverse('edx_name_affirmation:verified_name_history'),
+            {'username': other_user.username}
+        )
+
+        self.assertEqual(response.status_code, expected_response)
+
+    def _create_verified_name_history(self, user):
+        """
+        Create and return a verified name QuerySet.
+        """
+        create_verified_name(
+            user,
+            'Jonathan Doe',
+            'Jon Doe',
+            verification_attempt_id=123,
+            is_verified=True
+        )
+        create_verified_name(
+            user,
+            'Jane Doe',
+            'Jane Doe',
+            proctored_exam_attempt_id=456,
+            is_verified=False
+        )
+        return get_verified_name_history(user)
+
+    def _get_expected_response(self, user, verified_name_history):
+        """
+        Create and return a verified name QuerySet.
+        """
+        expected_response = []
+
+        for verified_name_obj in verified_name_history:
+            data = {
+                'created': verified_name_obj.created.isoformat(),
+                'username': user.username,
+                'verified_name': verified_name_obj.verified_name,
+                'profile_name': verified_name_obj.profile_name,
+                'verification_attempt_id': verified_name_obj.verification_attempt_id,
+                'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
+                'is_verified': verified_name_obj.is_verified
+            }
+            expected_response.append(data)
+
+        return expected_response
 
 
 class VerifiedNameConfigViewTests(LoggedInTestCase):

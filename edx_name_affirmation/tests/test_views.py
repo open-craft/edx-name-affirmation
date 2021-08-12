@@ -247,11 +247,12 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
         self.assertEqual(data, expected_response)
 
     def test_get_no_data(self):
+        expected_response = self._get_expected_response(self.user, [])
         response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
 
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content.decode('utf-8'))
-        self.assertEqual(data, [])
+        self.assertEqual(data, expected_response)
 
     @ddt.data((True, 200), (False, 403))
     @ddt.unpack
@@ -294,7 +295,7 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
         """
         Create and return a verified name QuerySet.
         """
-        expected_response = []
+        expected_response = {'results': []}
 
         for verified_name_obj in verified_name_history:
             data = {
@@ -306,7 +307,7 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
                 'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
                 'is_verified': verified_name_obj.is_verified
             }
-            expected_response.append(data)
+            expected_response['results'].append(data)
 
         return expected_response
 

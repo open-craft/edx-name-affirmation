@@ -147,10 +147,8 @@ class VerifiedNameHistoryView(AuthenticatedAPIView):
 
         user = get_user_model().objects.get(username=username) if username else request.user
         verified_name_qs = get_verified_name_history(user)
-
-        serialized_data = [
-            VerifiedNameSerializer(verified_name).data for verified_name in verified_name_qs
-        ]
+        serializer = VerifiedNameSerializer(verified_name_qs, many=True)
+        serialized_data = {'results': serializer.data}
 
         return Response(serialized_data)
 

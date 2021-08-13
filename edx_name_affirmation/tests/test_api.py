@@ -12,6 +12,7 @@ from edx_name_affirmation.api import (
     create_verified_name,
     create_verified_name_config,
     get_verified_name,
+    get_verified_name_history,
     should_use_verified_name_for_certs,
     update_is_verified_status,
     update_verification_attempt_id
@@ -154,6 +155,18 @@ class TestVerifiedNameAPI(TestCase):
             verified_name_obj = get_verified_name(self.user)
 
         self.assertIsNone(verified_name_obj)
+
+    def test_get_verified_name_history(self):
+        """
+        Test that get_verified_name_history returns all of the user's VerifiedNames
+        ordered by most recently created.
+        """
+        verified_name_first = self._create_verified_name()
+        verified_name_second = self._create_verified_name()
+
+        verified_name_qs = get_verified_name_history(self.user)
+        self.assertEqual(verified_name_qs[1].id, verified_name_first.id)
+        self.assertEqual(verified_name_qs[0].id, verified_name_second.id)
 
     def test_update_verification_attempt_id(self):
         """

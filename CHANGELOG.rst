@@ -14,6 +14,11 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.5.0] - 2021-08-11
+~~~~~~~~~~~~~~~~~~~~
+* Add API method and endpoint to return a complete list of the user's
+  VerifiedNames, ordered by most recently created.
+
 [0.4.0] - 2021-08-06
 ~~~~~~~~~~~~~~~~~~~~
 * Expose API methods through `NameAffirmationService`.

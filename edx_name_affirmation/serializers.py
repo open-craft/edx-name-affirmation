@@ -17,7 +17,7 @@ class VerifiedNameSerializer(serializers.ModelSerializer):
     profile_name = serializers.CharField(required=True)
     verification_attempt_id = serializers.IntegerField(required=False, allow_null=True)
     proctored_exam_attempt_id = serializers.IntegerField(required=False, allow_null=True)
-    is_verified = serializers.BooleanField(required=False, allow_null=True)
+    status = serializers.CharField(required=False, allow_null=True)
 
     class Meta:
         """
@@ -27,7 +27,7 @@ class VerifiedNameSerializer(serializers.ModelSerializer):
 
         fields = (
             "created", "username", "verified_name", "profile_name", "verification_attempt_id",
-            "proctored_exam_attempt_id", "is_verified"
+            "proctored_exam_attempt_id", "status"
         )
 
 

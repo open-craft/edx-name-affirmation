@@ -40,10 +40,11 @@ class VerifiedName(TimeStampedModel):
 
     status = models.CharField(
         max_length=32,
-        choices=[(tag.value, tag.value) for tag in VerifiedNameStatus],
+        choices=[(st.value, st.value) for st in VerifiedNameStatus],
         default=VerifiedNameStatus.PENDING.value,
     )
-    is_verified = models.BooleanField(default=False)
+    # is_verified is being removed
+    is_verified = models.BooleanField(default=False, null=True)
 
     class Meta:
         """ Meta class for this Django model """

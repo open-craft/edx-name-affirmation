@@ -17,7 +17,7 @@ from edx_name_affirmation.api import (
     get_verified_name_history,
     should_use_verified_name_for_certs
 )
-from edx_name_affirmation.models import VerifiedNameConfig
+from edx_name_affirmation.models import VerifiedNameConfig, VerifiedNameStatus
 from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 from .utils import LoggedInTestCase
@@ -48,7 +48,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
         cache.clear()
 
     def test_verified_name(self):
-        verified_name = self._create_verified_name(is_verified=True)
+        verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
 
         expected_data = self._get_expected_data(self.user, verified_name)
 
@@ -59,7 +59,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
 
     @override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
     def test_verified_name_feature_enabled(self):
-        verified_name = self._create_verified_name(is_verified=True)
+        verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
 
         expected_data = self._get_expected_data(self.user, verified_name, verified_name_enabled=True)
 
@@ -69,7 +69,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
         self.assertEqual(data, expected_data)
 
     def test_verified_name_existing_config(self):
-        verified_name = self._create_verified_name(is_verified=True)
+        verified_name = self._create_verified_name()
         create_verified_name_config(self.user, use_verified_name_for_certs=True)
         expected_data = self._get_expected_data(self.user, verified_name, use_verified_name_for_certs=True)
 
@@ -80,7 +80,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
     def test_staff_access_verified_name(self):
         other_user = User(username='other_tester', email='other@test.com')
         other_user.save()
-        create_verified_name(other_user, self.VERIFIED_NAME, self.PROFILE_NAME, is_verified=True)
+        create_verified_name(other_user, self.VERIFIED_NAME, self.PROFILE_NAME, status=VerifiedNameStatus.APPROVED)
 
         # check that non staff access returns 403
         response = self.client.get(reverse('edx_name_affirmation:verified_name'), {'username': other_user.username})
@@ -136,7 +136,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'proctored_exam_attempt_id': self.ATTEMPT_ID,
-            'is_verified': True,
+            'status': VerifiedNameStatus.APPROVED.value,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),
@@ -159,7 +159,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'verification_attempt_id': self.ATTEMPT_ID,
-            'is_verified': True,
+            'status': VerifiedNameStatus.APPROVED.value,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),
@@ -173,7 +173,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'verification_attempt_id': 'xxyz',
-            'is_verified': True
+            'status': VerifiedNameStatus.APPROVED.value,
         }
         response = self.client.post(
             reverse('edx_name_affirmation:verified_name'),
@@ -196,7 +196,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
         self.assertEqual(response.status_code, 400)
 
     def _create_verified_name(
-        self, verification_attempt_id=None, proctored_exam_attempt_id=None, is_verified=False,
+        self, verification_attempt_id=None, proctored_exam_attempt_id=None, status=VerifiedNameStatus.PENDING,
     ):
         """
         Create and return a verified name object.
@@ -207,7 +207,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             self.PROFILE_NAME,
             verification_attempt_id,
             proctored_exam_attempt_id,
-            is_verified
+            status
         )
         return get_verified_name(self.user)
 
@@ -225,7 +225,7 @@ class VerifiedNameViewTests(LoggedInTestCase):
             'profile_name': verified_name_obj.profile_name,
             'verification_attempt_id': verified_name_obj.verification_attempt_id,
             'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
-            'is_verified': verified_name_obj.is_verified,
+            'status': verified_name_obj.status,
             'use_verified_name_for_certs': use_verified_name_for_certs,
             'verified_name_enabled': verified_name_enabled
         }
@@ -280,14 +280,14 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
             'Jonathan Doe',
             'Jon Doe',
             verification_attempt_id=123,
-            is_verified=True
+            status=VerifiedNameStatus.APPROVED,
         )
         create_verified_name(
             user,
             'Jane Doe',
             'Jane Doe',
             proctored_exam_attempt_id=456,
-            is_verified=False
+            status=VerifiedNameStatus.DENIED,
         )
         return get_verified_name_history(user)
 
@@ -305,7 +305,7 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
                 'profile_name': verified_name_obj.profile_name,
                 'verification_attempt_id': verified_name_obj.verification_attempt_id,
                 'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
-                'is_verified': verified_name_obj.is_verified
+                'status': verified_name_obj.status
             }
             expected_response['results'].append(data)
 

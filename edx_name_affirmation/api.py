@@ -10,14 +10,14 @@ from edx_name_affirmation.exceptions import (
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
 )
-from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
+from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig, VerifiedNameStatus
 
 log = logging.getLogger(__name__)
 
 
 def create_verified_name(
     user, verified_name, profile_name, verification_attempt_id=None,
-    proctored_exam_attempt_id=None, is_verified=False,
+    proctored_exam_attempt_id=None, status=VerifiedNameStatus.PENDING,
 ):
     """
     Create a new `VerifiedName` for the given user.
@@ -47,9 +47,9 @@ def create_verified_name(
             'external attempt IDs were given. Only one may be used. '
             'verification_attempt_id={verification_attempt_id}, '
             'proctored_exam_attempt_id={proctored_exam_attempt_id}, '
-            'is_verified={is_verified}'.format(
+            'status={status}'.format(
                 user_id=user.id, verification_attempt_id=verification_attempt_id,
-                proctored_exam_attempt_id=proctored_exam_attempt_id, is_verified=is_verified,
+                proctored_exam_attempt_id=proctored_exam_attempt_id, status=status,
             )
         )
         raise VerifiedNameMultipleAttemptIds(err_msg)
@@ -60,16 +60,16 @@ def create_verified_name(
         profile_name=profile_name,
         verification_attempt_id=verification_attempt_id,
         proctored_exam_attempt_id=proctored_exam_attempt_id,
-        is_verified=is_verified,
+        status=status,
     )
 
     log_msg = (
         'VerifiedName created for user_id={user_id}. '
         'verification_attempt_id={verification_attempt_id}, '
         'proctored_exam_attempt_id={proctored_exam_attempt_id}, '
-        'is_verified={is_verified}'.format(
+        'status={status}'.format(
             user_id=user.id, verification_attempt_id=verification_attempt_id,
-            proctored_exam_attempt_id=proctored_exam_attempt_id, is_verified=is_verified,
+            proctored_exam_attempt_id=proctored_exam_attempt_id, status=status,
         )
     )
     log.info(log_msg)
@@ -89,7 +89,7 @@ def get_verified_name(user, is_verified=False):
     verified_name_qs = VerifiedName.objects.filter(user=user).order_by('-created')
 
     if is_verified:
-        return verified_name_qs.filter(is_verified=True).first()
+        return verified_name_qs.filter(status=VerifiedNameStatus.APPROVED.value).first()
 
     return verified_name_qs.first()
 
@@ -159,8 +159,8 @@ def update_verification_attempt_id(user, verification_attempt_id):
     log.info(log_msg)
 
 
-def update_is_verified_status(
-    user, is_verified, verification_attempt_id=None, proctored_exam_attempt_id=None
+def update_verified_name_status(
+    user, status, verification_attempt_id=None, proctored_exam_attempt_id=None
 ):
     """
     Update the status of a VerifiedName using the linked ID verification or exam attempt ID. Only one
@@ -168,7 +168,7 @@ def update_is_verified_status(
 
     Arguments:
         * user (User object)
-        * is_verified (bool)
+        * status (Verified Name Status)
         * verification_attempt_id (int)
         * proctored_exam_attempt_id (int)
     """
@@ -177,7 +177,7 @@ def update_is_verified_status(
     if verification_attempt_id:
         if proctored_exam_attempt_id:
             err_msg = (
-                'Attempted to update the is_verified status for a VerifiedName, but two different '
+                'Attempted to update the status for a VerifiedName, but two different '
                 'attempt IDs were given. verification_attempt_id={verification_attempt_id}, '
                 'proctored_exam_attempt_id={proctored_exam_attempt_id}'.format(
                     verification_attempt_id=verification_attempt_id,
@@ -190,7 +190,7 @@ def update_is_verified_status(
         filters['proctored_exam_attempt_id'] = proctored_exam_attempt_id
     else:
         err_msg = (
-            'Attempted to update the is_verified status for a VerifiedName, but no '
+            'Attempted to update the status for a VerifiedName, but no '
             'verification_attempt_id or proctored_exam_attempt_id was given.'
         )
         raise VerifiedNameAttemptIdNotGiven(err_msg)
@@ -199,24 +199,24 @@ def update_is_verified_status(
 
     if not verified_name_obj:
         err_msg = (
-            'Attempted to update is_verified={is_verified} for a VerifiedName, but one does '
+            'Attempted to update status={status} for a VerifiedName, but one does '
             'not exist for the given attempt ID. verification_attempt_id={verification_attempt_id}, '
             'proctored_exam_attempt_id={proctored_exam_attempt_id}'.format(
-                is_verified=is_verified,
+                status=status,
                 verification_attempt_id=verification_attempt_id,
                 proctored_exam_attempt_id=proctored_exam_attempt_id,
             )
         )
         raise VerifiedNameDoesNotExist(err_msg)
 
-    verified_name_obj.is_verified = is_verified
+    verified_name_obj.status = status.value
     verified_name_obj.save()
 
     log_msg = (
-        'Updated is_verified={is_verified} for VerifiedName belonging to user_id={user_id}. '
+        'Updated status={status} for VerifiedName belonging to user_id={user_id}. '
         'verification_attempt_id={verification_attempt_id}, '
         'proctored_exam_attempt_id={proctored_exam_attempt_id}'.format(
-            is_verified=is_verified,
+            status=status,
             user_id=verified_name_obj.user.id,
             verification_attempt_id=verification_attempt_id,
             proctored_exam_attempt_id=proctored_exam_attempt_id,

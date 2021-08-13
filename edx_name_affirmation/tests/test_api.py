@@ -14,8 +14,8 @@ from edx_name_affirmation.api import (
     get_verified_name,
     get_verified_name_history,
     should_use_verified_name_for_certs,
-    update_is_verified_status,
-    update_verification_attempt_id
+    update_verification_attempt_id,
+    update_verified_name_status
 )
 from edx_name_affirmation.exceptions import (
     VerifiedNameAttemptIdNotGiven,
@@ -23,7 +23,7 @@ from edx_name_affirmation.exceptions import (
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
 )
-from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
+from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig, VerifiedNameStatus
 
 User = get_user_model()
 
@@ -58,26 +58,26 @@ class TestVerifiedNameAPI(TestCase):
         self.assertEqual(verified_name_obj.user, self.user)
         self.assertIsNone(verified_name_obj.verification_attempt_id)
         self.assertIsNone(verified_name_obj.proctored_exam_attempt_id)
-        self.assertFalse(verified_name_obj.is_verified)
+        self.assertEqual(verified_name_obj.status, VerifiedNameStatus.PENDING.value)
 
     @ddt.data(
-        (123, None, False),
-        (None, 456, True),
+        (123, None, VerifiedNameStatus.APPROVED),
+        (None, 456, VerifiedNameStatus.SUBMITTED),
     )
     @ddt.unpack
     def test_create_verified_name_with_optional_arguments(
-        self, verification_attempt_id, proctored_exam_attempt_id, is_verified,
+        self, verification_attempt_id, proctored_exam_attempt_id, status,
     ):
         """
         Test to create a verified name with optional arguments supplied.
         """
         verified_name_obj = self._create_verified_name(
-            verification_attempt_id, proctored_exam_attempt_id, is_verified,
+            verification_attempt_id, proctored_exam_attempt_id, status,
         )
 
         self.assertEqual(verified_name_obj.verification_attempt_id, verification_attempt_id)
         self.assertEqual(verified_name_obj.proctored_exam_attempt_id, proctored_exam_attempt_id)
-        self.assertEqual(verified_name_obj.is_verified, is_verified)
+        self.assertEqual(verified_name_obj.status, status.value)
 
     def test_create_verified_name_two_ids(self):
         """
@@ -130,10 +130,10 @@ class TestVerifiedNameAPI(TestCase):
 
     def test_get_verified_name_only_verified(self):
         """
-        Test that VerifiedName entries with is_verified=False are ignored if is_verified
+        Test that VerifiedName entries with status != approved are ignored if is_verified
         argument is set to True.
         """
-        self._create_verified_name(is_verified=True)
+        self._create_verified_name(status=VerifiedNameStatus.APPROVED)
         create_verified_name(self.user, 'unverified name', 'unverified profile name')
 
         verified_name_obj = get_verified_name(self.user, True)
@@ -225,11 +225,11 @@ class TestVerifiedNameAPI(TestCase):
         Test that VerifiedName status can be updated with a given attempt ID.
         """
         self._create_verified_name(verification_attempt_id, proctored_exam_attempt_id)
-        update_is_verified_status(
-            self.user, True, verification_attempt_id, proctored_exam_attempt_id,
+        update_verified_name_status(
+            self.user, VerifiedNameStatus.DENIED, verification_attempt_id, proctored_exam_attempt_id,
         )
         verified_name_obj = get_verified_name(self.user)
-        self.assertTrue(verified_name_obj.is_verified)
+        self.assertEqual(VerifiedNameStatus.DENIED.value, verified_name_obj.status)
 
     def test_update_is_verified_no_attempt_id(self):
         """
@@ -237,7 +237,7 @@ class TestVerifiedNameAPI(TestCase):
         ID given.
         """
         with self.assertRaises(VerifiedNameAttemptIdNotGiven):
-            update_is_verified_status(self.user, True)
+            update_verified_name_status(self.user, True)
 
     def test_update_is_verified_multiple_attempt_ids(self):
         """
@@ -245,7 +245,7 @@ class TestVerifiedNameAPI(TestCase):
         IDs given.
         """
         with self.assertRaises(VerifiedNameMultipleAttemptIds):
-            update_is_verified_status(
+            update_verified_name_status(
                 self.user, True, self.VERIFICATION_ATTEMPT_ID, self.PROCTORED_EXAM_ATTEMPT_ID,
             )
 
@@ -255,17 +255,17 @@ class TestVerifiedNameAPI(TestCase):
         not exist for the attempt ID given.
         """
         with self.assertRaises(VerifiedNameDoesNotExist):
-            update_is_verified_status(self.user, True, self.VERIFICATION_ATTEMPT_ID)
+            update_verified_name_status(self.user, True, self.VERIFICATION_ATTEMPT_ID)
 
     def _create_verified_name(
-        self, verification_attempt_id=None, proctored_exam_attempt_id=None, is_verified=False,
+        self, verification_attempt_id=None, proctored_exam_attempt_id=None, status=VerifiedNameStatus.PENDING,
     ):
         """
         Util to create and return a VerifiedName with default names.
         """
         create_verified_name(
             self.user, self.VERIFIED_NAME, self.PROFILE_NAME, verification_attempt_id,
-            proctored_exam_attempt_id, is_verified
+            proctored_exam_attempt_id, status
         )
         return get_verified_name(self.user)
 

@@ -1,6 +1,7 @@
 """
 Database models for edx_name_affirmation.
 """
+from enum import Enum
 
 from config_models.models import ConfigurationModel
 from model_utils.models import TimeStampedModel
@@ -9,6 +10,13 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 User = get_user_model()
+
+
+class VerifiedNameStatus(str, Enum):
+    PENDING = "pending"
+    SUBMITTED = "submitted"
+    APPROVED = "approved"
+    DENIED = "denied"
 
 
 class VerifiedName(TimeStampedModel):
@@ -30,6 +38,11 @@ class VerifiedName(TimeStampedModel):
     verification_attempt_id = models.PositiveIntegerField(null=True)
     proctored_exam_attempt_id = models.PositiveIntegerField(null=True)
 
+    status = models.CharField(
+        max_length=32,
+        choices=[(tag.value, tag.value) for tag in VerifiedNameStatus],
+        default=VerifiedNameStatus.PENDING.value,
+    )
     is_verified = models.BooleanField(default=False)
 
     class Meta:

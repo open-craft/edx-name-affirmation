@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.6.1] - 2021-08-17
+~~~~~~~~~~~~~~~~~~~~
+* Django settings updates for admin app
+
 [0.6.0] - 2021-08-11
 ~~~~~~~~~~~~~~~~~~~~
 * Add name verification status field, replacing single is_verified boolean.

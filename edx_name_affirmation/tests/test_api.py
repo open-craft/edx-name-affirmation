@@ -23,7 +23,8 @@ from edx_name_affirmation.exceptions import (
     VerifiedNameEmptyString,
     VerifiedNameMultipleAttemptIds
 )
-from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig, VerifiedNameStatus
+from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
+from edx_name_affirmation.statuses import VerifiedNameStatus
 
 User = get_user_model()
 

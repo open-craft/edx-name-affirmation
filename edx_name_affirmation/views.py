@@ -19,8 +19,8 @@ from edx_name_affirmation.api import (
     should_use_verified_name_for_certs
 )
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
-from edx_name_affirmation.models import VerifiedNameStatus
 from edx_name_affirmation.serializers import VerifiedNameConfigSerializer, VerifiedNameSerializer
+from edx_name_affirmation.statuses import VerifiedNameStatus
 from edx_name_affirmation.toggles import is_verified_name_enabled
 
 

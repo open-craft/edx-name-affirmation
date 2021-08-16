@@ -17,7 +17,8 @@ from edx_name_affirmation.api import (
     get_verified_name_history,
     should_use_verified_name_for_certs
 )
-from edx_name_affirmation.models import VerifiedNameConfig, VerifiedNameStatus
+from edx_name_affirmation.models import VerifiedNameConfig
+from edx_name_affirmation.statuses import VerifiedNameStatus
 from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 from .utils import LoggedInTestCase

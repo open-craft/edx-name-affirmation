@@ -9,17 +9,19 @@ class VerifiedNameStatus(str, Enum):
     """
     Possible states for the verified name.
 
-    Pending: the verified name has been created, but not seen by anyone
+    Pending: the verified name has been created
 
     Submitted: the verified name has been submitted to a verification authority
 
     Approved, Denied: resulting states from that authority
 
-    State transitions in the verifying processes may not move this status.
-    For example in proctoring the verification might be pending at exam start,
-    unchanged when the exam is ready to submit, move to submitted on submit,
-    and then remain unchanged through multiple verification statuses until
-    the exam is verified or rejected.
+    This is the status of the verified name attempt, which is related to
+    but separate from the status of the verifying process such as IDV or proctoring.
+    Status changes in the verifying processes are usually more fine grained.
+
+    For example when proctoring changes from ready to start to started the verified
+    name is still pending. Once proctoring is actually submitted the verified name
+    can be considered submitted.
 
     The expected lifecycle is pending -> submitted -> approved/denied.
 

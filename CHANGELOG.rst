@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.6.0] - 2021-08-11
+~~~~~~~~~~~~~~~~~~~~
+* Add name verification status field, replacing single is_verified boolean.
+
 [0.5.0] - 2021-08-11
 ~~~~~~~~~~~~~~~~~~~~
 * Add API method and endpoint to return a complete list of the user's

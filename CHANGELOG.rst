@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.6.2] - 2021-08-17
+~~~~~~~~~~~~~~~~~~~~
+* Remove verified name is_verified from model
+
 [0.6.1] - 2021-08-17
 ~~~~~~~~~~~~~~~~~~~~
 * Django settings updates for admin app

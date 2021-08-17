@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages',
     'django.contrib.sessions',
     'edx_name_affirmation',
     'waffle',
@@ -51,3 +52,14 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 )
+
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'APP_DIRS': False,
+    'OPTIONS': {
+        'context_processors': [
+            'django.contrib.auth.context_processors.auth',  # this is required for admin
+            'django.contrib.messages.context_processors.messages',  # this is required for admin
+        ],
+    },
+}]

@@ -29,7 +29,7 @@ class NameAffirmationAdminTests(TestCase):
 
         expected_list_display = (
             'id', 'user', 'verified_name', 'verification_attempt_id', 'proctored_exam_attempt_id',
-            'is_verified', 'created', 'modified',
+            'status', 'created', 'modified',
         )
         self.assertEqual(
             expected_list_display,

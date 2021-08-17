@@ -8,6 +8,8 @@ from model_utils.models import TimeStampedModel
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from edx_name_affirmation.statuses import VerifiedNameStatus
+
 User = get_user_model()
 
 
@@ -30,7 +32,13 @@ class VerifiedName(TimeStampedModel):
     verification_attempt_id = models.PositiveIntegerField(null=True)
     proctored_exam_attempt_id = models.PositiveIntegerField(null=True)
 
-    is_verified = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=32,
+        choices=[(st.value, st.value) for st in VerifiedNameStatus],
+        default=VerifiedNameStatus.PENDING.value,
+    )
+    # is_verified is being removed
+    is_verified = models.BooleanField(default=False, null=True)
 
     class Meta:
         """ Meta class for this Django model """

@@ -20,6 +20,7 @@ from edx_name_affirmation.api import (
 )
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
 from edx_name_affirmation.serializers import VerifiedNameConfigSerializer, VerifiedNameSerializer
+from edx_name_affirmation.statuses import VerifiedNameStatus
 from edx_name_affirmation.toggles import is_verified_name_enabled
 
 
@@ -48,7 +49,7 @@ class VerifiedNameView(AuthenticatedAPIView):
         "profile_name": "Jon Doe"
         "verification_attempt_id": (Optional)
         "proctored_exam_attempt_id": (Optional)
-        "is_verified": (Optional)
+        "status": (Optional)
     }
 
     HTTP GET
@@ -61,7 +62,7 @@ class VerifiedNameView(AuthenticatedAPIView):
             "profile_name": "Jon Doe",
             "verification_attempt_id": 123,
             "proctored_exam_attempt_id": None,
-            "is_verified": True,
+            "status": "approved",
             "use_verified_name_for_certs": False,
             "verified_name_enabled": True
         }
@@ -113,7 +114,7 @@ class VerifiedNameView(AuthenticatedAPIView):
                     request.data.get('profile_name'),
                     verification_attempt_id=request.data.get('verification_attempt_id', None),
                     proctored_exam_attempt_id=request.data.get('proctored_exam_attempt_id', None),
-                    is_verified=request.data.get('is_verified', False)
+                    status=request.data.get('status', VerifiedNameStatus.PENDING)
                 )
                 response_status = status.HTTP_200_OK
                 data = {}

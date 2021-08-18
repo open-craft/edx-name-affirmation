@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.6.4] - 2021-08-18
+~~~~~~~~~~~~~~~~~~~~
+* Remove verified name is_verified from DB
+
 [0.6.3] - 2021-08-18
 ~~~~~~~~~~~~~~~~~~~~
 * Update admin for verified name status

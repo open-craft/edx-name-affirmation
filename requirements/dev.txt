@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.6.6
+astroid==2.7.2
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -13,7 +13,7 @@ backports.entry-points-selectable==1.1.0
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-bleach==4.0.0
+bleach==4.1.0
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -22,10 +22,6 @@ certifi==2021.5.30
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-cffi==1.14.6
-    # via
-    #   -r requirements/quality.txt
-    #   cryptography
 chardet==4.0.0
     # via diff-cover
 charset-normalizer==2.0.4
@@ -59,11 +55,7 @@ coverage==5.5
     # via
     #   -r requirements/ci.txt
     #   codecov
-cryptography==3.4.7
-    # via
-    #   -r requirements/quality.txt
-    #   secretstorage
-diff-cover==6.2.1
+diff-cover==6.3.4
     # via -r requirements/dev.in
 distlib==0.3.2
     # via
@@ -94,7 +86,7 @@ idna==3.2
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==4.6.3
+importlib-metadata==4.7.1
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -105,11 +97,6 @@ isort==5.9.3
     # via
     #   -r requirements/quality.txt
     #   pylint
-jeepney==0.7.1
-    # via
-    #   -r requirements/quality.txt
-    #   keyring
-    #   secretstorage
 jinja2==3.0.1
     # via
     #   -r requirements/quality.txt
@@ -118,7 +105,7 @@ jinja2==3.0.1
     #   jinja2-pluralize
 jinja2-pluralize==0.3.0
     # via diff-cover
-keyring==23.0.1
+keyring==23.1.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -159,9 +146,12 @@ pkginfo==1.7.1
 platformdirs==2.2.0
     # via
     #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
+    #   pylint
     #   virtualenv
 pluggy==0.13.1
     # via
+    #   -c requirements/constraints.txt
     #   -r requirements/ci.txt
     #   diff-cover
     #   tox
@@ -173,18 +163,14 @@ py==1.10.0
     #   tox
 pycodestyle==2.7.0
     # via -r requirements/quality.txt
-pycparser==2.20
-    # via
-    #   -r requirements/quality.txt
-    #   cffi
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
-pygments==2.9.0
+pygments==2.10.0
     # via
     #   -r requirements/quality.txt
     #   diff-cover
     #   readme-renderer
-pylint==2.9.6
+pylint==2.10.2
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -243,10 +229,6 @@ rfc3986==1.5.0
     #   twine
 rstcheck==3.3.1
     # via -r requirements/quality.txt
-secretstorage==3.3.1
-    # via
-    #   -r requirements/quality.txt
-    #   keyring
 six==1.16.0
     # via
     #   -r requirements/ci.txt
@@ -265,7 +247,7 @@ sqlparse==0.4.1
     # via
     #   -r requirements/quality.txt
     #   django
-stevedore==3.3.0
+stevedore==3.4.0
     # via
     #   -r requirements/quality.txt
     #   code-annotations
@@ -279,11 +261,11 @@ toml==0.10.2
     #   -r requirements/quality.txt
     #   pylint
     #   tox
-tomli==1.2.0
+tomli==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
-tox==3.24.1
+tox==3.24.3
     # via
     #   -r requirements/ci.txt
     #   tox-battery
@@ -291,7 +273,7 @@ tox-battery==0.6.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/dev.in
-tqdm==4.62.0
+tqdm==4.62.2
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -302,7 +284,7 @@ urllib3==1.26.6
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-virtualenv==20.7.0
+virtualenv==20.7.2
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -310,7 +292,7 @@ webencodings==0.5.1
     # via
     #   -r requirements/quality.txt
     #   bleach
-wheel==0.36.2
+wheel==0.37.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

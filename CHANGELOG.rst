@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.8.0] - 2021-08-30
+~~~~~~~~~~~~~~~~~~~~
+* Add signal receivers for IDV and proctoring attempts
+
 [0.7.0] - 2021-08-26
 ~~~~~~~~~~~~~~~~~~~~
 * Add verified_name_enabled and use_verified_name_for_certs to the GET response of VerifiedNameHistoryView.

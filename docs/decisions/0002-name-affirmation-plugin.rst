@@ -9,8 +9,12 @@ Accepted
 Context
 -------
 
-`edx-name-affirmation` is intended to be an optional feature for the open edX community. As such, we
-should allow the consuming application (in our case, `edx-platform <https://github.com/edx/edx-platform>`_)
+ID verification, in its current iteration on `edx-platform`, does not fulfill its intended purpose. IE,
+a learner can change their name at will after completing ID verification. `edx-name-affirmation` is designed
+to be a solution to this problem, providing a new "verified name" feature.
+
+In addition to replacing IDV, Name Affirmation is intended to be an optional feature for the open edX community.
+As such, we should allow the consuming application (in our case, `edx-platform <https://github.com/edx/edx-platform>`_)
 to determine whether or not this feature should be installed.
 
 Options
@@ -19,7 +23,7 @@ Options
 **edx-platform app**
 
 - Create a new application directly in `edx-platform`.
-- This is the easiest option, but doesn't fit our purposes in order to decouple the code from platform.
+- This is the easiest option, but couples the code to platform.
 
 **Django plugin**
 
@@ -29,7 +33,7 @@ Options
 
 **IDA**
 
-- Decoupled from `edx-platform` and better ability for open edX to opt out.
+- Decoupled from `edx-platform`, and better ability for open edX to opt out.
 - It has a more involved setup, but would result in a faster deploy process.
 - Having a separate service for such a small application may be overkill.
 

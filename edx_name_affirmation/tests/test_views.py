@@ -247,6 +247,21 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
         data = json.loads(response.content.decode('utf-8'))
         self.assertEqual(data, expected_response)
 
+    @override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
+    def test_get_bools(self):
+        verified_name_history = self._create_verified_name_history(self.user)
+        expected_response = self._get_expected_response(
+            self.user, verified_name_history,
+            verified_name_enabled=True,
+            use_verified_name_for_certs=False
+        )
+
+        response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
+
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(data, expected_response)
+
     def test_get_no_data(self):
         expected_response = self._get_expected_response(self.user, [])
         response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
@@ -292,11 +307,21 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
         )
         return get_verified_name_history(user)
 
-    def _get_expected_response(self, user, verified_name_history):
+    def _get_expected_response(
+        self,
+        user,
+        verified_name_history,
+        verified_name_enabled=False,
+        use_verified_name_for_certs=False
+    ):
         """
         Create and return a verified name QuerySet.
         """
-        expected_response = {'results': []}
+        expected_response = {
+            'results': [],
+            'verified_name_enabled': verified_name_enabled,
+            'use_verified_name_for_certs': use_verified_name_for_certs,
+        }
 
         for verified_name_obj in verified_name_history:
             data = {

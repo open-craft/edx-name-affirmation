@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.70] - 2021-08-26
+~~~~~~~~~~~~~~~~~~~~
+* Add verified_name_enabled and use_verified_name_for_certs to the GET response of VerifiedNameHistoryView.
+
 [0.6.4] - 2021-08-18
 ~~~~~~~~~~~~~~~~~~~~
 * Remove verified name is_verified from DB

@@ -86,11 +86,10 @@ class VerifiedNameView(AuthenticatedAPIView):
                 data={'detail': 'There is no verified name related to this user.'}
 
             )
-        use_verified_name_for_certs = should_use_verified_name_for_certs(user)
 
         serialized_data = VerifiedNameSerializer(verified_name).data
         serialized_data['verified_name_enabled'] = is_verified_name_enabled()
-        serialized_data['use_verified_name_for_certs'] = use_verified_name_for_certs
+        serialized_data['use_verified_name_for_certs'] = should_use_verified_name_for_certs(user)
         return Response(serialized_data)
 
     def post(self, request):
@@ -149,7 +148,12 @@ class VerifiedNameHistoryView(AuthenticatedAPIView):
         user = get_user_model().objects.get(username=username) if username else request.user
         verified_name_qs = get_verified_name_history(user)
         serializer = VerifiedNameSerializer(verified_name_qs, many=True)
-        serialized_data = {'results': serializer.data}
+
+        serialized_data = {
+            'verified_name_enabled': is_verified_name_enabled(),
+            'use_verified_name_for_certs': should_use_verified_name_for_certs(user),
+            'results': serializer.data,
+        }
 
         return Response(serialized_data)
 

@@ -1,20 +1,35 @@
 # pylint: disable=logging-format-interpolation
-
-""""
-Signal handlers for IDV and proctoring service signals
+"""
+Name Affirmation signal handlers
 """
 
 import logging
 
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
 
 from edx_name_affirmation.models import VerifiedName
+from edx_name_affirmation.signals import VERIFIED_NAME_APPROVED
 from edx_name_affirmation.statuses import VerifiedNameStatus
 from edx_name_affirmation.toggles import is_verified_name_enabled
 
 User = get_user_model()
 
 log = logging.getLogger(__name__)
+
+
+@receiver(post_save, sender=VerifiedName)
+def verified_name_approved(sender, instance, **kwargs):  # pylint: disable=unused-argument
+    """
+    Emit a signal when a verified name's status is updated to "approved".
+    """
+    if instance.status == VerifiedNameStatus.APPROVED:
+        VERIFIED_NAME_APPROVED.send(
+          sender='name_affirmation',
+          user_id=instance.user.id,
+          profile_name=instance.profile_name
+        )
 
 
 def idv_attempt_handler(attempt_id, user_id, status, full_name, profile_name, **kwargs):
@@ -51,10 +66,15 @@ def idv_attempt_handler(attempt_id, user_id, status, full_name, profile_name, **
 
         # then for all matching attempt ids, update the status
         if trigger_status:
-            verified_names.filter(
+            verified_name_qs = verified_names.filter(
                 verification_attempt_id=attempt_id,
                 proctored_exam_attempt_id=None
-            ).update(status=trigger_status)
+            )
+
+            # Individually update to ensure that post_save signals send
+            for verified_name_obj in verified_name_qs:
+                verified_name_obj.status = trigger_status
+                verified_name_obj.save()
 
             log.info(
                 'Updated VerifiedNames for user={user_id} with verification_attempt_id={attempt_id} to '

@@ -36,3 +36,9 @@ class EdxNameAffirmationConfig(AppConfig):
             }
         }
     }
+
+    def ready(self):
+        """
+        Connect signal handlers.
+        """
+        from . import handlers  # pylint: disable=import-outside-toplevel,unused-import

@@ -1,5 +1,5 @@
 """
-Tests for signals.py
+Tests for Name Affirmation signal handlers
 """
 
 import ddt
@@ -30,6 +30,40 @@ class SignalTestCase(TestCase):
         self.profile_name = 'Jon Smith'
         self.idv_attempt_id = 1111111
         self.proctoring_attempt_id = 2222222
+
+
+@ddt.ddt
+class PostSaveVerifiedNameTests(SignalTestCase):
+    """
+    Tests for the post_save handler on the VerifiedName model.
+    """
+
+    @ddt.data(
+      (VerifiedNameStatus.PENDING, False),
+      (VerifiedNameStatus.SUBMITTED, False),
+      (VerifiedNameStatus.APPROVED, True),
+      (VerifiedNameStatus.DENIED, False)
+    )
+    @ddt.unpack
+    def test_post_save_verified_name_approved(self, status, should_send):
+        """
+        Test that VERIFIED_NAME_APPROVED should only send if the status is changed to approved.
+        """
+        with patch('edx_name_affirmation.signals.VERIFIED_NAME_APPROVED.send') as mock_signal:
+            verified_name_obj = VerifiedName.objects.create(
+                user=self.user,
+                verified_name='Jonathan Doe',
+                profile_name=self.profile_name,
+                verification_attempt_id=self.idv_attempt_id
+            )
+            verified_name_obj.status = status
+            verified_name_obj.save()
+
+            self.assertEqual(mock_signal.called, should_send)
+            if should_send:
+                mock_signal.assert_called_with(
+                    sender='name_affirmation', user_id=self.user.id, profile_name=self.profile_name
+                )
 
 
 @ddt.ddt
@@ -142,24 +176,32 @@ class IDVSignalTests(SignalTestCase):
         """
         If a VerifiedName(s) for a user and verified name exist, ensure that it is updated properly
         """
-        VerifiedName.objects.create(
-            user=self.user,
-            verified_name=self.verified_name,
-            profile_name=self.profile_name,
-            verification_attempt_id=self.idv_attempt_id
-        )
+        with patch('edx_name_affirmation.signals.VERIFIED_NAME_APPROVED.send') as mock_signal:
+            VerifiedName.objects.create(
+                user=self.user,
+                verified_name=self.verified_name,
+                profile_name=self.profile_name,
+                verification_attempt_id=self.idv_attempt_id
+            )
 
-        idv_attempt_handler(
-            self.idv_attempt_id,
-            self.user.id,
-            idv_status,
-            self.verified_name,
-            self.profile_name
-        )
+            idv_attempt_handler(
+                self.idv_attempt_id,
+                self.user.id,
+                idv_status,
+                self.verified_name,
+                self.profile_name
+            )
 
-        # check that the attempt id and status have been updated for all three VerifiedNames
-        self.assertEqual(len(VerifiedName.objects.filter(verification_attempt_id=self.idv_attempt_id)), 1)
-        self.assertEqual(len(VerifiedName.objects.filter(status=expected_status)), 1)
+            # check that the attempt id and status have been updated for all three VerifiedNames
+            self.assertEqual(len(VerifiedName.objects.filter(verification_attempt_id=self.idv_attempt_id)), 1)
+            self.assertEqual(len(VerifiedName.objects.filter(status=expected_status)), 1)
+
+            # If the status is approved, ensure that the post_save signal is called
+            if expected_status == VerifiedNameStatus.APPROVED:
+                mock_signal.assert_called()
+            else:
+                with self.assertRaises(AssertionError):
+                    mock_signal.assert_called()
 
     @override_waffle_flag(VERIFIED_NAME_FLAG, active=False)
     def test_idv_handler_with_flag_disabled(self):

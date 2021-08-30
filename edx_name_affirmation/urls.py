@@ -5,7 +5,7 @@ from django.conf.urls import include, url
 
 from edx_name_affirmation import views
 
-app_name = u'edx_name_affirmation'
+app_name = 'edx_name_affirmation'
 
 urlpatterns = [
     url(

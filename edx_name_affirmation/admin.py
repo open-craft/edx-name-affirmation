@@ -15,8 +15,9 @@ class VerifiedNameAdmin(admin.ModelAdmin):
       'id', 'user', 'verified_name', 'verification_attempt_id', 'proctored_exam_attempt_id',
       'status', 'created', 'modified',
     )
-    readonly_fields = ('id', 'user', 'created', 'modified')
+    readonly_fields = ('id',)
     search_fields = ('user__username', 'verification_attempt_id', 'proctored_exam_attempt_id',)
+    raw_id_fields = ('user', )
 
 
 class VerifiedNameConfigAdmin(admin.ModelAdmin):
@@ -28,6 +29,7 @@ class VerifiedNameConfigAdmin(admin.ModelAdmin):
     )
     readonly_fields = ('change_date',)
     search_fields = ('user__username',)
+    raw_id_fields = ('user', )
 
 
 admin.site.register(VerifiedName, VerifiedNameAdmin)

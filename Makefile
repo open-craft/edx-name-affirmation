@@ -62,6 +62,9 @@ requirements: ## install development environment requirements
 	pip install -qr requirements/pip-tools.txt
 	pip-sync requirements/dev.txt requirements/private.*
 
+requirements.test: requirements ## install test environment requriements
+	pip install -qr requirements/test.txt
+
 test: clean ## run tests in the current virtualenv
 	pytest
 

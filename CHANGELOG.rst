@@ -13,6 +13,10 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+
+[0.9.0] - 2021-09-01
+~~~~~~~~~~~~~~~~~~~~
+* Add is verified name enabled to the API
 * ADR for the use of signals in name affirmation service
 
 [0.8.2] - 2021-08-31

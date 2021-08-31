@@ -29,8 +29,8 @@ class VerifiedName(TimeStampedModel):
     profile_name = models.CharField(max_length=255, null=True)
 
     # Reference to an external ID verification or proctored exam attempt
-    verification_attempt_id = models.PositiveIntegerField(null=True)
-    proctored_exam_attempt_id = models.PositiveIntegerField(null=True)
+    verification_attempt_id = models.PositiveIntegerField(null=True, blank=True)
+    proctored_exam_attempt_id = models.PositiveIntegerField(null=True, blank=True)
 
     status = models.CharField(
         max_length=32,

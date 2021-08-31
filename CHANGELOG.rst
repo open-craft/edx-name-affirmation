@@ -13,6 +13,9 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+[0.8.2] - 2021-08-31
+~~~~~~~~~~~~~~~~~~~~
+* Update django admin to allow editing of VerifiedName and VerifiedNameConfig
 
 [0.8.1] - 2021-08-30
 ~~~~~~~~~~~~~~~~~~~~

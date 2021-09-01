@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 
 def is_verified_name_enabled():
     """
-    For callers with direct toggle import to ask if the verified name feature is enabled.
+    For callers without direct toggle import available to ask if the verified name feature is enabled.
 
     Since this uses edx_toggles it expects to be called
     while servicing a request and will check the cached results.

@@ -13,6 +13,8 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+* ADR for the use of signals in name affirmation service
+
 [0.8.2] - 2021-08-31
 ~~~~~~~~~~~~~~~~~~~~
 * Update django admin to allow editing of VerifiedName and VerifiedNameConfig

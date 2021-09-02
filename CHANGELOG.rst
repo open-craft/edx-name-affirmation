@@ -14,6 +14,11 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.9.1] - 2021-09-07
+~~~~~~~~~~~~~~~~~~~~
+* Add extra validation for the VerifiedName serializer, throwing a 400 error if
+  `verified_name` contains HTML or a URL.
+
 [0.9.0] - 2021-09-01
 ~~~~~~~~~~~~~~~~~~~~
 * Add is verified name enabled to the API

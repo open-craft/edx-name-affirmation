@@ -26,7 +26,23 @@ from .utils import LoggedInTestCase
 User = get_user_model()
 
 
-class VerifiedNameViewTests(LoggedInTestCase):
+class NameAffirmationViewsTestCase(LoggedInTestCase):
+    """
+    Base test class for Name Affirmation views
+    """
+
+    def setUp(self):
+        super().setUp()
+        # Create a fresh config with default values
+        VerifiedNameConfig.objects.create(user=self.user)
+
+    def tearDown(self):
+        super().tearDown()
+        cache.clear()
+
+
+@ddt.ddt
+class VerifiedNameViewTests(NameAffirmationViewsTestCase):
     """
     Tests for the VerifiedNameView
     """
@@ -38,15 +54,6 @@ class VerifiedNameViewTests(LoggedInTestCase):
     OTHER_PROFILE_NAME = 'Bob Smith'
 
     ATTEMPT_ID = 11111
-
-    def setUp(self):
-        super().setUp()
-        # Create a fresh config with default values
-        VerifiedNameConfig.objects.create(user=self.user)
-
-    def tearDown(self):
-        super().tearDown()
-        cache.clear()
 
     def test_verified_name(self):
         verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
@@ -168,6 +175,21 @@ class VerifiedNameViewTests(LoggedInTestCase):
         )
         self.assertEqual(response.status_code, 403)
 
+    @ddt.data('<html>Verified Name</html>', 'https://verifiedname.com')
+    def test_post_400_invalid_name(self, verified_name):
+        verified_name_data = {
+            'username': self.user.username,
+            'profile_name': self.PROFILE_NAME,
+            'verified_name': verified_name,
+            'verification_attempt_id': self.ATTEMPT_ID,
+            'status': VerifiedNameStatus.SUBMITTED.value,
+        }
+        response = self.client.post(
+            reverse('edx_name_affirmation:verified_name'),
+            verified_name_data
+        )
+        self.assertEqual(response.status_code, 400)
+
     def test_post_400_invalid_serializer(self):
         verified_name_data = {
             'username': self.user.username,
@@ -233,10 +255,11 @@ class VerifiedNameViewTests(LoggedInTestCase):
 
 
 @ddt.ddt
-class VerifiedNameHistoryViewTests(LoggedInTestCase):
+class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
     """
     Tests for the VerifiedNameHistoryView
     """
+
     def test_get(self):
         verified_name_history = self._create_verified_name_history(self.user)
         expected_response = self._get_expected_response(self.user, verified_name_history)
@@ -338,19 +361,10 @@ class VerifiedNameHistoryViewTests(LoggedInTestCase):
         return expected_response
 
 
-class VerifiedNameConfigViewTests(LoggedInTestCase):
+class VerifiedNameConfigViewTests(NameAffirmationViewsTestCase):
     """
     Tests for the VerifiedNameConfigView
     """
-
-    def setUp(self):
-        super().setUp()
-        # Create a fresh config with default values
-        VerifiedNameConfig.objects.create(user=self.user)
-
-    def tearDown(self):
-        super().tearDown()
-        cache.clear()
 
     def test_post_201(self):
         config_data = {

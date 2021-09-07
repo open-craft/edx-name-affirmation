@@ -1,4 +1,7 @@
 """Defines serializers used by the Name Affirmation API"""
+
+import re
+
 from rest_framework import serializers
 
 from django.contrib.auth import get_user_model
@@ -29,6 +32,26 @@ class VerifiedNameSerializer(serializers.ModelSerializer):
             "created", "username", "verified_name", "profile_name", "verification_attempt_id",
             "proctored_exam_attempt_id", "status"
         )
+
+    def validate_verified_name(self, verified_name):
+        if self._contains_html(verified_name):
+            raise serializers.ValidationError('Name cannot contain the following characters: < >')
+        if self._contains_url(verified_name):
+            raise serializers.ValidationError('Name cannot contain a URL')
+
+    def _contains_html(self, string):
+        """
+        Validator method to check whether a string contains HTML tags
+        """
+        regex = re.compile('(<|>)', re.UNICODE)
+        return bool(regex.search(string))
+
+    def _contains_url(self, string):
+        """
+        Validator method to check whether a string contains a url
+        """
+        regex = re.findall(r'https|http?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', string)
+        return bool(regex)
 
 
 class VerifiedNameConfigSerializer(serializers.ModelSerializer):

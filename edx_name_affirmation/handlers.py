@@ -32,7 +32,7 @@ def verified_name_approved(sender, instance, **kwargs):  # pylint: disable=unuse
         )
 
 
-def idv_attempt_handler(attempt_id, user_id, status, full_name, profile_name, **kwargs):
+def idv_attempt_handler(attempt_id, user_id, status, photo_id_name, full_name, **kwargs):
     """
     Receiver for IDV attempt updates
 
@@ -40,14 +40,14 @@ def idv_attempt_handler(attempt_id, user_id, status, full_name, profile_name, **
         attempt_id(int): ID associated with the IDV attempt
         user_id(int): ID associated with the IDV attempt's user
         status(str): status in IDV language for the IDV attempt
-        full_name(str): name to be used as verified name
-        profile_name(str): user's current profile name
+        photo_id_name(str): name to be used as verified name
+        full_name(str): user's pending name change or current profile name
     """
     if not is_verified_name_enabled():
         return
 
     trigger_status = VerifiedNameStatus.trigger_state_change_from_idv(status)
-    verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=full_name).order_by('-created')
+    verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=photo_id_name).order_by('-created')
     if verified_names:
         # if there are VerifiedName objects, we want to update existing entries
         # for each attempt with no attempt id (either proctoring or idv), update attempt id
@@ -89,8 +89,8 @@ def idv_attempt_handler(attempt_id, user_id, status, full_name, profile_name, **
         user = User.objects.get(id=user_id)
         verified_name = VerifiedName.objects.create(
             user=user,
-            verified_name=full_name,
-            profile_name=profile_name,
+            verified_name=photo_id_name,
+            profile_name=full_name,
             verification_attempt_id=attempt_id,
             status=(trigger_status if trigger_status else VerifiedNameStatus.PENDING),
         )

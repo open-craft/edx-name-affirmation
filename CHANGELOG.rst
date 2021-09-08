@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.9.2] - 2021-09-07
+~~~~~~~~~~~~~~~~~~~~
+* Update IDV signal handler field names to be more explicit about the received names.
+
 [0.9.1] - 2021-09-07
 ~~~~~~~~~~~~~~~~~~~~
 * Add extra validation for the VerifiedName serializer, throwing a 400 error if

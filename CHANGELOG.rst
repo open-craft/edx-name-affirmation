@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.10.0] - 2021-09-13
+~~~~~~~~~~~~~~~~~~~~~
+* Add is verified name enabled endpoint
+
 [0.9.2] - 2021-09-07
 ~~~~~~~~~~~~~~~~~~~~
 * Update IDV signal handler field names to be more explicit about the received names.

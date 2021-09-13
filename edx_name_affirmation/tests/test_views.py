@@ -42,6 +42,21 @@ class NameAffirmationViewsTestCase(LoggedInTestCase):
 
 
 @ddt.ddt
+class VerifiedNameEnabledViewTests(NameAffirmationViewsTestCase):
+    """
+    Tests for the VerifiedNameEnabledView
+    """
+
+    @ddt.data(True, False)
+    def test_verified_name_feature_enabled(self, flag_state):
+        with override_waffle_flag(VERIFIED_NAME_FLAG, active=flag_state):
+            response = self.client.get(reverse('edx_name_affirmation:verified_name_enabled'))
+            self.assertEqual(response.status_code, 200)
+            data = json.loads(response.content.decode('utf-8'))
+            self.assertEqual(data, {"verified_name_enabled": flag_state})
+
+
+@ddt.ddt
 class VerifiedNameViewTests(NameAffirmationViewsTestCase):
     """
     Tests for the VerifiedNameView

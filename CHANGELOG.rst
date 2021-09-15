@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[0.11.0] - 2021-09-15
+~~~~~~~~~~~~~~~~~~~~~
+* Add name change validator
+
 [0.10.0] - 2021-09-13
 ~~~~~~~~~~~~~~~~~~~~~
 * Add is verified name enabled endpoint

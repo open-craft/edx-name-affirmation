@@ -12,3 +12,7 @@
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
 
 pluggy<=0.13.1          # diff-cover, tox, and pytest are creating version conflicts for pluggy, pinning to resolve
+
+# pinning celery to latest release
+celery<6.0
+click<8.0.0

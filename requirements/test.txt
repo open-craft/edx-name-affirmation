@@ -4,8 +4,18 @@
 #
 #    make upgrade
 #
+    # via
+    #   -r requirements/base.txt
+    #   kombu
 attrs==21.2.0
     # via pytest
+    # via
+    #   -r requirements/base.txt
+    #   celery
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/base.txt
+    #   edx-celeryutils
 certifi==2021.5.30
     # via
     #   -r requirements/base.txt
@@ -14,14 +24,31 @@ cffi==1.14.6
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.4
+charset-normalizer==2.0.6
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.0.1
+click==7.1.2
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/base.txt
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
+    #   code-annotations
+click-didyoumean==0.0.3
     # via
     #   -r requirements/base.txt
-    #   code-annotations
+    #   celery
+click-plugins==1.1.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click-repl==0.2.0
+    # via
+    #   -r requirements/base.txt
+    #   celery
 code-annotations==1.2.0
     # via
     #   -r requirements/base.txt
@@ -43,9 +70,11 @@ ddt==1.4.2
     #   django-model-utils
     #   djangorestframework
     #   drf-jwt
+    #   edx-celeryutils
     #   edx-django-utils
     #   edx-drf-extensions
     #   edx-toggles
+    #   jsonfield2
     #   rest-condition
 django-config-models==2.2.0
     # via -r requirements/base.txt
@@ -55,7 +84,9 @@ django-crum==0.7.9
     #   edx-django-utils
     #   edx-toggles
 django-model-utils==4.1.1
-    # via -r requirements/base.txt
+    # via
+    #   -r requirements/base.txt
+    #   edx-celeryutils
 django-waffle==2.2.1
     # via
     #   -r requirements/base.txt
@@ -74,7 +105,9 @@ drf-jwt==1.19.0
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
     #   edx-drf-extensions
-edx-django-utils==4.3.0
+edx-celeryutils==1.1.0
+    # via -r requirements/base.txt
+edx-django-utils==4.4.0
     # via
     #   -r requirements/base.txt
     #   django-config-models
@@ -93,6 +126,7 @@ edx-toggles==4.2.0
 future==0.18.2
     # via
     #   -r requirements/base.txt
+    #   edx-celeryutils
     #   pyjwkest
 idna==3.2
     # via
@@ -104,13 +138,20 @@ jinja2==3.0.1
     # via
     #   -r requirements/base.txt
     #   code-annotations
+jsonfield2==4.0.0.post0
+    # via
+    #   -r requirements/base.txt
+    #   edx-celeryutils
+    # via
+    #   -r requirements/base.txt
+    #   celery
 markupsafe==2.0.1
     # via
     #   -r requirements/base.txt
     #   jinja2
 mock==4.0.3
     # via -r requirements/test.in
-newrelic==6.8.1.164
+newrelic==7.0.0.166
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -124,6 +165,10 @@ pluggy==0.13.1
     # via
     #   -c requirements/constraints.txt
     #   pytest
+prompt-toolkit==3.0.20
+    # via
+    #   -r requirements/base.txt
+    #   click-repl
 psutil==5.8.0
     # via
     #   -r requirements/base.txt
@@ -153,7 +198,7 @@ pymongo==3.12.0
     #   edx-opaque-keys
 pyparsing==2.4.7
     # via packaging
-pytest==6.2.4
+pytest==6.2.5
     # via
     #   pytest-cov
     #   pytest-django
@@ -172,6 +217,7 @@ python-slugify==5.0.2
 pytz==2021.1
     # via
     #   -r requirements/base.txt
+    #   celery
     #   django
 pyyaml==5.4.1
     # via
@@ -193,10 +239,11 @@ semantic-version==2.8.5
 six==1.16.0
     # via
     #   -r requirements/base.txt
+    #   click-repl
     #   edx-drf-extensions
     #   pyjwkest
     #   python-dateutil
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements/base.txt
     #   django
@@ -214,7 +261,19 @@ toml==0.10.2
     # via
     #   pytest
     #   pytest-cov
-urllib3==1.26.6
+urllib3==1.26.7
     # via
     #   -r requirements/base.txt
     #   requests
+    # via
+    #   -r requirements/base.txt
+    #   amqp
+    #   celery
+    #   kombu
+wcwidth==0.2.5
+    # via
+    #   -r requirements/base.txt
+    #   prompt-toolkit
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

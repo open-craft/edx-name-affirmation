@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.7.2
+astroid==2.8.0
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -24,13 +24,14 @@ certifi==2021.5.30
     #   requests
 chardet==4.0.0
     # via diff-cover
-charset-normalizer==2.0.4
+charset-normalizer==2.0.6
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-click==8.0.1
+click==7.1.2
     # via
+    #   -c requirements/constraints.txt
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   click-log
@@ -55,9 +56,9 @@ coverage==5.5
     # via
     #   -r requirements/ci.txt
     #   codecov
-diff-cover==6.3.4
+diff-cover==6.4.0
     # via -r requirements/dev.in
-distlib==0.3.2
+distlib==0.3.3
     # via
     #   -r requirements/ci.txt
     #   virtualenv
@@ -66,7 +67,6 @@ django==2.2.24
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.txt
     #   edx-i18n-tools
-    #   edx-lint
 docutils==0.17.1
     # via
     #   -r requirements/quality.txt
@@ -74,7 +74,7 @@ docutils==0.17.1
     #   rstcheck
 edx-i18n-tools==0.7.0
     # via -r requirements/dev.in
-edx-lint==5.0.0
+edx-lint==5.1.0
     # via -r requirements/quality.txt
 filelock==3.0.12
     # via
@@ -86,7 +86,7 @@ idna==3.2
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==4.7.1
+importlib-metadata==4.8.1
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -105,7 +105,7 @@ jinja2==3.0.1
     #   jinja2-pluralize
 jinja2-pluralize==0.3.0
     # via diff-cover
-keyring==23.1.0
+keyring==23.2.1
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -137,13 +137,13 @@ pep517==0.11.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-pip-tools==6.2.0
+pip-tools==6.3.0
     # via -r requirements/pip-tools.txt
 pkginfo==1.7.1
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==2.2.0
+platformdirs==2.3.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -170,7 +170,7 @@ pygments==2.10.0
     #   -r requirements/quality.txt
     #   diff-cover
     #   readme-renderer
-pylint==2.10.2
+pylint==2.11.1
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -243,7 +243,7 @@ snowballstemmer==2.1.0
     # via
     #   -r requirements/quality.txt
     #   pydocstyle
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements/quality.txt
     #   django
@@ -265,7 +265,7 @@ tomli==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
-tox==3.24.3
+tox==3.24.4
     # via
     #   -r requirements/ci.txt
     #   tox-battery
@@ -273,18 +273,23 @@ tox-battery==0.6.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/dev.in
-tqdm==4.62.2
+tqdm==4.62.3
     # via
     #   -r requirements/quality.txt
     #   twine
 twine==3.4.2
     # via -r requirements/quality.txt
-urllib3==1.26.6
+typing-extensions==3.10.0.2
+    # via
+    #   -r requirements/quality.txt
+    #   astroid
+    #   pylint
+urllib3==1.26.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-virtualenv==20.7.2
+virtualenv==20.8.0
     # via
     #   -r requirements/ci.txt
     #   tox

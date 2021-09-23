@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[1.0.0] - 2021-09-23
+~~~~~~~~~~~~~~~~~~~~~
+* Move signal receiver logic into celery task
+
 [0.11.0] - 2021-09-15
 ~~~~~~~~~~~~~~~~~~~~~
 * Add name change validator

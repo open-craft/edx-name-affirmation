@@ -5,8 +5,17 @@ In a real-world use case, apps in this project are installed into other
 Django applications, so these settings will not be used.
 """
 
+import tempfile
 from os.path import abspath, dirname, join
 
+from celery import Celery
+
+
+results_dir = tempfile.TemporaryDirectory()
+
+APP = Celery()
+APP.conf.CELERY_ALWAYS_EAGER = True
+APP.conf.CELERY_RESULT_BACKEND = f'file://{results_dir.name}'
 
 def root(*args):
     """

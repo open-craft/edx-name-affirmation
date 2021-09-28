@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[1.0.1] - 2021-09-28
+~~~~~~~~~~~~~~~~~~~~~
+* Move toggle check out of tasks
+
 [1.0.0] - 2021-09-23
 ~~~~~~~~~~~~~~~~~~~~~
 * Move signal receiver logic into celery task

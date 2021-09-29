@@ -1,4 +1,4 @@
-# pylint: disable=logging-format-interpolation
+# pylint: disable=logging-format-interpolation, unused-argument
 """
 Name affirmation celery tasks
 """
@@ -17,14 +17,18 @@ User = get_user_model()
 
 log = logging.getLogger(__name__)
 
+DEFAULT_RETRY_SECONDS = 30
+MAX_RETRIES = 3
 
-@shared_task
+
+@shared_task(
+    bind=True, autoretry_for=(Exception,), default_retry_delay=DEFAULT_RETRY_SECONDS, max_retries=MAX_RETRIES,
+)
 @set_code_owner_attribute
-def idv_update_verified_name(attempt_id, user_id, status, photo_id_name, full_name):
+def idv_update_verified_name(self, attempt_id, user_id, status, photo_id_name, full_name):
     """
     Celery task for updating a verified name based on an IDV attempt
     """
-
     trigger_status = VerifiedNameStatus.trigger_state_change_from_idv(status)
     verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=photo_id_name).order_by('-created')
     if verified_names:
@@ -84,9 +88,12 @@ def idv_update_verified_name(attempt_id, user_id, status, photo_id_name, full_na
         )
 
 
-@shared_task
+@shared_task(
+    bind=True, autoretry_for=(Exception,), default_retry_delay=DEFAULT_RETRY_SECONDS, max_retries=MAX_RETRIES,
+)
 @set_code_owner_attribute
 def proctoring_update_verified_name(
+    self,
     attempt_id,
     user_id,
     status,

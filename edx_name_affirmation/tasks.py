@@ -12,7 +12,6 @@ from django.contrib.auth import get_user_model
 
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.toggles import is_verified_name_enabled
 
 User = get_user_model()
 
@@ -25,8 +24,6 @@ def idv_update_verified_name(attempt_id, user_id, status, photo_id_name, full_na
     """
     Celery task for updating a verified name based on an IDV attempt
     """
-    if not is_verified_name_enabled():
-        return
 
     trigger_status = VerifiedNameStatus.trigger_state_change_from_idv(status)
     verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=photo_id_name).order_by('-created')
@@ -102,8 +99,6 @@ def proctoring_update_verified_name(
     """
     Celery task for updating a verified name based on a proctoring attempt
     """
-    if not is_verified_name_enabled():
-        return
 
     # We only care about updates from onboarding exams, or from non-practice proctored exams with a backend that
     # does not support onboarding. This is because those two event types are guaranteed to contain verification events,

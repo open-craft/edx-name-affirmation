@@ -13,6 +13,7 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+* Add system check to CI.
 
 [1.0.2] - 2021-09-29
 ~~~~~~~~~~~~~~~~~~~~~

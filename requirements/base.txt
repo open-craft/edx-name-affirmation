@@ -12,11 +12,11 @@ celery==5.1.2
     # via
     #   -c requirements/constraints.txt
     #   edx-celeryutils
-certifi==2021.5.30
+certifi==2021.10.8
     # via requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.6
+charset-normalizer==2.0.7
     # via requests
 click==7.1.2
     # via
@@ -26,7 +26,7 @@ click==7.1.2
     #   click-plugins
     #   click-repl
     #   code-annotations
-click-didyoumean==0.0.3
+click-didyoumean==0.3.0
     # via celery
 click-plugins==1.1.1
     # via celery
@@ -34,7 +34,7 @@ click-repl==0.2.0
     # via celery
 code-annotations==1.2.0
     # via edx-toggles
-cryptography==3.4.8
+cryptography==35.0.0
     # via pyjwt
 django==2.2.24
     # via
@@ -49,8 +49,7 @@ django==2.2.24
     #   edx-django-utils
     #   edx-drf-extensions
     #   edx-toggles
-    #   jsonfield2
-    #   rest-condition
+    #   jsonfield
 django-config-models==2.2.0
     # via -r requirements/base.in
 django-crum==0.7.9
@@ -72,12 +71,11 @@ djangorestframework==3.12.4
     #   django-config-models
     #   drf-jwt
     #   edx-drf-extensions
-    #   rest-condition
 drf-jwt==1.19.0
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   edx-drf-extensions
-edx-celeryutils==1.1.0
+edx-celeryutils==1.1.1
     # via -r requirements/base.in
 edx-django-utils==4.4.0
     # via
@@ -85,10 +83,8 @@ edx-django-utils==4.4.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==6.6.0
-    # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -r requirements/base.in
+edx-drf-extensions==8.0.0
+    # via -r requirements/base.in
 edx-opaque-keys==2.2.2
     # via edx-drf-extensions
 edx-toggles==4.2.0
@@ -97,17 +93,17 @@ future==0.18.2
     # via
     #   edx-celeryutils
     #   pyjwkest
-idna==3.2
+idna==3.3
     # via requests
-jinja2==3.0.1
+jinja2==3.0.2
     # via code-annotations
-jsonfield2==4.0.0.post0
+jsonfield==3.1.0
     # via edx-celeryutils
 kombu==5.1.0
     # via celery
 markupsafe==2.0.1
     # via jinja2
-newrelic==7.0.0.166
+newrelic==7.2.1.168
     # via edx-django-utils
 pbr==5.6.0
     # via stevedore
@@ -117,21 +113,21 @@ psutil==5.8.0
     # via edx-django-utils
 pycparser==2.20
     # via cffi
-pycryptodomex==3.10.1
+pycryptodomex==3.11.0
     # via pyjwkest
 pyjwkest==1.4.2
     # via edx-drf-extensions
-pyjwt[crypto]==1.7.1
+pyjwt[crypto]==2.2.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   drf-jwt
+    #   edx-drf-extensions
 pymongo==3.12.0
     # via edx-opaque-keys
 python-dateutil==2.8.2
     # via edx-drf-extensions
 python-slugify==5.0.2
     # via code-annotations
-pytz==2021.1
+pytz==2021.3
     # via
     #   celery
     #   django
@@ -141,8 +137,6 @@ requests==2.26.0
     # via
     #   edx-drf-extensions
     #   pyjwkest
-rest-condition==1.0.3
-    # via edx-drf-extensions
 semantic-version==2.8.5
     # via edx-drf-extensions
 six==1.16.0

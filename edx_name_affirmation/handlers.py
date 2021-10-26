@@ -43,7 +43,23 @@ def idv_attempt_handler(attempt_id, user_id, status, photo_id_name, full_name, *
         photo_id_name(str): name to be used as verified name
         full_name(str): user's pending name change or current profile name
     """
+    log.info('VerifiedName: idv_attempt_handler started for user %(user_id)s '
+             'with photo_id_name %(photo_id_name)s and status %(status)s',
+             {
+                 'user_id': user_id,
+                 'photo_id_name': photo_id_name,
+                 'status': status
+             }
+             )
     if is_verified_name_enabled():
+        log.info('VerifiedName: idv_attempt_handler triggering Celery task for user %(user_id)s '
+                 'with photo_id_name %(photo_id_name)s and status %(status)s',
+                 {
+                     'user_id': user_id,
+                     'photo_id_name': photo_id_name,
+                     'status': status
+                 }
+                 )
         idv_update_verified_name.delay(attempt_id, user_id, status, photo_id_name, full_name)
 
 

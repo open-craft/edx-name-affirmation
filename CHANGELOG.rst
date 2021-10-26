@@ -13,7 +13,11 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+
+[1.0.3] - 2021-10-26
+~~~~~~~~~~~~~~~~~~~~~
 * Add system check to CI.
+* Add additional logs to IDV signal handler and Celery task logic.
 
 [1.0.2] - 2021-09-29
 ~~~~~~~~~~~~~~~~~~~~~

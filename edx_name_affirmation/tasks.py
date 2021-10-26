@@ -29,6 +29,14 @@ def idv_update_verified_name(self, attempt_id, user_id, status, photo_id_name, f
     """
     Celery task for updating a verified name based on an IDV attempt
     """
+    log.info('VerifiedName: idv_update_verified_name triggering Celery task started for user %(user_id)s '
+             'with attempt_id %(attempt_id)s and status %(status)s',
+             {
+                'user_id': user_id,
+                'attempt_id': attempt_id,
+                'status': status
+             }
+             )
     trigger_status = VerifiedNameStatus.trigger_state_change_from_idv(status)
     verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=photo_id_name).order_by('-created')
     if verified_names:

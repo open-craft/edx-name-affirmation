@@ -4,7 +4,6 @@ Python API for edx_name_affirmation.
 
 import logging
 
-from edx_name_affirmation import toggles
 from edx_name_affirmation.exceptions import (
     VerifiedNameAttemptIdNotGiven,
     VerifiedNameDoesNotExist,
@@ -15,16 +14,6 @@ from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
 from edx_name_affirmation.statuses import VerifiedNameStatus
 
 log = logging.getLogger(__name__)
-
-
-def is_verified_name_enabled():
-    """
-    For callers without direct toggle import available to ask if the verified name feature is enabled.
-
-    Since this uses edx_toggles it expects to be called
-    while servicing a request and will check the cached results.
-    """
-    return toggles.is_verified_name_enabled()
 
 
 def create_verified_name(

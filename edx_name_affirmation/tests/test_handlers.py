@@ -3,7 +3,6 @@ Tests for Name Affirmation signal handlers
 """
 
 import ddt
-from edx_toggles.toggles.testutils import override_waffle_flag
 from mock import patch
 
 from django.contrib.auth import get_user_model
@@ -12,12 +11,10 @@ from django.test import TestCase
 from edx_name_affirmation.handlers import idv_attempt_handler, proctoring_attempt_handler
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 User = get_user_model()
 
 
-@override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
 class SignalTestCase(TestCase):
     """
     Test case for signals.py
@@ -203,22 +200,6 @@ class IDVSignalTests(SignalTestCase):
                 with self.assertRaises(AssertionError):
                     mock_signal.assert_called()
 
-    @override_waffle_flag(VERIFIED_NAME_FLAG, active=False)
-    def test_idv_handler_with_flag_disabled(self):
-        """
-        Test that no attempt is created if the waffle flag is disabled
-        """
-
-        idv_attempt_handler(
-            self.idv_attempt_id,
-            self.user.id,
-            'submitted',
-            self.verified_name,
-            self.profile_name
-        )
-
-        self.assertEqual(len(VerifiedName.objects.filter()), 0)
-
 
 @ddt.ddt
 class ProctoringSignalTests(SignalTestCase):
@@ -364,22 +345,3 @@ class ProctoringSignalTests(SignalTestCase):
             # check that log is not called if the names do not differ
             with self.assertRaises(AssertionError):
                 mock_logger.assert_called_with(log_str)
-
-    @override_waffle_flag(VERIFIED_NAME_FLAG, active=False)
-    def test_proctoring_handler_with_flag_disabled(self):
-        """
-        Test that no attempt is created if the waffle flag is disabled
-        """
-
-        proctoring_attempt_handler(
-            self.proctoring_attempt_id,
-            self.user.id,
-            'created',
-            self.verified_name,
-            self.profile_name,
-            True,
-            True,
-            True
-        )
-
-        self.assertEqual(len(VerifiedName.objects.filter()), 0)

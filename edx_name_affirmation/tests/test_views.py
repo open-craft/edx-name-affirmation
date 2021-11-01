@@ -4,7 +4,6 @@ All tests for edx_name_affirmation views
 import json
 
 import ddt
-from edx_toggles.toggles.testutils import override_waffle_flag
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
@@ -19,7 +18,6 @@ from edx_name_affirmation.api import (
 )
 from edx_name_affirmation.models import VerifiedNameConfig
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 from .utils import LoggedInTestCase
 
@@ -42,21 +40,6 @@ class NameAffirmationViewsTestCase(LoggedInTestCase):
 
 
 @ddt.ddt
-class VerifiedNameEnabledViewTests(NameAffirmationViewsTestCase):
-    """
-    Tests for the VerifiedNameEnabledView
-    """
-
-    @ddt.data(True, False)
-    def test_verified_name_feature_enabled(self, flag_state):
-        with override_waffle_flag(VERIFIED_NAME_FLAG, active=flag_state):
-            response = self.client.get(reverse('edx_name_affirmation:verified_name_enabled'))
-            self.assertEqual(response.status_code, 200)
-            data = json.loads(response.content.decode('utf-8'))
-            self.assertEqual(data, {"verified_name_enabled": flag_state})
-
-
-@ddt.ddt
 class VerifiedNameViewTests(NameAffirmationViewsTestCase):
     """
     Tests for the VerifiedNameView
@@ -74,17 +57,6 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
 
         expected_data = self._get_expected_data(self.user, verified_name)
-
-        response = self.client.get(reverse('edx_name_affirmation:verified_name'))
-        self.assertEqual(response.status_code, 200)
-        data = json.loads(response.content.decode('utf-8'))
-        self.assertEqual(data, expected_data)
-
-    @override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
-    def test_verified_name_feature_enabled(self):
-        verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
-
-        expected_data = self._get_expected_data(self.user, verified_name, verified_name_enabled=True)
 
         response = self.client.get(reverse('edx_name_affirmation:verified_name'))
         self.assertEqual(response.status_code, 200)
@@ -251,7 +223,7 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
 
     def _get_expected_data(
         self, user, verified_name_obj,
-        use_verified_name_for_certs=False, verified_name_enabled=False,
+        use_verified_name_for_certs=False,
     ):
         """
         Create a dictionary of expected data.
@@ -265,7 +237,6 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
             'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
             'status': verified_name_obj.status,
             'use_verified_name_for_certs': use_verified_name_for_certs,
-            'verified_name_enabled': verified_name_enabled
         }
 
 
@@ -285,12 +256,10 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
         data = json.loads(response.content.decode('utf-8'))
         self.assertEqual(data, expected_response)
 
-    @override_waffle_flag(VERIFIED_NAME_FLAG, active=True)
     def test_get_bools(self):
         verified_name_history = self._create_verified_name_history(self.user)
         expected_response = self._get_expected_response(
             self.user, verified_name_history,
-            verified_name_enabled=True,
             use_verified_name_for_certs=False
         )
 
@@ -349,7 +318,6 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
         self,
         user,
         verified_name_history,
-        verified_name_enabled=False,
         use_verified_name_for_certs=False
     ):
         """
@@ -357,7 +325,6 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
         """
         expected_response = {
             'results': [],
-            'verified_name_enabled': verified_name_enabled,
             'use_verified_name_for_certs': use_verified_name_for_certs,
         }
 

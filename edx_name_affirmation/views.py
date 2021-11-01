@@ -16,7 +16,6 @@ from edx_name_affirmation.api import (
     create_verified_name_config,
     get_verified_name,
     get_verified_name_history,
-    is_verified_name_enabled,
     should_use_verified_name_for_certs
 )
 from edx_name_affirmation.exceptions import VerifiedNameMultipleAttemptIds
@@ -30,27 +29,6 @@ class AuthenticatedAPIView(APIView):
     """
     authentication_classes = (SessionAuthentication, JwtAuthentication)
     permission_classes = (IsAuthenticated,)
-
-
-class VerifiedNameEnabledView(AuthenticatedAPIView):
-    """
-    Endpoint for the UI to determine if this feature is on
-    /edx_name_affirmation/v1/verified_name_enabled
-
-    Supports:
-        HTTP GET: Returns True or False
-
-    HTTP GET
-        Example response: {
-            "verified_name_enabled": True
-        }
-    """
-    def get(self, request):
-        """
-        Get the state of the verified name enabled flag
-        """
-        flag = {'verified_name_enabled': is_verified_name_enabled()}
-        return Response(flag)
 
 
 class VerifiedNameView(AuthenticatedAPIView):
@@ -85,7 +63,6 @@ class VerifiedNameView(AuthenticatedAPIView):
             "proctored_exam_attempt_id": None,
             "status": "approved",
             "use_verified_name_for_certs": False,
-            "verified_name_enabled": True
         }
     """
     def get(self, request):
@@ -109,7 +86,6 @@ class VerifiedNameView(AuthenticatedAPIView):
             )
 
         serialized_data = VerifiedNameSerializer(verified_name).data
-        serialized_data['verified_name_enabled'] = is_verified_name_enabled()
         serialized_data['use_verified_name_for_certs'] = should_use_verified_name_for_certs(user)
         return Response(serialized_data)
 
@@ -171,7 +147,6 @@ class VerifiedNameHistoryView(AuthenticatedAPIView):
         serializer = VerifiedNameSerializer(verified_name_qs, many=True)
 
         serialized_data = {
-            'verified_name_enabled': is_verified_name_enabled(),
             'use_verified_name_for_certs': should_use_verified_name_for_certs(user),
             'results': serializer.data,
         }

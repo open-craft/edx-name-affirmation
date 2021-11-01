@@ -14,6 +14,12 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.0.0] - 2021-10-27
+~~~~~~~~~~~~~~~~~~~~~
+* Remove VERIFIED_NAME_FLAG and all references to it.
+* Remove VerifiedNameEnabledView view.
+* Remove verified_name_enabled key from responses for VerifiedNameView view and VerifiedNameHistoryView
+
 [1.0.3] - 2021-10-26
 ~~~~~~~~~~~~~~~~~~~~~
 * Add system check to CI.

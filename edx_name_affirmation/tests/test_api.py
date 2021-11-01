@@ -3,7 +3,6 @@ Tests for the `edx_name_affirmation` Python API.
 """
 
 import ddt
-from edx_toggles.toggles.testutils import override_waffle_flag
 
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
@@ -14,7 +13,6 @@ from edx_name_affirmation.api import (
     create_verified_name_config,
     get_verified_name,
     get_verified_name_history,
-    is_verified_name_enabled,
     should_use_verified_name_for_certs,
     update_verification_attempt_id,
     update_verified_name_status
@@ -27,7 +25,6 @@ from edx_name_affirmation.exceptions import (
 )
 from edx_name_affirmation.models import VerifiedName, VerifiedNameConfig
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.toggles import VERIFIED_NAME_FLAG
 
 User = get_user_model()
 
@@ -314,10 +311,3 @@ class TestVerifiedNameAPI(TestCase):
         create_verified_name_config(self.user, use_verified_name_for_certs=True)
         create_verified_name_config(self.user)
         self.assertTrue(should_use_verified_name_for_certs(self.user))
-
-    def test_is_verified_name_enabled_false(self):
-        self.assertFalse(is_verified_name_enabled())
-
-    @override_waffle_flag(VERIFIED_NAME_FLAG, True)
-    def test_is_verified_name_enabled_true(self):
-        self.assertTrue(is_verified_name_enabled())

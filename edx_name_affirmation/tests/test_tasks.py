@@ -9,7 +9,7 @@ from django.test import TestCase
 
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.tasks import idv_update_verified_name, proctoring_update_verified_name
+from edx_name_affirmation.tasks import idv_update_verified_name_task, proctoring_update_verified_name_task
 
 User = get_user_model()
 
@@ -28,9 +28,9 @@ class TaskTests(TestCase):
         self.idv_attempt_id = 1111111
         self.proctoring_attempt_id = 2222222
 
-    @patch('edx_name_affirmation.tasks.idv_update_verified_name.retry')
+    @patch('edx_name_affirmation.tasks.idv_update_verified_name_task.retry')
     def test_idv_retry(self, mock_retry):
-        idv_update_verified_name.delay(
+        idv_update_verified_name_task.delay(
             self.idv_attempt_id,
             # force an error with an invalid user ID
             99999,
@@ -40,17 +40,14 @@ class TaskTests(TestCase):
         )
         mock_retry.assert_called()
 
-    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name.retry')
+    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name_task.retry')
     def test_proctoring_retry(self, mock_retry):
-        proctoring_update_verified_name.delay(
+        proctoring_update_verified_name_task.delay(
             self.proctoring_attempt_id,
             # force an error with an invalid user ID
             99999,
             VerifiedNameStatus.PENDING,
             self.verified_name_obj.verified_name,
             self.verified_name_obj.profile_name,
-            True,
-            True,
-            True,
         )
         mock_retry.assert_called()

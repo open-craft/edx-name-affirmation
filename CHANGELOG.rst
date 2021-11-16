@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.0.2] - 2021-11-16
+~~~~~~~~~~~~~~~~~~~~
+* Cut over to new celery tasks for IDV and proctoring handlers.
+
 [2.0.1] - 2021-11-15
 ~~~~~~~~~~~~~~~~~~~~
 * If we receive a non-relevant status for either IDV or proctoring, do not

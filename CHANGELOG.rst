@@ -14,6 +14,11 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.0.1] - 2021-11-15
+~~~~~~~~~~~~~~~~~~~~
+* If we receive a non-relevant status for either IDV or proctoring, do not
+  trigger a celery task.
+
 [2.0.0] - 2021-10-27
 ~~~~~~~~~~~~~~~~~~~~~
 * Remove VERIFIED_NAME_FLAG and all references to it.

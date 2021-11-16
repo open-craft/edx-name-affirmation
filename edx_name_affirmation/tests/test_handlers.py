@@ -90,7 +90,6 @@ class IDVSignalTests(SignalTestCase):
 
     @ddt.data(
         ('created', VerifiedNameStatus.PENDING),
-        ('must_retry', VerifiedNameStatus.PENDING),
         ('submitted', VerifiedNameStatus.SUBMITTED),
         ('approved', VerifiedNameStatus.APPROVED),
         ('denied', VerifiedNameStatus.DENIED)
@@ -163,7 +162,6 @@ class IDVSignalTests(SignalTestCase):
 
     @ddt.data(
         ('created', VerifiedNameStatus.PENDING),
-        ('must_retry', VerifiedNameStatus.PENDING),
         ('submitted', VerifiedNameStatus.SUBMITTED),
         ('approved', VerifiedNameStatus.APPROVED),
         ('denied', VerifiedNameStatus.DENIED)
@@ -197,8 +195,26 @@ class IDVSignalTests(SignalTestCase):
             if expected_status == VerifiedNameStatus.APPROVED:
                 mock_signal.assert_called()
             else:
-                with self.assertRaises(AssertionError):
-                    mock_signal.assert_called()
+                mock_signal.assert_not_called()
+
+    @ddt.data(
+        'ready',
+        'must_retry',
+    )
+    @patch('edx_name_affirmation.tasks.idv_update_verified_name.delay')
+    def test_idv_non_trigger_status(self, status, mock_task):
+        """
+        Test that a celery task is not triggered if a non-relevant status is received
+        """
+        idv_attempt_handler(
+            self.idv_attempt_id,
+            self.user.id,
+            status,
+            self.verified_name,
+            self.profile_name
+        )
+
+        mock_task.assert_not_called()
 
 
 @ddt.ddt
@@ -209,7 +225,6 @@ class ProctoringSignalTests(SignalTestCase):
 
     @ddt.data(
         ('created', VerifiedNameStatus.PENDING),
-        ('started', VerifiedNameStatus.PENDING),
         ('submitted', VerifiedNameStatus.SUBMITTED),
         ('verified', VerifiedNameStatus.APPROVED),
         ('rejected', VerifiedNameStatus.DENIED)
@@ -264,8 +279,6 @@ class ProctoringSignalTests(SignalTestCase):
         self.assertEqual(len(verified_name_query), 1)
         verified_name = verified_name_query.first()
         self.assertEqual(verified_name.status, VerifiedNameStatus.PENDING)
-
-    # test for log
 
     @ddt.data(
         (None, None, True, True, True),
@@ -345,3 +358,28 @@ class ProctoringSignalTests(SignalTestCase):
             # check that log is not called if the names do not differ
             with self.assertRaises(AssertionError):
                 mock_logger.assert_called_with(log_str)
+
+    @ddt.data(
+        'download_software_clicked',
+        'ready_to_start',
+        'started',
+        'ready_to_submit',
+        'error',
+    )
+    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name.delay')
+    def test_proctoring_non_trigger_status(self, status, mock_task):
+        """
+        Test that a celery task is not triggered if a non-relevant status is received
+        """
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            status,
+            self.verified_name,
+            self.profile_name,
+            True,
+            True,
+            True
+        )
+
+        mock_task.assert_not_called()

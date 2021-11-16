@@ -42,16 +42,28 @@ def idv_attempt_handler(attempt_id, user_id, status, photo_id_name, full_name, *
         photo_id_name(str): name to be used as verified name
         full_name(str): user's pending name change or current profile name
     """
+    trigger_status = VerifiedNameStatus.trigger_state_change_from_idv(status)
 
-    log.info('VerifiedName: idv_attempt_handler triggering Celery task for user %(user_id)s '
-             'with photo_id_name %(photo_id_name)s and status %(status)s',
-             {
-                 'user_id': user_id,
-                 'photo_id_name': photo_id_name,
-                 'status': status
-             }
-             )
-    idv_update_verified_name.delay(attempt_id, user_id, status, photo_id_name, full_name)
+    # only trigger celery task if status is relevant to name affirmation
+    if trigger_status:
+        log.info('VerifiedName: idv_attempt_handler triggering Celery task for user %(user_id)s '
+                 'with photo_id_name %(photo_id_name)s and status %(status)s',
+                 {
+                     'user_id': user_id,
+                     'photo_id_name': photo_id_name,
+                     'status': status
+                 }
+                 )
+        idv_update_verified_name.delay(attempt_id, user_id, status, photo_id_name, full_name)
+    else:
+        log.info('VerifiedName: idv_attempt_handler will not trigger Celery task for user %(user_id)s '
+                 'with photo_id_name %(photo_id_name)s because of status %(status)s',
+                 {
+                     'user_id': user_id,
+                     'photo_id_name': photo_id_name,
+                     'status': status
+                 }
+                 )
 
 
 def proctoring_attempt_handler(
@@ -78,13 +90,35 @@ def proctoring_attempt_handler(
         is_proctored(boolean): if the exam attempt is for a proctored exam
         backend_supports_onboarding(boolean): if the exam attempt is for an exam with a backend that supports onboarding
     """
-    proctoring_update_verified_name.delay(
-        attempt_id,
-        user_id,
-        status,
-        full_name,
-        profile_name,
-        is_practice_exam,
-        is_proctored,
-        backend_supports_onboarding
-    )
+
+    # We only care about updates from onboarding exams, or from non-practice proctored exams with a backend that
+    # does not support onboarding. This is because those two event types are guaranteed to contain verification events,
+    # whereas timed exams and proctored exams with a backend that does support onboarding are not guaranteed
+    is_onboarding_exam = is_practice_exam and is_proctored and backend_supports_onboarding
+    reviewable_proctored_exam = is_proctored and not is_practice_exam and not backend_supports_onboarding
+    if not (is_onboarding_exam or reviewable_proctored_exam):
+        return
+
+    trigger_status = VerifiedNameStatus.trigger_state_change_from_proctoring(status)
+
+    # only trigger celery task if status is relevant to name affirmation
+    if trigger_status:
+        proctoring_update_verified_name.delay(
+            attempt_id,
+            user_id,
+            status,
+            full_name,
+            profile_name,
+            is_practice_exam,
+            is_proctored,
+            backend_supports_onboarding
+        )
+    else:
+        log.info('VerifiedName: proctoring_attempt_handler will not trigger Celery task for user %(user_id)s '
+                 'with profile_name %(profile_name)s because of status %(status)s',
+                 {
+                     'user_id': user_id,
+                     'profile_name': profile_name,
+                     'status': status,
+                 }
+                 )

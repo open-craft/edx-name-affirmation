@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.0.3] - 2021-11-17
+~~~~~~~~~~~~~~~~~~~~
+* Remove unused celery tasks
+
 [2.0.2] - 2021-11-16
 ~~~~~~~~~~~~~~~~~~~~
 * Cut over to new celery tasks for IDV and proctoring handlers.

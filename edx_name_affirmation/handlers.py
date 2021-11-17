@@ -11,7 +11,7 @@ from django.dispatch.dispatcher import receiver
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.signals import VERIFIED_NAME_APPROVED
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.tasks import idv_update_verified_name, proctoring_update_verified_name
+from edx_name_affirmation.tasks import idv_update_verified_name_task, proctoring_update_verified_name_task
 
 User = get_user_model()
 
@@ -54,7 +54,7 @@ def idv_attempt_handler(attempt_id, user_id, status, photo_id_name, full_name, *
                      'status': status
                  }
                  )
-        idv_update_verified_name.delay(attempt_id, user_id, status, photo_id_name, full_name)
+        idv_update_verified_name_task.delay(attempt_id, user_id, trigger_status, photo_id_name, full_name)
     else:
         log.info('VerifiedName: idv_attempt_handler will not trigger Celery task for user %(user_id)s '
                  'with photo_id_name %(photo_id_name)s because of status %(status)s',
@@ -103,15 +103,12 @@ def proctoring_attempt_handler(
 
     # only trigger celery task if status is relevant to name affirmation
     if trigger_status:
-        proctoring_update_verified_name.delay(
+        proctoring_update_verified_name_task.delay(
             attempt_id,
             user_id,
-            status,
+            trigger_status,
             full_name,
             profile_name,
-            is_practice_exam,
-            is_proctored,
-            backend_supports_onboarding
         )
     else:
         log.info('VerifiedName: proctoring_attempt_handler will not trigger Celery task for user %(user_id)s '

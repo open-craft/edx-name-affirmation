@@ -201,7 +201,7 @@ class IDVSignalTests(SignalTestCase):
         'ready',
         'must_retry',
     )
-    @patch('edx_name_affirmation.tasks.idv_update_verified_name.delay')
+    @patch('edx_name_affirmation.tasks.idv_update_verified_name_task.delay')
     def test_idv_non_trigger_status(self, status, mock_task):
         """
         Test that a celery task is not triggered if a non-relevant status is received
@@ -280,39 +280,48 @@ class ProctoringSignalTests(SignalTestCase):
         verified_name = verified_name_query.first()
         self.assertEqual(verified_name.status, VerifiedNameStatus.PENDING)
 
-    @ddt.data(
-        (None, None, True, True, True),
-        ('John', 'John', False, False, False),
-        ('John', 'John', False, True, True),
-        ('John', 'John', True, True, False)
-    )
-    @ddt.unpack
-    def test_proctoring_does_not_create_name(
-        self,
-        verified_name,
-        profile_name,
-        is_practice,
-        is_proctored,
-        backend_supports_onboarding
-    ):
+    def test_proctoring_does_not_create_name(self):
         """
-        Test that if we receive a signal for an attempt id that we do not yet have a verified name for,
-        we do not create a verified name under certain conditions.
+        Test that if we receive a signal for an attempt id that we do not have a name for, we do not create a new
+        record.
         """
 
-        # test for signal that does not contain verified or profile name
         proctoring_attempt_handler(
             self.proctoring_attempt_id,
             self.user.id,
             'created',
-            verified_name,
-            profile_name,
-            is_practice,
-            is_proctored,
-            backend_supports_onboarding
+            None,
+            None,
+            True,
+            True,
+            True
         )
 
         self.assertEqual(len(VerifiedName.objects.filter()), 0)
+
+    @ddt.data(
+        (False, False, False),
+        (False, True, True),
+        (True, True, False)
+    )
+    @ddt.unpack
+    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name_task.delay')
+    def test_proctoring_does_not_trigger_celery_task(self, is_practice, is_proctored, supports_onboarding, mock_task):
+        """
+        Test that a celery task is not triggered if the exam does not contain an id verification event
+        """
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            'created',
+            'John',
+            'John',
+            is_practice,
+            is_proctored,
+            supports_onboarding
+        )
+
+        mock_task.assert_not_called()
 
     @ddt.data(
         True,
@@ -366,7 +375,7 @@ class ProctoringSignalTests(SignalTestCase):
         'ready_to_submit',
         'error',
     )
-    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name.delay')
+    @patch('edx_name_affirmation.tasks.proctoring_update_verified_name_task.delay')
     def test_proctoring_non_trigger_status(self, status, mock_task):
         """
         Test that a celery task is not triggered if a non-relevant status is received

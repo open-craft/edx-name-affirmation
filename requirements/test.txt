@@ -34,7 +34,6 @@ charset-normalizer==2.0.9
     #   requests
 click==8.0.3
     # via
-    #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   celery
     #   click-didyoumean
@@ -108,7 +107,7 @@ drf-jwt==1.19.1
     #   edx-drf-extensions
 edx-celeryutils==1.1.1
     # via -r requirements/base.txt
-edx-django-utils==4.4.0
+edx-django-utils==4.4.1
     # via
     #   -r requirements/base.txt
     #   django-config-models

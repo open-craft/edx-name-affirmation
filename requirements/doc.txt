@@ -6,7 +6,7 @@
 #
 alabaster==0.7.12
     # via sphinx
-amqp==5.0.7
+amqp==5.0.9
     # via kombu
 asgiref==3.4.1
     # via django
@@ -28,7 +28,6 @@ charset-normalizer==2.0.9
     # via requests
 click==8.0.3
     # via
-    #   -c requirements/constraints.txt
     #   celery
     #   click-didyoumean
     #   click-plugins
@@ -91,7 +90,7 @@ drf-jwt==1.19.1
     # via edx-drf-extensions
 edx-celeryutils==1.1.1
     # via -r requirements/base.in
-edx-django-utils==4.4.0
+edx-django-utils==4.4.1
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -191,7 +190,7 @@ six==1.16.0
     #   sphinxcontrib-napoleon
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==4.3.1
+sphinx==4.3.2
     # via
     #   -r requirements/doc.in
     #   edx-sphinx-theme

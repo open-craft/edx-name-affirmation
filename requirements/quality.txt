@@ -18,7 +18,6 @@ charset-normalizer==2.0.9
     # via requests
 click==8.0.3
     # via
-    #   -c requirements/constraints.txt
     #   click-log
     #   code-annotations
     #   edx-lint
@@ -40,7 +39,7 @@ edx-lint==5.2.1
     # via -r requirements/quality.in
 idna==3.3
     # via requests
-importlib-metadata==4.9.0
+importlib-metadata==4.10.0
     # via
     #   keyring
     #   twine

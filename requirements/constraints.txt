@@ -15,4 +15,3 @@ pluggy<=0.13.1          # diff-cover, tox, and pytest are creating version confl
 
 # pinning celery to latest release
 celery<6.0
-click<9.0.0

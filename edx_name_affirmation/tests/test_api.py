@@ -157,6 +157,38 @@ class TestVerifiedNameAPI(TestCase):
 
         self.assertIsNone(verified_name_obj)
 
+    @ddt.data(
+        ([VerifiedNameStatus.PENDING], VerifiedNameStatus.DENIED),
+        ([VerifiedNameStatus.DENIED, VerifiedNameStatus.PENDING], VerifiedNameStatus.APPROVED),
+        (['invalid status'], VerifiedNameStatus.PENDING)
+    )
+    @ddt.unpack
+    def test_get_verified_name_exclude(self, statuses_to_exclude, expected_status):
+        """
+        Exclude verified names by status when getting the most recent verified name.
+        """
+        self._create_verified_name(status=VerifiedNameStatus.APPROVED)
+        self._create_verified_name(status=VerifiedNameStatus.DENIED)
+        self._create_verified_name(status=VerifiedNameStatus.PENDING)
+
+        verified_name_obj = get_verified_name(self.user, False, statuses_to_exclude)
+
+        self.assertEqual(verified_name_obj.status, expected_status)
+
+    @ddt.data(False, True)
+    def test_get_verified_name_ignore_exlude_parameter(self, is_verified):
+        """
+        If `is_verified` is True, ignore the `statuses_to_exclude` parameter.
+        """
+        self._create_verified_name(status=VerifiedNameStatus.APPROVED)
+
+        verified_name_obj = get_verified_name(self.user, is_verified, [VerifiedNameStatus.APPROVED])
+
+        if is_verified:
+            self.assertEqual(verified_name_obj.verified_name, self.VERIFIED_NAME)
+        else:
+            self.assertIsNone(verified_name_obj)
+
     def test_get_verified_name_history(self):
         """
         Test that get_verified_name_history returns all of the user's VerifiedNames

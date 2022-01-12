@@ -76,7 +76,7 @@ def create_verified_name(
     log.info(log_msg)
 
 
-def get_verified_name(user, is_verified=False):
+def get_verified_name(user, is_verified=False, statuses_to_exclude=None):
     """
     Get the most recent VerifiedName for a given user.
 
@@ -84,6 +84,8 @@ def get_verified_name(user, is_verified=False):
         * `user` (User object)
         * `is_verified` (bool): Optional, set to True to ignore entries that are not
           verified.
+        * `statuses_to_exclude` (list): Optional list of statuses to filter out. Only
+          relevant if `is_verified` is False.
 
     Returns a VerifiedName object.
     """
@@ -91,6 +93,9 @@ def get_verified_name(user, is_verified=False):
 
     if is_verified:
         return verified_name_qs.filter(status=VerifiedNameStatus.APPROVED.value).first()
+
+    if statuses_to_exclude:
+        return verified_name_qs.exclude(status__in=statuses_to_exclude).first()
 
     return verified_name_qs.first()
 

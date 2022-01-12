@@ -14,6 +14,11 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.1.0] - 2022-01-11
+~~~~~~~~~~~~~~~~~~~~
+* Add optional `statuses_to_exclude` argument to `get_verified_name` in order to filter out one or
+  more statuses from the result.
+
 [2.0.3] - 2021-11-17
 ~~~~~~~~~~~~~~~~~~~~
 * Remove unused celery tasks

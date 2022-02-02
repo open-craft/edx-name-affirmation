@@ -7,7 +7,7 @@
     # via
     #   -r requirements/base.txt
     #   kombu
-asgiref==3.4.1
+asgiref==3.5.0
     # via
     #   -r requirements/base.txt
     #   django
@@ -28,7 +28,7 @@ cffi==1.15.0
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via
     #   -r requirements/base.txt
     #   requests
@@ -57,7 +57,7 @@ code-annotations==1.2.0
     #   -r requirements/base.txt
     #   -r requirements/test.in
     #   edx-toggles
-coverage[toml]==6.2
+coverage[toml]==6.3.1
     # via pytest-cov
 cryptography==36.0.1
     # via
@@ -78,7 +78,7 @@ ddt==1.4.4
     #   edx-drf-extensions
     #   edx-toggles
     #   jsonfield
-django-config-models==2.2.2
+django-config-models==2.3.0
     # via -r requirements/base.txt
 django-crum==0.7.9
     # via
@@ -105,9 +105,9 @@ drf-jwt==1.19.2
     # via
     #   -r requirements/base.txt
     #   edx-drf-extensions
-edx-celeryutils==1.1.1
+edx-celeryutils==1.2.1
     # via -r requirements/base.txt
-edx-django-utils==4.4.1
+edx-django-utils==4.5.0
     # via
     #   -r requirements/base.txt
     #   django-config-models
@@ -115,11 +115,11 @@ edx-django-utils==4.4.1
     #   edx-toggles
 edx-drf-extensions==8.0.1
     # via -r requirements/base.txt
-edx-opaque-keys==2.2.2
+edx-opaque-keys==2.3.0
     # via
     #   -r requirements/base.txt
     #   edx-drf-extensions
-edx-toggles==4.2.0
+edx-toggles==4.3.1
     # via -r requirements/base.txt
 future==0.18.2
     # via
@@ -149,7 +149,7 @@ markupsafe==2.0.1
     #   jinja2
 mock==4.0.3
     # via -r requirements/test.in
-newrelic==7.2.4.171
+newrelic==7.4.0.172
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -163,7 +163,7 @@ pluggy==0.13.1
     # via
     #   -c requirements/constraints.txt
     #   pytest
-prompt-toolkit==3.0.24
+prompt-toolkit==3.0.26
     # via
     #   -r requirements/base.txt
     #   click-repl
@@ -177,7 +177,7 @@ pycparser==2.21
     # via
     #   -r requirements/base.txt
     #   cffi
-pycryptodomex==3.12.0
+pycryptodomex==3.14.0
     # via
     #   -r requirements/base.txt
     #   pyjwkest
@@ -190,11 +190,11 @@ pyjwt[crypto]==2.3.0
     #   -r requirements/base.txt
     #   drf-jwt
     #   edx-drf-extensions
-pymongo==4.0.1
+pymongo==3.12.3
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys
-pyparsing==3.0.6
+pyparsing==3.0.7
     # via packaging
 pytest==6.2.5
     # via

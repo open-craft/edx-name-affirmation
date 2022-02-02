@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.4.1
+asgiref==3.5.0
     # via django
 astroid==2.9.3
     # via
@@ -16,7 +16,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via requests
 click==8.0.3
     # via
@@ -31,7 +31,7 @@ colorama==0.4.4
     # via twine
 cryptography==36.0.1
     # via secretstorage
-django==3.2.11
+django==3.2.12
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.in
@@ -43,7 +43,7 @@ edx-lint==5.2.1
     # via -r requirements/quality.in
 idna==3.3
     # via requests
-importlib-metadata==4.10.0
+importlib-metadata==4.10.1
     # via
     #   keyring
     #   twine
@@ -95,7 +95,7 @@ pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
-pyparsing==3.0.6
+pyparsing==3.0.7
     # via packaging
 python-slugify==5.0.2
     # via code-annotations

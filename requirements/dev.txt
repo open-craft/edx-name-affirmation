@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.4.1
+asgiref==3.5.0
     # via
     #   -r requirements/quality.txt
     #   django
@@ -28,7 +28,7 @@ cffi==1.15.0
     #   cryptography
 chardet==4.0.0
     # via diff-cover
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -55,7 +55,7 @@ colorama==0.4.4
     # via
     #   -r requirements/quality.txt
     #   twine
-coverage==6.2
+coverage==6.3.1
     # via
     #   -r requirements/ci.txt
     #   codecov
@@ -69,7 +69,7 @@ distlib==0.3.4
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==3.2.11
+django==3.2.12
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.txt
@@ -93,7 +93,7 @@ idna==3.3
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==4.10.0
+importlib-metadata==4.10.1
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -201,7 +201,7 @@ pylint-plugin-utils==0.7
     #   -r requirements/quality.txt
     #   pylint-celery
     #   pylint-django
-pyparsing==3.0.6
+pyparsing==3.0.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt

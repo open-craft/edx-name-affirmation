@@ -6,7 +6,7 @@
 #
 amqp==5.0.9
     # via kombu
-asgiref==3.4.1
+asgiref==3.5.0
     # via django
 billiard==3.6.4.0
     # via celery
@@ -18,7 +18,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via requests
 click==8.0.3
     # via
@@ -37,7 +37,7 @@ code-annotations==1.2.0
     # via edx-toggles
 cryptography==36.0.1
     # via pyjwt
-django==3.2.11
+django==3.2.12
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
@@ -51,7 +51,7 @@ django==3.2.11
     #   edx-drf-extensions
     #   edx-toggles
     #   jsonfield
-django-config-models==2.2.2
+django-config-models==2.3.0
     # via -r requirements/base.in
 django-crum==0.7.9
     # via
@@ -74,9 +74,9 @@ djangorestframework==3.13.1
     #   edx-drf-extensions
 drf-jwt==1.19.2
     # via edx-drf-extensions
-edx-celeryutils==1.1.1
+edx-celeryutils==1.2.1
     # via -r requirements/base.in
-edx-django-utils==4.4.1
+edx-django-utils==4.5.0
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -84,9 +84,9 @@ edx-django-utils==4.4.1
     #   edx-toggles
 edx-drf-extensions==8.0.1
     # via -r requirements/base.in
-edx-opaque-keys==2.2.2
+edx-opaque-keys==2.3.0
     # via edx-drf-extensions
-edx-toggles==4.2.0
+edx-toggles==4.3.1
     # via -r requirements/base.in
 future==0.18.2
     # via
@@ -102,17 +102,17 @@ kombu==5.2.3
     # via celery
 markupsafe==2.0.1
     # via jinja2
-newrelic==7.2.4.171
+newrelic==7.4.0.172
     # via edx-django-utils
 pbr==5.8.0
     # via stevedore
-prompt-toolkit==3.0.24
+prompt-toolkit==3.0.26
     # via click-repl
 psutil==5.9.0
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pycryptodomex==3.12.0
+pycryptodomex==3.14.0
     # via pyjwkest
 pyjwkest==1.4.2
     # via edx-drf-extensions
@@ -120,7 +120,7 @@ pyjwt[crypto]==2.3.0
     # via
     #   drf-jwt
     #   edx-drf-extensions
-pymongo==4.0.1
+pymongo==3.12.3
     # via edx-opaque-keys
 python-dateutil==2.8.2
     # via edx-drf-extensions

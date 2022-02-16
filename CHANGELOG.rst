@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.2.0] - 2022-02-14
+~~~~~~~~~~~~~~~~~~~~
+* Added Django40 testing and dropped Django22, 30 and 31 support
+
 [2.1.0] - 2022-01-11
 ~~~~~~~~~~~~~~~~~~~~
 * Add optional `statuses_to_exclude` argument to `get_verified_name` in order to filter out one or

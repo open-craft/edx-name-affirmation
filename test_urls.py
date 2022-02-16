@@ -1,5 +1,5 @@
-from django.conf.urls import include, url
+from django.urls import path, include
 
 urlpatterns = [
-  url(r'^', include('edx_name_affirmation.urls', namespace='edx_name_affirmation')),
+  path('', include('edx_name_affirmation.urls', namespace='edx_name_affirmation')),
 ]

@@ -227,7 +227,8 @@ class ProctoringSignalTests(SignalTestCase):
         ('created', VerifiedNameStatus.PENDING),
         ('submitted', VerifiedNameStatus.SUBMITTED),
         ('verified', VerifiedNameStatus.APPROVED),
-        ('rejected', VerifiedNameStatus.DENIED)
+        ('rejected', VerifiedNameStatus.DENIED),
+        ('error', VerifiedNameStatus.DENIED),
     )
     @ddt.unpack
     def test_proctoring_update_status_for_attempt_id(self, proctoring_status, expected_status):
@@ -254,6 +255,49 @@ class ProctoringSignalTests(SignalTestCase):
             True
         )
         # make sure that status on verified name is correct
+        verified_name_query = VerifiedName.objects.filter(id=object_id)
+        self.assertEqual(len(verified_name_query), 1)
+        verified_name = verified_name_query.first()
+        self.assertEqual(verified_name.status, expected_status)
+
+    @ddt.data(
+        ('verified', VerifiedNameStatus.APPROVED),
+        ('rejected', VerifiedNameStatus.DENIED),
+    )
+    @ddt.unpack
+    def test_proctoring_error_update_status(self, proctoring_status, expected_status):
+        """
+        If we receive a proctoring update with an error status, ensure that later status updates are handled as expected
+        """
+
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            'error',
+            self.verified_name,
+            self.profile_name,
+            True,
+            True,
+            True
+        )
+
+        verified_name = VerifiedName.objects.get(proctored_exam_attempt_id=self.proctoring_attempt_id)
+        object_id = verified_name.id
+        self.assertEqual(verified_name.status, VerifiedNameStatus.DENIED)
+
+        # update status
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            proctoring_status,
+            self.verified_name,
+            self.profile_name,
+            True,
+            True,
+            True
+        )
+
+        # ensure that status is updated for subsequent updates
         verified_name_query = VerifiedName.objects.filter(id=object_id)
         self.assertEqual(len(verified_name_query), 1)
         verified_name = verified_name_query.first()
@@ -373,7 +417,6 @@ class ProctoringSignalTests(SignalTestCase):
         'ready_to_start',
         'started',
         'ready_to_submit',
-        'error',
     )
     @patch('edx_name_affirmation.tasks.proctoring_update_verified_name_task.delay')
     def test_proctoring_non_trigger_status(self, status, mock_task):

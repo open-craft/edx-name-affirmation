@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.2.1] - 2022-02-23
+~~~~~~~~~~~~~~~~~~~~
+* Update verified name status to `denied` if proctoring `error` status is received
+
 [2.2.0] - 2022-02-14
 ~~~~~~~~~~~~~~~~~~~~
 * Added Django40 testing and dropped Django22, 30 and 31 support

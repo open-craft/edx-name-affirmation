@@ -59,7 +59,8 @@ class VerifiedNameStatus(str, Enum):
             'created': cls.PENDING,
             'submitted': cls.SUBMITTED,
             'verified': cls.APPROVED,
-            'rejected': cls.DENIED
+            'rejected': cls.DENIED,
+            'error': cls.DENIED,
         }
 
         return proctoring_state_transition_mapping.get(proctoring_status, None)

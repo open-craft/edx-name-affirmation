@@ -29,7 +29,7 @@ class VerifiedNameSerializer(serializers.ModelSerializer):
         model = VerifiedName
 
         fields = (
-            "created", "username", "verified_name", "profile_name", "verification_attempt_id",
+            "id", "created", "username", "verified_name", "profile_name", "verification_attempt_id",
             "proctored_exam_attempt_id", "status"
         )
 
@@ -52,6 +52,16 @@ class VerifiedNameSerializer(serializers.ModelSerializer):
         """
         regex = re.findall(r'https|http?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', string)
         return bool(regex)
+
+
+class UpdateVerifiedNameSerializer(VerifiedNameSerializer):
+    """
+    Serializer for updates to the VerifiedName Model.
+    """
+    username = serializers.CharField(source='user.username', required=True)
+    verified_name = serializers.CharField(required=False)
+    profile_name = serializers.CharField(required=False)
+    status = serializers.CharField(required=True)
 
 
 class VerifiedNameConfigSerializer(serializers.ModelSerializer):

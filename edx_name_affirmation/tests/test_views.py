@@ -24,6 +24,7 @@ from .utils import LoggedInTestCase
 User = get_user_model()
 
 
+@ddt.ddt
 class NameAffirmationViewsTestCase(LoggedInTestCase):
     """
     Base test class for Name Affirmation views
@@ -31,8 +32,11 @@ class NameAffirmationViewsTestCase(LoggedInTestCase):
 
     def setUp(self):
         super().setUp()
-        # Create a fresh config with default values
+        self.other_user = User(username='other_tester', email='other@test.com')
+        self.other_user.save()
+        # Create fresh configs with default values
         VerifiedNameConfig.objects.create(user=self.user)
+        VerifiedNameConfig.objects.create(user=self.other_user)
 
     def tearDown(self):
         super().tearDown()
@@ -54,7 +58,7 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
     ATTEMPT_ID = 11111
 
     def test_verified_name(self):
-        verified_name = self._create_verified_name(status=VerifiedNameStatus.APPROVED)
+        verified_name = self._create_verified_name(self.user, status=VerifiedNameStatus.APPROVED)
 
         expected_data = self._get_expected_data(self.user, verified_name)
 
@@ -64,7 +68,7 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         self.assertEqual(data, expected_data)
 
     def test_verified_name_existing_config(self):
-        verified_name = self._create_verified_name()
+        verified_name = self._create_verified_name(self.user)
         create_verified_name_config(self.user, use_verified_name_for_certs=True)
         expected_data = self._get_expected_data(self.user, verified_name, use_verified_name_for_certs=True)
 
@@ -73,25 +77,29 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         self.assertTrue(data, expected_data)
 
     def test_staff_access_verified_name(self):
-        other_user = User(username='other_tester', email='other@test.com')
-        other_user.save()
-        create_verified_name(other_user, self.VERIFIED_NAME, self.PROFILE_NAME, status=VerifiedNameStatus.APPROVED)
+        create_verified_name(self.other_user, self.VERIFIED_NAME, self.PROFILE_NAME, status=VerifiedNameStatus.APPROVED)
 
         # check that non staff access returns 403
-        response = self.client.get(reverse('edx_name_affirmation:verified_name'), {'username': other_user.username})
+        response = self.client.get(
+            reverse('edx_name_affirmation:verified_name'),
+            {'username': self.other_user.username}
+        )
         self.assertEqual(response.status_code, 403)
 
         self.user.is_staff = True
         self.user.save()
 
         # create verified name
-        self._create_verified_name()
-        other_user_verified_name = get_verified_name(other_user, is_verified=True)
+        self._create_verified_name(self.user)
+        other_user_verified_name = get_verified_name(self.other_user, is_verified=True)
 
         # expected data should match the verifiedname from the other user
-        expected_data = self._get_expected_data(other_user, other_user_verified_name)
+        expected_data = self._get_expected_data(self.other_user, other_user_verified_name)
 
-        response = self.client.get(reverse('edx_name_affirmation:verified_name'), {'username': other_user.username})
+        response = self.client.get(
+            reverse('edx_name_affirmation:verified_name'),
+            {'username': self.other_user.username}
+        )
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content.decode('utf-8'))
         self.assertEqual(data, expected_data)
@@ -123,11 +131,8 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         self.user.is_staff = True
         self.user.save()
 
-        other_user = User(username='other_tester', email='other@test.com')
-        other_user.save()
-
         verified_name_data = {
-            'username': other_user.username,
+            'username': self.other_user.username,
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'proctored_exam_attempt_id': self.ATTEMPT_ID,
@@ -139,18 +144,15 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         )
         self.assertEqual(response.status_code, 200)
 
-        created_name = get_verified_name(other_user, is_verified=True)
-        self.assertEqual(created_name.user.username, other_user.username)
+        created_name = get_verified_name(self.other_user, is_verified=True)
+        self.assertEqual(created_name.user.username, self.other_user.username)
         self.assertEqual(created_name.profile_name, self.PROFILE_NAME)
         self.assertEqual(created_name.verified_name, self.VERIFIED_NAME)
         self.assertEqual(created_name.proctored_exam_attempt_id, self.ATTEMPT_ID)
 
     def test_post_403_non_staff(self):
-        other_user = User(username='other_tester', email='other@test.com')
-        other_user.save()
-
         verified_name_data = {
-            'username': other_user.username,
+            'username': self.other_user.username,
             'profile_name': self.PROFILE_NAME,
             'verified_name': self.VERIFIED_NAME,
             'verification_attempt_id': self.ATTEMPT_ID,
@@ -205,21 +207,141 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         )
         self.assertEqual(response.status_code, 400)
 
+    @ddt.data((True, True, 200), (False, True, 403), (False, False, 403), (True, False, 404))
+    @ddt.unpack
+    def test_patch(self, is_staff, verified_name_exists, expected_response):
+        if is_staff:
+            self.user.is_staff = True
+            self.user.save()
+
+        if verified_name_exists:
+            self._create_verified_name(
+                self.other_user,
+                verification_attempt_id=123,
+                status=VerifiedNameStatus.SUBMITTED
+            )
+
+        update_data = {
+            'username': self.other_user.username,
+            'verification_attempt_id': 123,
+            'status': VerifiedNameStatus.APPROVED
+        }
+
+        response = self.client.patch(
+            reverse('edx_name_affirmation:verified_name'),
+            update_data,
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, expected_response)
+        if verified_name_exists:
+            updated_verified_name = get_verified_name(self.other_user)
+            if is_staff:
+                data = json.loads(response.content.decode('utf-8'))
+                assert updated_verified_name.status == data['status'] == VerifiedNameStatus.APPROVED
+            else:
+                self.assertEqual(updated_verified_name.status, VerifiedNameStatus.SUBMITTED)
+
+    def test_patch_missing_status(self):
+        self.user.is_staff = True
+        self.user.save()
+
+        self._create_verified_name(self.other_user, verification_attempt_id=123)
+
+        update_data = {
+            'username': self.other_user.username,
+            'verification_attempt_id': 123
+        }
+
+        response = self.client.patch(
+            reverse('edx_name_affirmation:verified_name'),
+            update_data,
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_patch_two_attempt_ids(self):
+        self.user.is_staff = True
+        self.user.save()
+
+        self._create_verified_name(self.other_user, verification_attempt_id=123)
+
+        update_data = {
+            'username': self.other_user.username,
+            'status': VerifiedNameStatus.APPROVED,
+            'verification_attempt_id': 123,
+            'proctored_exam_attempt_id': 456
+        }
+
+        response = self.client.patch(
+            reverse('edx_name_affirmation:verified_name'),
+            update_data,
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_patch_missing_attempt_id(self):
+        self.user.is_staff = True
+        self.user.save()
+
+        self._create_verified_name(self.other_user, verification_attempt_id=123)
+
+        update_data = {
+            'username': self.other_user.username,
+            'status': VerifiedNameStatus.APPROVED
+        }
+
+        response = self.client.patch(
+            reverse('edx_name_affirmation:verified_name'),
+            update_data,
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 400)
+
+    @ddt.data((True, True, 204), (False, True, 403), (False, False, 403), (True, False, 404))
+    @ddt.unpack
+    def test_delete(self, is_staff, verified_name_exists, expected_response):
+        if is_staff:
+            self.user.is_staff = True
+            self.user.save()
+
+        verified_name_id = 1
+        if verified_name_exists:
+            verified_name = self._create_verified_name(
+                self.other_user,
+                verification_attempt_id=123,
+                status=VerifiedNameStatus.APPROVED
+            )
+            verified_name_id = verified_name.id
+
+        response = self.client.delete(reverse(
+            'edx_name_affirmation:verified_name_by_id',
+            kwargs={'verified_name_id': verified_name_id}
+        ))
+
+        self.assertEqual(response.status_code, expected_response)
+        if verified_name_exists:
+            if is_staff:
+                self.assertIsNone(get_verified_name(self.other_user))
+            else:
+                self.assertEqual(get_verified_name(self.other_user), verified_name)
+
     def _create_verified_name(
-        self, verification_attempt_id=None, proctored_exam_attempt_id=None, status=VerifiedNameStatus.PENDING,
+        self, user, verification_attempt_id=None,
+        proctored_exam_attempt_id=None, status=VerifiedNameStatus.PENDING,
     ):
         """
         Create and return a verified name object.
         """
         create_verified_name(
-            self.user,
+            user,
             self.VERIFIED_NAME,
             self.PROFILE_NAME,
             verification_attempt_id,
             proctored_exam_attempt_id,
             status
         )
-        return get_verified_name(self.user)
+        return get_verified_name(user)
 
     def _get_expected_data(
         self, user, verified_name_obj,
@@ -229,6 +351,7 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
         Create a dictionary of expected data.
         """
         return {
+            'id': verified_name_obj.id,
             'created': verified_name_obj.created.isoformat(),
             'username': user.username,
             'verified_name': verified_name_obj.verified_name,
@@ -280,16 +403,13 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
     @ddt.data((True, 200), (False, 403))
     @ddt.unpack
     def test_get_staff_access(self, is_staff, expected_response):
-        other_user = User(username='other_tester', email='other@test.com')
-        other_user.save()
-
         if is_staff:
             self.user.is_staff = True
             self.user.save()
 
         response = self.client.get(
             reverse('edx_name_affirmation:verified_name_history'),
-            {'username': other_user.username}
+            {'username': self.other_user.username}
         )
 
         self.assertEqual(response.status_code, expected_response)
@@ -330,6 +450,7 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
 
         for verified_name_obj in verified_name_history:
             data = {
+                'id': verified_name_obj.id,
                 'created': verified_name_obj.created.isoformat(),
                 'username': user.username,
                 'verified_name': verified_name_obj.verified_name,
@@ -389,11 +510,8 @@ class VerifiedNameConfigViewTests(NameAffirmationViewsTestCase):
         self.user.is_staff = True
         self.user.save()
 
-        other_user = User(username='other_user', email='other@test.com')
-        other_user.save()
-
         config_data = {
-            'username': other_user.username,
+            'username': self.other_user.username,
             'use_verified_name_for_certs': True
         }
         response = self.client.post(
@@ -402,15 +520,12 @@ class VerifiedNameConfigViewTests(NameAffirmationViewsTestCase):
         )
         self.assertEqual(response.status_code, 201)
 
-        use_verified_name_for_certs = should_use_verified_name_for_certs(other_user)
+        use_verified_name_for_certs = should_use_verified_name_for_certs(self.other_user)
         self.assertTrue(use_verified_name_for_certs)
 
     def test_post_403_non_staff(self):
-        other_user = User(username='other_tester', email='other@test.com')
-        other_user.save()
-
         config_data = {
-            'username': other_user.username,
+            'username': self.other_user.username,
             'use_verified_name_for_certs': True
         }
         response = self.client.post(

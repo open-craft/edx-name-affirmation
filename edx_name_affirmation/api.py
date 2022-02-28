@@ -4,6 +4,8 @@ Python API for edx_name_affirmation.
 
 import logging
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from edx_name_affirmation.exceptions import (
     VerifiedNameAttemptIdNotGiven,
     VerifiedNameDoesNotExist,
@@ -98,6 +100,21 @@ def get_verified_name(user, is_verified=False, statuses_to_exclude=None):
         return verified_name_qs.exclude(status__in=statuses_to_exclude).first()
 
     return verified_name_qs.first()
+
+
+def delete_verified_name(verified_name_id):
+    """
+    Delete a VerifiedName.
+    """
+    try:
+        verified_name = VerifiedName.objects.get(id=verified_name_id)
+        verified_name.delete()
+    except ObjectDoesNotExist as exc:
+        err_msg = (
+            'Attempted to delete verified_name_id={verified_name_id}'
+            'but it does not exist'.format(verified_name_id=verified_name_id)
+        )
+        raise VerifiedNameDoesNotExist(err_msg) from exc
 
 
 def get_verified_name_history(user):
@@ -215,7 +232,7 @@ def update_verified_name_status(
         )
         raise VerifiedNameDoesNotExist(err_msg)
 
-    verified_name_obj.status = status.value
+    verified_name_obj.status = status
     verified_name_obj.save()
 
     log_msg = (
@@ -229,6 +246,8 @@ def update_verified_name_status(
         )
     )
     log.info(log_msg)
+
+    return verified_name_obj
 
 
 def create_verified_name_config(user, use_verified_name_for_certs=None):

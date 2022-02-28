@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.3.0] - 2022-02-28
+~~~~~~~~~~~~~~~~~~~~
+* Add REST API functionality to update verified name status, and to delete verified names.
+
 [2.2.1] - 2022-02-23
 ~~~~~~~~~~~~~~~~~~~~
 * Update verified name status to `denied` if proctoring `error` status is received

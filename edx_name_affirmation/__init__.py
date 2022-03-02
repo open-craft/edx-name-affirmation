@@ -2,6 +2,6 @@
 Django app housing name affirmation logic.
 """
 
-__version__ = '2.3.0'
+__version__ = '2.3.1'
 
 default_app_config = 'edx_name_affirmation.apps.EdxNameAffirmationConfig'  # pylint: disable=invalid-name

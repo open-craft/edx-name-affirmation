@@ -170,3 +170,45 @@ def proctoring_update_verified_name_task(
                     attempt_id=attempt_id,
                 )
             )
+
+
+@shared_task(
+    bind=True, autoretry_for=(Exception,), default_retry_delay=DEFAULT_RETRY_SECONDS, max_retries=MAX_RETRIES,
+)
+@set_code_owner_attribute
+def delete_verified_name_task(self, idv_attempt_id, proctoring_attempt_id):
+    """
+    Celery task to delete a verified name based on an idv or proctoring attempt
+    """
+    # this case shouldn't happen, but should log as an error in case
+    if (idv_attempt_id and proctoring_attempt_id) or (not idv_attempt_id and not proctoring_attempt_id):
+        log.error(
+            'A maximum of one attempt id should be provided for either a proctored exam attempt or IDV attempt.'
+        )
+        return
+
+    log_message = {'field_name': '', 'attempt_id': ''}
+
+    if idv_attempt_id:
+        verified_names = VerifiedName.objects.filter(verification_attempt_id=idv_attempt_id)
+        log_message['field_name'] = 'verification_attempt_id'
+        log_message['attempt_id'] = idv_attempt_id
+    else:
+        verified_names = VerifiedName.objects.filter(proctored_exam_attempt_id=proctoring_attempt_id)
+        log_message['field_name'] = 'proctored_exam_attempt_id'
+        log_message['attempt_id'] = proctoring_attempt_id
+
+    if verified_names:
+        log.info(
+            'Deleting {num_names} VerifiedName(s) associated with {field_name}='
+            '{verification_attempt_id}'.format(
+                num_names=len(verified_names),
+                field_name=log_message['field_name'],
+                verification_attempt_id=log_message['attempt_id'],
+            )
+        )
+        verified_names.delete()
+
+    log.info(
+        'No VerifiedNames deleted because no VerifiedNames were associated with the provided attempt ID.'
+    )

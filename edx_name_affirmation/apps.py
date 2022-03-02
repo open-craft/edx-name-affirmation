@@ -29,9 +29,19 @@ class EdxNameAffirmationConfig(AppConfig):
                         'signal_path': 'lms.djangoapps.verify_student.signals.idv_update_signal',
                     },
                     {
+                        'receiver_func_name': 'idv_delete_handler',
+                        'signal_path': 'django.db.models.signals.post_delete',
+                        'sender_path': 'lms.djangoapps.verify_student.models.SoftwareSecurePhotoVerification',
+                    },
+                    {
                         'receiver_func_name': 'proctoring_attempt_handler',
                         'signal_path': 'edx_proctoring.signals.exam_attempt_status_signal',
-                    }
+                    },
+                    {
+                        'receiver_func_name': 'proctoring_delete_handler',
+                        'signal_path': 'django.db.models.signals.post_delete',
+                        'sender_path': 'edx_proctoring.models.ProctoredExamStudentAttempt',
+                    },
                 ],
             }
         }

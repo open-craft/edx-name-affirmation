@@ -3,12 +3,17 @@ Tests for Name Affirmation signal handlers
 """
 
 import ddt
-from mock import patch
+from mock import MagicMock, patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from edx_name_affirmation.handlers import idv_attempt_handler, proctoring_attempt_handler
+from edx_name_affirmation.handlers import (
+    idv_attempt_handler,
+    idv_delete_handler,
+    proctoring_attempt_handler,
+    proctoring_delete_handler
+)
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.statuses import VerifiedNameStatus
 
@@ -215,6 +220,21 @@ class IDVSignalTests(SignalTestCase):
         )
 
         mock_task.assert_not_called()
+
+    @patch('edx_name_affirmation.tasks.delete_verified_name_task.delay')
+    def test_idv_delete_handler(self, mock_task):
+        """
+        Test that a celery task is triggered if an idv delete signal is received
+        """
+        mock_idv_object = MagicMock()
+        mock_idv_object.id = 'abcdef'
+        idv_delete_handler(
+            {},
+            mock_idv_object,
+            '',
+        )
+
+        mock_task.assert_called_with(mock_idv_object.id, None)
 
 
 @ddt.ddt
@@ -435,3 +455,18 @@ class ProctoringSignalTests(SignalTestCase):
         )
 
         mock_task.assert_not_called()
+
+    @patch('edx_name_affirmation.tasks.delete_verified_name_task.delay')
+    def test_proctoring_delete_handler(self, mock_task):
+        """
+        Test that a celery task is triggered if an idv delete signal is received
+        """
+        mock_proctoring_object = MagicMock()
+        mock_proctoring_object.id = 'abcdef'
+        proctoring_delete_handler(
+            {},
+            mock_proctoring_object,
+            '',
+        )
+
+        mock_task.assert_called_with(None, mock_proctoring_object.id)

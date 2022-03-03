@@ -11,7 +11,11 @@ from django.dispatch.dispatcher import receiver
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.signals import VERIFIED_NAME_APPROVED
 from edx_name_affirmation.statuses import VerifiedNameStatus
-from edx_name_affirmation.tasks import idv_update_verified_name_task, proctoring_update_verified_name_task
+from edx_name_affirmation.tasks import (
+    delete_verified_name_task,
+    idv_update_verified_name_task,
+    proctoring_update_verified_name_task
+)
 
 User = get_user_model()
 
@@ -64,6 +68,23 @@ def idv_attempt_handler(attempt_id, user_id, status, photo_id_name, full_name, *
                      'status': status
                  }
                  )
+
+
+def idv_delete_handler(sender, instance, signal, **kwargs):  # pylint: disable=unused-argument
+    """
+    Receiver for IDV attempt deletions
+
+    Args:
+        attempt_id(int): ID associated with the IDV attempt
+    """
+    idv_attempt_id = instance.id
+    log.info(
+        'VerifiedName: idv_delete_handler triggering Celery task for idv_attempt_id=%(idv_attempt_id)s',
+        {
+            'idv_attempt_id': idv_attempt_id,
+        }
+    )
+    delete_verified_name_task.delay(idv_attempt_id, None)
 
 
 def proctoring_attempt_handler(
@@ -119,3 +140,21 @@ def proctoring_attempt_handler(
                      'status': status,
                  }
                  )
+
+
+def proctoring_delete_handler(sender, instance, signal, **kwargs):  # pylint: disable=unused-argument
+    """
+    Receiver for proctoring attempt deletions
+
+    Args:
+        attempt_id(int): ID associated with the proctoring attempt
+    """
+    proctoring_attempt_id = instance.id
+    log.info(
+        'VerifiedName: proctoring_delete_handler triggering Celery task for '
+        'proctoring_attempt_id=%(proctoring_attempt_id)s',
+        {
+            'proctoring_attempt_id': proctoring_attempt_id,
+        }
+    )
+    delete_verified_name_task.delay(None, proctoring_attempt_id)

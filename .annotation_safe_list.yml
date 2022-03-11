@@ -24,3 +24,7 @@ sessions.Session:
     ".. pii": "The session can be used to store user information"
     ".. pii_types": "other"
     ".. pii_retirement": "consumer_api"
+edx_name_affirmation.HistoricalVerifiedName:
+    ".. pii": "This model contains name fields"
+    ".. pii_types": "name"
+    ".. pii_retirement": "local_api"

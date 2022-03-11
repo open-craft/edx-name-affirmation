@@ -4,6 +4,7 @@ Database models for edx_name_affirmation.
 
 from config_models.models import ConfigurationModel
 from model_utils.models import TimeStampedModel
+from simple_history.models import HistoricalRecords
 
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -37,6 +38,7 @@ class VerifiedName(TimeStampedModel):
         choices=[(st.value, st.value) for st in VerifiedNameStatus],
         default=VerifiedNameStatus.PENDING.value,
     )
+    history = HistoricalRecords()
 
     class Meta:
         """ Meta class for this Django model """

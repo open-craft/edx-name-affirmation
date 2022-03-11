@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-amqp==5.0.9
+amqp==5.1.0
     # via kombu
 billiard==3.6.4.0
     # via celery
@@ -22,7 +22,7 @@ click-plugins==1.1.1
     # via celery
 click-repl==0.2.0
     # via celery
-kombu==5.2.3
+kombu==5.2.4
     # via celery
 prompt-toolkit==3.0.28
     # via click-repl

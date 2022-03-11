@@ -22,10 +22,6 @@ certifi==2021.10.8
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-cffi==1.15.0
-    # via
-    #   -r requirements/quality.txt
-    #   cryptography
 chardet==4.0.0
     # via diff-cover
 charset-normalizer==2.0.12
@@ -59,10 +55,6 @@ coverage==6.3.2
     # via
     #   -r requirements/ci.txt
     #   codecov
-cryptography==36.0.1
-    # via
-    #   -r requirements/quality.txt
-    #   secretstorage
 diff-cover==6.4.4
     # via -r requirements/dev.in
 distlib==0.3.4
@@ -102,11 +94,6 @@ isort==5.10.1
     # via
     #   -r requirements/quality.txt
     #   pylint
-jeepney==0.7.1
-    # via
-    #   -r requirements/quality.txt
-    #   keyring
-    #   secretstorage
 jinja2==3.0.3
     # via
     #   -r requirements/quality.txt
@@ -170,10 +157,6 @@ py==1.11.0
     #   tox
 pycodestyle==2.8.0
     # via -r requirements/quality.txt
-pycparser==2.21
-    # via
-    #   -r requirements/quality.txt
-    #   cffi
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
 pygments==2.11.2
@@ -219,7 +202,7 @@ pyyaml==6.0
     #   -r requirements/quality.txt
     #   code-annotations
     #   edx-i18n-tools
-readme-renderer==32.0
+readme-renderer==33.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -240,10 +223,6 @@ rfc3986==2.0.0
     #   twine
 rstcheck==3.3.1
     # via -r requirements/quality.txt
-secretstorage==3.3.1
-    # via
-    #   -r requirements/quality.txt
-    #   keyring
 six==1.16.0
     # via
     #   -r requirements/ci.txt
@@ -303,7 +282,7 @@ urllib3==1.26.8
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.13.2
+virtualenv==20.13.3
     # via
     #   -r requirements/ci.txt
     #   tox

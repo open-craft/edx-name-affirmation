@@ -8,7 +8,7 @@ amqp==5.1.0
     # via kombu
 billiard==3.6.4.0
     # via celery
-celery==5.2.3
+celery==5.2.6
     # via -r requirements/celery50.in
 click==8.1.2
     # via
@@ -24,7 +24,7 @@ click-repl==0.2.0
     # via celery
 kombu==5.2.4
     # via celery
-prompt-toolkit==3.0.28
+prompt-toolkit==3.0.29
     # via click-repl
 pytz==2022.1
     # via celery
@@ -37,6 +37,3 @@ vine==5.0.0
     #   kombu
 wcwidth==0.2.5
     # via prompt-toolkit
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

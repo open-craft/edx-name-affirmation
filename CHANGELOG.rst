@@ -13,6 +13,8 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+* Updated internal documentation. Added to the readme and a new docs context
+
 [2.3.2] - 2022-03-11
 ~~~~~~~~~~~~~~~~~~~~
 * Add simple_history tracking to the VerifiedName model

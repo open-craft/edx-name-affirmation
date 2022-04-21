@@ -13,6 +13,9 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+[2.3.3] - 2022-04-21
+~~~~~~~~~~~~~~~~~~~~
+* Leverage edx-api-doc-tools to provide better swagger documentation for the RESTFul API endpoints
 * Updated internal documentation. Added to the readme and a new docs context
 
 [2.3.2] - 2022-03-11

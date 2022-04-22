@@ -1,7 +1,7 @@
 """
 Name Affirmation HTTP-based API endpoints
 """
-
+from edx_api_doc_tools import path_parameter, query_parameter, schema
 from edx_rest_framework_extensions.auth.jwt.authentication import JwtAuthentication
 from rest_framework import status as http_status
 from rest_framework.authentication import SessionAuthentication
@@ -44,29 +44,27 @@ class AuthenticatedAPIView(APIView):
 class VerifiedNameView(AuthenticatedAPIView):
     """
     Endpoint for a VerifiedName.
-    /edx_name_affirmation/v1/verified_name?username=xxx
 
     Supports:
         HTTP POST: Creates a new VerifiedName.
         HTTP GET: Returns an existing VerifiedName (by username or requesting user)
         HTTP PATCH: Update the status of a VerifiedName
         HTTP DELETE: Delete a VerifiedName
-
-    HTTP POST
-    Creates a new VerifiedName.
-    Expected POST data: {
-        "username": "jdoe",
-        "verified_name": "Jonathan Doe"
-        "profile_name": "Jon Doe"
-        "verification_attempt_id": (Optional)
-        "proctored_exam_attempt_id": (Optional)
-        "status": (Optional)
-    }
-
-    HTTP GET
-        ** Scenarios **
-        ?username=jdoe
-        returns an existing verified name object matching the username
+    """
+    @schema(
+        parameters=[
+            query_parameter('username', str, 'The username of which verified name records might be associated'),
+        ],
+        responses={
+            200: 'The verified_name record associated with the username provided',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+            404: 'The verified_name record associated with the username provided does not exist.'
+        },
+    )
+    def get(self, request):
+        """
+        Get most recent verified name for the request user or for the specified username
+        For example: /edx_name_affirmation/v1/verified_name?username=jdoe
         Example response: {
             "username": "jdoe",
             "verified_name": "Jonathan Doe",
@@ -76,23 +74,6 @@ class VerifiedNameView(AuthenticatedAPIView):
             "status": "approved",
             "use_verified_name_for_certs": False,
         }
-
-    HTTP PATCH
-        * Update the status of a VerifiedName
-            Example PATCH data: {
-                "username": "jdoe",
-                "verification_attempt_id" OR "proctored_exam_attempt_id": 123,
-                "status": "approved",
-            }
-
-    HTTP DELETE
-        * Delete a VerifiedName
-        /edx_name_affirmation/v1/verified_name/{id}
-
-    """
-    def get(self, request):
-        """
-        Get most recent verified name for the request user or for the specified username
         """
         username = request.GET.get('username')
         if username and not request.user.is_staff:
@@ -113,9 +94,25 @@ class VerifiedNameView(AuthenticatedAPIView):
         serialized_data['use_verified_name_for_certs'] = should_use_verified_name_for_certs(user)
         return Response(serialized_data)
 
+    @schema(
+        body=VerifiedNameSerializer(),
+        responses={
+            200: 'The verified_name record associated with the username provided is successfully created',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+            400: 'The posted data have conflicts with already stored verified name'
+        },
+    )
     def post(self, request):
         """
-        Create verified name
+        Creates a new VerifiedName.
+        Expected POST data: {
+            "username": "jdoe",
+            "verified_name": "Jonathan Doe"
+            "profile_name": "Jon Doe"
+            "verification_attempt_id": (Optional)
+            "proctored_exam_attempt_id": (Optional)
+            "status": (Optional)
+        }
         """
         username = request.data.get('username')
         if username != request.user.username and not request.user.is_staff:
@@ -146,9 +143,22 @@ class VerifiedNameView(AuthenticatedAPIView):
             data = serializer.errors
         return Response(status=response_status, data=data)
 
+    @schema(
+        body=UpdateVerifiedNameSerializer(),
+        responses={
+            200: 'The verified_name record associated with the username provided is successfully edited',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+            400: 'The edit action failed validation rules'
+        },
+    )
     def patch(self, request):
         """
         Update verified name status
+        Example PATCH data: {
+                "username": "jdoe",
+                "verification_attempt_id" OR "proctored_exam_attempt_id": 123,
+                "status": "approved",
+            }
         """
         if not request.user.is_staff:
             return Response(
@@ -182,6 +192,16 @@ class VerifiedNameView(AuthenticatedAPIView):
 
         return Response(status=response_status, data=data)
 
+    @schema(
+        parameters=[
+            path_parameter('verified_name_id', str, 'The database id of the verified_name to be deleted'),
+        ],
+        responses={
+            204: 'The verified_name record associated with the id is successfully deleted from data store',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+            404: 'The verified_name record associated with the id provided does not exist.'
+        },
+    )
     def delete(self, request, verified_name_id):
         """
         Delete verified name
@@ -212,6 +232,15 @@ class VerifiedNameHistoryView(AuthenticatedAPIView):
     Supports:
         HTTP GET: Return a list of VerifiedNames for the given user.
     """
+    @schema(
+        parameters=[
+            query_parameter('username', str, 'The username of which verified name records might be associated'),
+        ],
+        responses={
+            200: 'The verified_name record associated with the username provided is successfully edited',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+        },
+    )
     def get(self, request):
         """
         Get a list of verified name objects for the given user, ordered by most recently created.
@@ -250,6 +279,14 @@ class VerifiedNameConfigView(AuthenticatedAPIView):
         "use_verified_name_for_certs": True
     }
     """
+    @schema(
+        body=VerifiedNameConfigSerializer(),
+        responses={
+            201: 'The verified_name configuration record is successfully created',
+            403: 'User lacks required permission. Only an edX staff user can invoke this API',
+            400: 'The POSTed data failed validation rules',
+        },
+    )
     def post(self, request):
         """
         Create VerifiedNameConfig

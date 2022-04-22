@@ -29,13 +29,13 @@ class VerifiedNameModelTests(TestCase):
         """
         Test the model history is recording records as expected
         """
-        verified_name_history = self.verified_name.history.all().order_by('history_date')  # pylint: disable=no-member
+        verified_name_history = self.verified_name.history.all().order_by('history_date')
         assert len(verified_name_history) == 1
         idv_attempt_id = 34455
         self.verified_name.status = VerifiedNameStatus.APPROVED
         self.verified_name.verification_attempt_id = idv_attempt_id
         self.verified_name.save()
-        verified_name_history = self.verified_name.history.all().order_by('history_date')  # pylint: disable=no-member
+        verified_name_history = self.verified_name.history.all().order_by('history_date')
         assert len(verified_name_history) == 2
 
         first_history_record = verified_name_history[0]

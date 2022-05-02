@@ -145,9 +145,8 @@ platformdirs==2.5.2
     #   -r requirements/quality.txt
     #   pylint
     #   virtualenv
-pluggy==0.13.1
+pluggy==1.0.0
     # via
-    #   -c requirements/constraints.txt
     #   -r requirements/ci.txt
     #   diff-cover
     #   tox

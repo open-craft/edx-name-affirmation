@@ -192,10 +192,8 @@ pbr==5.8.1
     # via
     #   -r requirements/base.txt
     #   stevedore
-pluggy==0.13.1
-    # via
-    #   -c requirements/constraints.txt
-    #   pytest
+pluggy==1.0.0
+    # via pytest
 prompt-toolkit==3.0.29
     # via
     #   -r requirements/base.txt

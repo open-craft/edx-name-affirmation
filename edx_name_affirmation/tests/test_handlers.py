@@ -134,6 +134,35 @@ class IDVSignalTests(SignalTestCase):
         self.assertEqual(len(VerifiedName.objects.filter(verification_attempt_id=self.idv_attempt_id)), 3)
         self.assertEqual(len(VerifiedName.objects.filter(status=expected_status)), 3)
 
+    def test_idv_create_with_existing_verified_names(self):
+        """
+        Test that if a user attempts IDV again with the same name as previous attempts, we still create a new record
+        """
+        previous_id = 1234567
+
+        VerifiedName.objects.create(
+            user=self.user,
+            verified_name=self.verified_name,
+            profile_name=self.profile_name,
+            verification_attempt_id=previous_id,
+            status='denied'
+        )
+
+        # create an IDV attempt with the same user and names as above, but change the attempt ID to a unique value
+        idv_attempt_handler(
+            self.idv_attempt_id,
+            self.user.id,
+            'submitted',
+            self.verified_name,
+            self.profile_name
+        )
+
+        verified_name = VerifiedName.objects.get(verification_attempt_id=self.idv_attempt_id)
+        self.assertEqual(verified_name.status, VerifiedNameStatus.SUBMITTED)
+
+        previous_name = VerifiedName.objects.get(verification_attempt_id=previous_id)
+        self.assertEqual(previous_name.status, VerifiedNameStatus.DENIED)
+
     def test_idv_does_not_update_verified_name_by_proctoring(self):
         """
         If the idv handler is triggered, ensure that the idv attempt info does not update any verified name

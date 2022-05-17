@@ -9,6 +9,7 @@ from celery import shared_task
 from edx_django_utils.monitoring import set_code_owner_attribute
 
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from edx_name_affirmation.models import VerifiedName
 from edx_name_affirmation.statuses import VerifiedNameStatus
@@ -37,7 +38,15 @@ def idv_update_verified_name_task(self, attempt_id, user_id, name_affirmation_st
                 'status': name_affirmation_status
              }
              )
-    verified_names = VerifiedName.objects.filter(user__id=user_id, verified_name=photo_id_name).order_by('-created')
+    # get all verified names that are either not associated with an IDV attempt, or
+    # only associated with the IDV attempt for which we received an update. We do not
+    # want to grab all verified names for the same user and name combination, because
+    # some of those records may already be associated with a different IDV attempt.
+    verified_names = VerifiedName.objects.filter(
+        (Q(verification_attempt_id=attempt_id) | Q(verification_attempt_id__isnull=True))
+        & Q(user__id=user_id)
+        & Q(verified_name=photo_id_name)
+    ).order_by('-created')
     if verified_names:
         # if there are VerifiedName objects, we want to update existing entries
         # for each attempt with no attempt id (either proctoring or idv), update attempt id

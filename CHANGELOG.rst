@@ -13,6 +13,11 @@ Change Log
 
 Unreleased
 ~~~~~~~~~~
+
+[2.3.4] - 2022-05-17
+~~~~~~~~~~~~~~~~~~~~
+* Fix bug that prevents new verified names from being created if the user is trying to verify the same name
+
 [2.3.3] - 2022-04-21
 ~~~~~~~~~~~~~~~~~~~~
 * Leverage edx-api-doc-tools to provide better swagger documentation for the RESTFul API endpoints

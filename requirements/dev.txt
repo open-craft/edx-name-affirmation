@@ -8,7 +8,7 @@ asgiref==3.5.2
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==2.11.7
+astroid==2.12.5
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -32,7 +32,7 @@ cffi==1.15.1
     #   cryptography
 chardet==5.0.0
     # via diff-cover
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -78,7 +78,7 @@ dill==0.3.5.1
     # via
     #   -r requirements/quality.txt
     #   pylint
-distlib==0.3.5
+distlib==0.3.6
     # via
     #   -r requirements/ci.txt
     #   virtualenv
@@ -116,6 +116,10 @@ isort==5.10.1
     # via
     #   -r requirements/quality.txt
     #   pylint
+jaraco-classes==3.2.2
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
 jeepney==0.8.0
     # via
     #   -r requirements/quality.txt
@@ -126,7 +130,7 @@ jinja2==3.1.2
     #   -r requirements/quality.txt
     #   code-annotations
     #   diff-cover
-keyring==23.8.2
+keyring==23.9.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -142,6 +146,10 @@ mccabe==0.7.0
     # via
     #   -r requirements/quality.txt
     #   pylint
+more-itertools==8.14.0
+    # via
+    #   -r requirements/quality.txt
+    #   jaraco-classes
 packaging==21.3
     # via
     #   -r requirements/ci.txt
@@ -187,7 +195,7 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==1.9.2
+pydantic==1.10.1
     # via
     #   -r requirements/quality.txt
     #   rstcheck
@@ -200,7 +208,7 @@ pygments==2.13.0
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==2.14.5
+pylint==2.15.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -238,7 +246,7 @@ pyyaml==6.0
     #   -r requirements/quality.txt
     #   code-annotations
     #   edx-i18n-tools
-readme-renderer==36.0
+readme-renderer==37.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -340,13 +348,13 @@ typing-extensions==4.3.0
     #   pydantic
     #   pylint
     #   rich
-urllib3==1.26.11
+urllib3==1.26.12
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.16.3
+virtualenv==20.16.4
     # via
     #   -r requirements/ci.txt
     #   tox

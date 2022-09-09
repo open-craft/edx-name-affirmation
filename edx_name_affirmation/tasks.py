@@ -119,31 +119,33 @@ def proctoring_update_verified_name_task(
     Celery task for updating a verified name based on a proctoring attempt
     """
 
-    # check if approved VerifiedName already exists for the user
-    verified_name = VerifiedName.objects.filter(
+    approved_verified_name = VerifiedName.objects.filter(
         user__id=user_id,
         status=VerifiedNameStatus.APPROVED
     ).order_by('-created').first()
-    if verified_name:
-        approved_verified_name = verified_name.verified_name
-        is_full_name_approved = approved_verified_name == full_name
+
+    verified_name_for_exam = VerifiedName.objects.filter(
+        user__id=user_id,
+        proctored_exam_attempt_id=attempt_id
+    ).order_by('-created').first()
+
+    # check if approved VerifiedName already exists for the user, and skip
+    # update if no VerifiedName has already been created for this specific exam
+    if approved_verified_name and not verified_name_for_exam:
+        is_full_name_approved = approved_verified_name.verified_name == full_name
         if not is_full_name_approved:
             log.warning(
                 'Full name for proctored_exam_attempt_id={attempt_id} is not equal '
                 'to the most recent verified name verified_name_id={name_id}.'.format(
                     attempt_id=attempt_id,
-                    name_id=verified_name.id
+                    name_id=approved_verified_name.id
                 )
             )
         return
 
-    verified_name = VerifiedName.objects.filter(
-        user__id=user_id,
-        proctored_exam_attempt_id=attempt_id
-    ).order_by('-created').first()
-    if verified_name:
-        verified_name.status = name_affirmation_status
-        verified_name.save()
+    if verified_name_for_exam:
+        verified_name_for_exam.status = name_affirmation_status
+        verified_name_for_exam.save()
         log.info(
             'Updated VerifiedName for user={user_id} with proctored_exam_attempt_id={attempt_id} '
             'to have status={status}'.format(

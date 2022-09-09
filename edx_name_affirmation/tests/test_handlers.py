@@ -434,8 +434,9 @@ class ProctoringSignalTests(SignalTestCase):
             status=VerifiedNameStatus.APPROVED
         )
 
+        additional_attempt_id = self.proctoring_attempt_id + 1
         proctoring_attempt_handler(
-            self.proctoring_attempt_id,
+            additional_attempt_id,
             self.user.id,
             'created',
             ('John' if should_names_differ else self.verified_name),
@@ -449,7 +450,7 @@ class ProctoringSignalTests(SignalTestCase):
             'Full name for proctored_exam_attempt_id={attempt_id} is not equal to the most recent verified '
             'name verified_name_id={verified_name_id}.'
         ).format(
-            attempt_id=self.proctoring_attempt_id,
+            attempt_id=additional_attempt_id,
             verified_name_id=verified_name.id
         )
 
@@ -499,3 +500,59 @@ class ProctoringSignalTests(SignalTestCase):
         )
 
         mock_task.assert_called_with(None, mock_proctoring_object.id)
+
+    def test_proctoring_multiple_approved(self):
+        # create task for submitted exam
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            'submitted',
+            'John',
+            'John',
+            True,
+            True,
+            True
+        )
+
+        # create task for submitted on another exam
+        other_attempt_id = self.proctoring_attempt_id + 1
+        proctoring_attempt_handler(
+            other_attempt_id,
+            self.user.id,
+            'submitted',
+            'John',
+            'John',
+            True,
+            True,
+            True
+        )
+
+        self.assertEqual(len(VerifiedName.objects.filter()), 2)
+        self.assertEqual(len(VerifiedName.objects.filter(status=VerifiedNameStatus.SUBMITTED)), 2)
+
+        # create task for approved exam 1
+        proctoring_attempt_handler(
+            self.proctoring_attempt_id,
+            self.user.id,
+            'verified',
+            'John',
+            'John',
+            True,
+            True,
+            True
+        )
+
+        # create task for approved exam 2
+        proctoring_attempt_handler(
+            other_attempt_id,
+            self.user.id,
+            'verified',
+            'John',
+            'John',
+            True,
+            True,
+            True
+        )
+
+        self.assertEqual(len(VerifiedName.objects.filter()), 2)
+        self.assertEqual(len(VerifiedName.objects.filter(status=VerifiedNameStatus.APPROVED)), 2)

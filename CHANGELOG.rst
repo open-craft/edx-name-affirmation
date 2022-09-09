@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.3.5] - 2022-09-09
+~~~~~~~~~~~~~~~~~~~~
+* Fix bug that prevents a verified name from being updated if the user already has an approved verified name associated with a proctored exam attempt
+
 [2.3.4] - 2022-05-17
 ~~~~~~~~~~~~~~~~~~~~
 * Fix bug that prevents new verified names from being created if the user is trying to verify the same name

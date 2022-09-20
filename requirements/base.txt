@@ -14,7 +14,7 @@ celery==5.2.7
     # via
     #   -c requirements/constraints.txt
     #   edx-celeryutils
-certifi==2022.6.15
+certifi==2022.9.14
     # via requests
 cffi==1.15.1
     # via
@@ -44,7 +44,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==37.0.4
+cryptography==38.0.1
     # via pyjwt
 django==3.2.15
     # via
@@ -97,13 +97,13 @@ edx-api-doc-tools==1.6.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.1
     # via -r requirements/base.in
-edx-django-utils==5.0.0
+edx-django-utils==5.0.1
     # via
     #   -r requirements/base.in
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.2.0
+edx-drf-extensions==8.3.1
     # via -r requirements/base.in
 edx-opaque-keys==2.3.0
     # via edx-drf-extensions
@@ -113,7 +113,7 @@ future==0.18.2
     # via
     #   edx-celeryutils
     #   pyjwkest
-idna==3.3
+idna==3.4
     # via requests
 inflection==0.5.1
     # via drf-yasg
@@ -129,7 +129,7 @@ kombu==5.2.4
     # via celery
 markupsafe==2.1.1
     # via jinja2
-newrelic==8.0.0.179
+newrelic==8.1.0.180
     # via edx-django-utils
 packaging==21.3
     # via drf-yasg
@@ -137,7 +137,7 @@ pbr==5.10.0
     # via stevedore
 prompt-toolkit==3.0.31
     # via click-repl
-psutil==5.9.1
+psutil==5.9.2
     # via edx-django-utils
 pycparser==2.21
     # via cffi

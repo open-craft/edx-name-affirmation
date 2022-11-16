@@ -98,7 +98,7 @@ django-crum==0.7.9
     #   -r requirements/base.txt
     #   edx-django-utils
     #   edx-toggles
-django-model-utils==4.2.0
+django-model-utils==4.3.1
     # via
     #   -r requirements/base.txt
     #   edx-celeryutils
@@ -146,7 +146,7 @@ edx-opaque-keys==2.3.0
     #   edx-drf-extensions
 edx-toggles==5.0.0
     # via -r requirements/base.txt
-exceptiongroup==1.0.0
+exceptiongroup==1.0.4
     # via pytest
 future==0.18.2
     # via
@@ -200,11 +200,11 @@ pbr==5.11.0
     #   stevedore
 pluggy==1.0.0
     # via pytest
-prompt-toolkit==3.0.31
+prompt-toolkit==3.0.32
     # via
     #   -r requirements/base.txt
     #   click-repl
-psutil==5.9.3
+psutil==5.9.4
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -293,7 +293,7 @@ sqlparse==0.4.3
     # via
     #   -r requirements/base.txt
     #   django
-stevedore==4.1.0
+stevedore==4.1.1
     # via
     #   -r requirements/base.txt
     #   code-annotations

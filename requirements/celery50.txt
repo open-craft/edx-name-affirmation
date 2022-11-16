@@ -24,7 +24,7 @@ click-repl==0.2.0
     # via celery
 kombu==5.2.4
     # via celery
-prompt-toolkit==3.0.31
+prompt-toolkit==3.0.32
     # via click-repl
 pytz==2022.6
     # via celery

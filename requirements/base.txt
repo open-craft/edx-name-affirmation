@@ -44,7 +44,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==38.0.3
+cryptography==38.0.4
     # via pyjwt
 django==3.2.16
     # via
@@ -135,13 +135,13 @@ packaging==21.3
     # via drf-yasg
 pbr==5.11.0
     # via stevedore
-prompt-toolkit==3.0.32
+prompt-toolkit==3.0.33
     # via click-repl
 psutil==5.9.4
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pycryptodomex==3.15.0
+pycryptodomex==3.16.0
     # via pyjwkest
 pyjwkest==1.4.2
     # via edx-drf-extensions
@@ -157,7 +157,7 @@ pyparsing==3.0.9
     # via packaging
 python-dateutil==2.8.2
     # via edx-drf-extensions
-python-slugify==6.1.2
+python-slugify==7.0.0
     # via code-annotations
 pytz==2022.6
     # via
@@ -197,7 +197,7 @@ uritemplate==4.1.1
     # via
     #   coreapi
     #   drf-yasg
-urllib3==1.26.12
+urllib3==1.26.13
     # via requests
 vine==5.0.0
     # via

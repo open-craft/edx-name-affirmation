@@ -8,7 +8,7 @@ asgiref==3.5.2
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==2.12.12
+astroid==2.12.13
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -30,7 +30,7 @@ cffi==1.15.1
     # via
     #   -r requirements/quality.txt
     #   cryptography
-chardet==5.0.0
+chardet==5.1.0
     # via diff-cover
 charset-normalizer==2.1.1
     # via
@@ -68,11 +68,11 @@ coverage==6.5.0
     # via
     #   -r requirements/ci.txt
     #   codecov
-cryptography==38.0.3
+cryptography==38.0.4
     # via
     #   -r requirements/quality.txt
     #   secretstorage
-diff-cover==7.0.2
+diff-cover==7.2.0
     # via -r requirements/dev.in
 dill==0.3.6
     # via
@@ -106,7 +106,7 @@ idna==3.4
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==5.0.0
+importlib-metadata==5.1.0
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -155,7 +155,7 @@ packaging==21.3
     #   -r requirements/pip-tools.txt
     #   build
     #   tox
-path==16.5.0
+path==16.6.0
     # via edx-i18n-tools
 pbr==5.11.0
     # via
@@ -165,9 +165,9 @@ pep517==0.13.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-pip-tools==6.10.0
+pip-tools==6.11.0
     # via -r requirements/pip-tools.txt
-pkginfo==1.8.3
+pkginfo==1.9.2
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -188,7 +188,7 @@ py==1.11.0
     # via
     #   -r requirements/ci.txt
     #   tox
-pycodestyle==2.9.1
+pycodestyle==2.10.0
     # via -r requirements/quality.txt
 pycparser==2.21
     # via
@@ -206,7 +206,7 @@ pygments==2.13.0
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==2.15.5
+pylint==2.15.7
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -231,7 +231,7 @@ pyparsing==3.0.9
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
     #   packaging
-python-slugify==6.1.2
+python-slugify==7.0.0
     # via
     #   -r requirements/quality.txt
     #   code-annotations
@@ -326,7 +326,7 @@ tox-battery==0.6.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/dev.in
-twine==4.0.1
+twine==4.0.2
     # via -r requirements/quality.txt
 typer[all]==0.7.0
     # via
@@ -343,13 +343,13 @@ typing-extensions==4.4.0
     #   pydantic
     #   pylint
     #   rich
-urllib3==1.26.12
+urllib3==1.26.13
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.16.7
+virtualenv==20.17.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -365,7 +365,7 @@ wrapt==1.14.1
     # via
     #   -r requirements/quality.txt
     #   astroid
-zipp==3.10.0
+zipp==3.11.0
     # via
     #   -r requirements/quality.txt
     #   importlib-metadata

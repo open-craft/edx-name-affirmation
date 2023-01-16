@@ -29,7 +29,7 @@ cffi==1.15.1
     #   -r requirements/base.txt
     #   cryptography
     #   pynacl
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via
     #   -r requirements/base.txt
     #   requests
@@ -68,7 +68,7 @@ coreschema==0.0.4
     #   -r requirements/base.txt
     #   coreapi
     #   drf-yasg
-coverage[toml]==7.0.1
+coverage[toml]==7.0.5
     # via pytest-cov
 cryptography==39.0.0
     # via
@@ -148,7 +148,7 @@ edx-toggles==5.0.0
     # via -r requirements/base.txt
 exceptiongroup==1.1.0
     # via pytest
-future==0.18.2
+future==0.18.3
     # via
     #   -r requirements/base.txt
     #   edx-celeryutils
@@ -161,7 +161,7 @@ inflection==0.5.1
     # via
     #   -r requirements/base.txt
     #   drf-yasg
-iniconfig==1.1.1
+iniconfig==2.0.0
     # via pytest
 itypes==1.2.0
     # via
@@ -183,18 +183,18 @@ markupsafe==2.1.1
     # via
     #   -r requirements/base.txt
     #   jinja2
-mock==5.0.0
+mock==5.0.1
     # via -r requirements/test.in
 newrelic==8.5.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-packaging==22.0
+packaging==23.0
     # via
     #   -r requirements/base.txt
     #   drf-yasg
     #   pytest
-pbr==5.11.0
+pbr==5.11.1
     # via
     #   -r requirements/base.txt
     #   stevedore
@@ -233,7 +233,7 @@ pynacl==1.5.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -249,7 +249,7 @@ python-slugify==7.0.0
     # via
     #   -r requirements/base.txt
     #   code-annotations
-pytz==2022.7
+pytz==2022.7.1
     # via
     #   -r requirements/base.txt
     #   celery
@@ -260,7 +260,7 @@ pyyaml==6.0
     # via
     #   -r requirements/base.txt
     #   code-annotations
-requests==2.28.1
+requests==2.28.2
     # via
     #   -r requirements/base.txt
     #   coreapi
@@ -308,7 +308,7 @@ uritemplate==4.1.1
     #   -r requirements/base.txt
     #   coreapi
     #   drf-yasg
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   -r requirements/base.txt
     #   requests
@@ -317,7 +317,7 @@ urllib3==1.26.13
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.2.5
+wcwidth==0.2.6
     # via
     #   -r requirements/base.txt
     #   prompt-toolkit

@@ -70,7 +70,7 @@ keyring==23.13.1
     # via twine
 lazy-object-proxy==1.9.0
     # via astroid
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via jinja2
 mccabe==0.7.0
     # via pylint
@@ -88,7 +88,7 @@ pycparser==2.21
     # via cffi
 pydantic==1.10.4
     # via rstcheck-core
-pydocstyle==6.2.3
+pydocstyle==6.3.0
     # via -r requirements/quality.in
 pygments==2.14.0
     # via
@@ -156,7 +156,7 @@ twine==4.0.2
     # via -r requirements/quality.in
 typer[all]==0.7.0
     # via rstcheck
-types-docutils==0.19.1.1
+types-docutils==0.19.1.2
     # via rstcheck-core
 typing-extensions==4.4.0
     # via

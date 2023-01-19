@@ -130,7 +130,7 @@ drf-yasg==1.21.4
     #   edx-api-doc-tools
 edx-api-doc-tools==1.6.0
     # via -r requirements/base.txt
-edx-celeryutils==1.2.1
+edx-celeryutils==1.2.2
     # via -r requirements/base.txt
 edx-django-utils==5.2.0
     # via
@@ -138,7 +138,7 @@ edx-django-utils==5.2.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.4.0
+edx-drf-extensions==8.4.1
     # via -r requirements/base.txt
 edx-opaque-keys==2.3.0
     # via
@@ -151,7 +151,6 @@ exceptiongroup==1.1.0
 future==0.18.3
     # via
     #   -r requirements/base.txt
-    #   edx-celeryutils
     #   pyjwkest
 idna==3.4
     # via
@@ -179,7 +178,7 @@ jsonfield==3.1.0
     # via
     #   -r requirements/base.txt
     #   celery
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   -r requirements/base.txt
     #   jinja2

@@ -109,7 +109,7 @@ drf-yasg==1.21.4
     # via edx-api-doc-tools
 edx-api-doc-tools==1.6.0
     # via -r requirements/base.in
-edx-celeryutils==1.2.1
+edx-celeryutils==1.2.2
     # via -r requirements/base.in
 edx-django-utils==5.2.0
     # via
@@ -117,18 +117,16 @@ edx-django-utils==5.2.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.4.0
+edx-drf-extensions==8.4.1
     # via -r requirements/base.in
 edx-opaque-keys==2.3.0
     # via edx-drf-extensions
-edx-sphinx-theme==3.0.0
+edx-sphinx-theme==3.1.0
     # via -r requirements/doc.in
 edx-toggles==5.0.0
     # via -r requirements/base.in
 future==0.18.3
-    # via
-    #   edx-celeryutils
-    #   pyjwkest
+    # via pyjwkest
 idna==3.4
     # via requests
 imagesize==1.4.1
@@ -148,7 +146,7 @@ jsonfield==3.1.0
     # via edx-celeryutils
 kombu==5.2.4
     # via celery
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via jinja2
 newrelic==8.5.0
     # via edx-django-utils

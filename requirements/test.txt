@@ -68,7 +68,7 @@ coreschema==0.0.4
     #   -r requirements/base.txt
     #   coreapi
     #   drf-yasg
-coverage[toml]==7.0.5
+coverage[toml]==7.1.0
     # via pytest-cov
 cryptography==39.0.0
     # via
@@ -211,7 +211,7 @@ pycparser==2.21
     # via
     #   -r requirements/base.txt
     #   cffi
-pycryptodomex==3.16.0
+pycryptodomex==3.17
     # via
     #   -r requirements/base.txt
     #   pyjwkest
@@ -244,7 +244,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements/base.txt
     #   edx-drf-extensions
-python-slugify==7.0.0
+python-slugify==8.0.0
     # via
     #   -r requirements/base.txt
     #   code-annotations

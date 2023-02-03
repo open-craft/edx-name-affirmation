@@ -319,7 +319,7 @@ class TestVerifiedNameAPI(TestCase):
         # we want to add an additional config to make sure that caching by user works properly
         other_user = User(username='bobsmith', email='bobsmith@test.com')
         other_user.save()
-        VerifiedNameConfig.objects.create(user=other_user, use_verified_name_for_certs=(not expected_value))
+        VerifiedNameConfig.objects.create(user=other_user, use_verified_name_for_certs=not expected_value)
 
         should_use_for_certs = should_use_verified_name_for_certs(self.user)
         self.assertEqual(should_use_for_certs, expected_value)

@@ -6,11 +6,11 @@
 #
 asgiref==3.6.0
     # via django
-astroid==2.13.2
+astroid==2.14.1
     # via
     #   pylint
     #   pylint-celery
-bleach==5.0.1
+bleach==6.0.0
     # via readme-renderer
 certifi==2022.12.7
     # via requests
@@ -36,7 +36,7 @@ cryptography==39.0.0
     # via secretstorage
 dill==0.3.6
     # via pylint
-django==3.2.16
+django==3.2.17
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.in
@@ -54,7 +54,7 @@ importlib-metadata==6.0.0
     #   twine
 importlib-resources==5.10.2
     # via keyring
-isort==5.11.4
+isort==5.12.0
     # via
     #   -r requirements/quality.in
     #   pylint
@@ -94,7 +94,7 @@ pygments==2.14.0
     # via
     #   readme-renderer
     #   rich
-pylint==2.15.10
+pylint==2.16.0
     # via
     #   edx-lint
     #   pylint-celery
@@ -108,7 +108,7 @@ pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
-python-slugify==7.0.0
+python-slugify==8.0.0
     # via code-annotations
 pytz==2022.7.1
     # via django
@@ -172,7 +172,7 @@ webencodings==0.5.1
     # via bleach
 wrapt==1.14.1
     # via astroid
-zipp==3.11.0
+zipp==3.12.0
     # via
     #   importlib-metadata
     #   importlib-resources

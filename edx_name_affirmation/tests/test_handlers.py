@@ -25,7 +25,7 @@ class SignalTestCase(TestCase):
     Test case for signals.py
     """
 
-    def setUp(self):  # pylint: disable=super-method-not-called
+    def setUp(self):
         self.user = User(username='tester', email='tester@test.com')
         self.user.save()
         self.verified_name = 'Jonathan Smith'

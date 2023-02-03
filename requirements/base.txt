@@ -46,7 +46,7 @@ coreschema==0.0.4
     #   drf-yasg
 cryptography==39.0.0
     # via pyjwt
-django==3.2.16
+django==3.2.17
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
@@ -139,7 +139,7 @@ psutil==5.9.4
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pycryptodomex==3.16.0
+pycryptodomex==3.17
     # via pyjwkest
 pyjwkest==1.4.2
     # via edx-drf-extensions
@@ -153,7 +153,7 @@ pynacl==1.5.0
     # via edx-django-utils
 python-dateutil==2.8.2
     # via edx-drf-extensions
-python-slugify==7.0.0
+python-slugify==8.0.0
     # via code-annotations
 pytz==2022.7.1
     # via

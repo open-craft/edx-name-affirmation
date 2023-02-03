@@ -14,7 +14,7 @@ babel==2.11.0
     # via sphinx
 billiard==3.6.4.0
     # via celery
-bleach==5.0.1
+bleach==6.0.0
     # via readme-renderer
 celery==5.2.7
     # via
@@ -52,7 +52,7 @@ coreschema==0.0.4
     #   drf-yasg
 cryptography==39.0.0
     # via pyjwt
-django==3.2.16
+django==3.2.17
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
@@ -164,7 +164,7 @@ psutil==5.9.4
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pycryptodomex==3.16.0
+pycryptodomex==3.17
     # via pyjwkest
 pygments==2.14.0
     # via
@@ -183,7 +183,7 @@ pynacl==1.5.0
     # via edx-django-utils
 python-dateutil==2.8.2
     # via edx-drf-extensions
-python-slugify==7.0.0
+python-slugify==8.0.0
     # via code-annotations
 pytz==2022.7.1
     # via
@@ -227,11 +227,11 @@ sphinx==5.3.0
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/doc.in
     #   edx-sphinx-theme
-sphinxcontrib-applehelp==1.0.3
+sphinxcontrib-applehelp==1.0.4
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.0
+sphinxcontrib-htmlhelp==2.0.1
     # via sphinx
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
@@ -268,5 +268,5 @@ wcwidth==0.2.6
     # via prompt-toolkit
 webencodings==0.5.1
     # via bleach
-zipp==3.11.0
+zipp==3.12.0
     # via importlib-metadata

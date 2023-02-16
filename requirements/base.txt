@@ -44,9 +44,9 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==39.0.0
+cryptography==39.0.1
     # via pyjwt
-django==3.2.17
+django==3.2.18
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
@@ -91,7 +91,7 @@ djangorestframework==3.14.0
     #   edx-drf-extensions
 drf-jwt==1.19.2
     # via edx-drf-extensions
-drf-yasg==1.21.4
+drf-yasg==1.21.5
     # via edx-api-doc-tools
 edx-api-doc-tools==1.6.0
     # via -r requirements/base.in
@@ -127,7 +127,7 @@ kombu==5.2.4
     # via celery
 markupsafe==2.1.2
     # via jinja2
-newrelic==8.5.0
+newrelic==8.6.0
     # via edx-django-utils
 packaging==23.0
     # via drf-yasg
@@ -182,7 +182,7 @@ six==1.16.0
     #   python-dateutil
 sqlparse==0.4.3
     # via django
-stevedore==4.1.1
+stevedore==5.0.0
     # via
     #   code-annotations
     #   edx-django-utils

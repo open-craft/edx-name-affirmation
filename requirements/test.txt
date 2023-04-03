@@ -70,7 +70,7 @@ coreschema==0.0.4
     #   drf-yasg
 coverage[toml]==7.2.2
     # via pytest-cov
-cryptography==39.0.2
+cryptography==40.0.1
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -132,7 +132,7 @@ edx-api-doc-tools==1.6.0
     # via -r requirements/base.txt
 edx-celeryutils==1.2.2
     # via -r requirements/base.txt
-edx-django-utils==5.2.0
+edx-django-utils==5.3.0
     # via
     #   -r requirements/base.txt
     #   django-config-models
@@ -184,7 +184,7 @@ markupsafe==2.1.2
     #   jinja2
 mock==5.0.1
     # via -r requirements/test.in
-newrelic==8.7.0
+newrelic==8.8.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -248,7 +248,7 @@ python-slugify==8.0.1
     # via
     #   -r requirements/base.txt
     #   code-annotations
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   -r requirements/base.txt
     #   celery

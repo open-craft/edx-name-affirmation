@@ -50,7 +50,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==39.0.2
+cryptography==40.0.1
     # via pyjwt
 django==3.2.18
     # via
@@ -111,7 +111,7 @@ edx-api-doc-tools==1.6.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.2
     # via -r requirements/base.in
-edx-django-utils==5.2.0
+edx-django-utils==5.3.0
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -131,7 +131,7 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.0.0
+importlib-metadata==6.1.0
     # via sphinx
 inflection==0.5.1
     # via drf-yasg
@@ -148,7 +148,7 @@ kombu==5.2.4
     # via celery
 markupsafe==2.1.2
     # via jinja2
-newrelic==8.7.0
+newrelic==8.8.0
     # via edx-django-utils
 packaging==23.0
     # via
@@ -185,7 +185,7 @@ python-dateutil==2.8.2
     # via edx-drf-extensions
 python-slugify==8.0.1
     # via code-annotations
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   babel
     #   celery

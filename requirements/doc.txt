@@ -50,7 +50,7 @@ coreschema==0.0.4
     # via
     #   coreapi
     #   drf-yasg
-cryptography==40.0.1
+cryptography==40.0.2
     # via pyjwt
 django==3.2.18
     # via
@@ -111,13 +111,13 @@ edx-api-doc-tools==1.6.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.2
     # via -r requirements/base.in
-edx-django-utils==5.3.0
+edx-django-utils==5.4.0
     # via
     #   -r requirements/base.in
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.4.1
+edx-drf-extensions==8.6.0
     # via -r requirements/base.in
 edx-opaque-keys==2.3.0
     # via edx-drf-extensions
@@ -131,7 +131,7 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.1.0
+importlib-metadata==6.4.1
     # via sphinx
 inflection==0.5.1
     # via drf-yasg
@@ -150,7 +150,7 @@ markupsafe==2.1.2
     # via jinja2
 newrelic==8.8.0
     # via edx-django-utils
-packaging==23.0
+packaging==23.1
     # via
     #   drf-yasg
     #   sphinx
@@ -166,7 +166,7 @@ pycparser==2.21
     # via cffi
 pycryptodomex==3.17
     # via pyjwkest
-pygments==2.14.0
+pygments==2.15.0
     # via
     #   doc8
     #   readme-renderer

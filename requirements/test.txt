@@ -11,8 +11,6 @@ asgiref==3.6.0
     # via
     #   -r requirements/base.txt
     #   django
-attrs==22.2.0
-    # via pytest
     # via
     #   -r requirements/base.txt
     #   celery
@@ -68,9 +66,9 @@ coreschema==0.0.4
     #   -r requirements/base.txt
     #   coreapi
     #   drf-yasg
-coverage[toml]==7.2.2
+coverage[toml]==7.2.3
     # via pytest-cov
-cryptography==40.0.1
+cryptography==40.0.2
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -132,13 +130,13 @@ edx-api-doc-tools==1.6.0
     # via -r requirements/base.txt
 edx-celeryutils==1.2.2
     # via -r requirements/base.txt
-edx-django-utils==5.3.0
+edx-django-utils==5.4.0
     # via
     #   -r requirements/base.txt
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.4.1
+edx-drf-extensions==8.6.0
     # via -r requirements/base.txt
 edx-opaque-keys==2.3.0
     # via
@@ -182,13 +180,13 @@ markupsafe==2.1.2
     # via
     #   -r requirements/base.txt
     #   jinja2
-mock==5.0.1
+mock==5.0.2
     # via -r requirements/test.in
 newrelic==8.8.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-packaging==23.0
+packaging==23.1
     # via
     #   -r requirements/base.txt
     #   drf-yasg
@@ -232,7 +230,7 @@ pynacl==1.5.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-pytest==7.2.2
+pytest==7.3.1
     # via
     #   pytest-cov
     #   pytest-django

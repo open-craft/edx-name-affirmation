@@ -131,7 +131,7 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.4.1
+importlib-metadata==6.5.0
     # via sphinx
 inflection==0.5.1
     # via drf-yasg
@@ -160,7 +160,7 @@ pockets==0.9.1
     # via sphinxcontrib-napoleon
 prompt-toolkit==3.0.38
     # via click-repl
-psutil==5.9.4
+psutil==5.9.5
     # via edx-django-utils
 pycparser==2.21
     # via cffi
@@ -241,7 +241,7 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via django
 stevedore==5.0.0
     # via

@@ -20,7 +20,7 @@ celery==5.2.7
     # via
     #   -c requirements/constraints.txt
     #   edx-celeryutils
-certifi==2022.12.7
+certifi==2023.5.7
     # via requests
 cffi==1.15.1
     # via
@@ -52,7 +52,7 @@ coreschema==0.0.4
     #   drf-yasg
 cryptography==40.0.2
     # via pyjwt
-django==3.2.18
+django==3.2.19
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
@@ -196,7 +196,7 @@ pyyaml==6.0
     # via code-annotations
 readme-renderer==37.3
     # via -r requirements/doc.in
-requests==2.29.0
+requests==2.30.0
     # via
     #   coreapi
     #   edx-drf-extensions
@@ -204,7 +204,7 @@ requests==2.29.0
     #   sphinx
 restructuredtext-lint==1.4.0
     # via doc8
-ruamel-yaml==0.17.22
+ruamel-yaml==0.17.24
     # via drf-yasg
 ruamel-yaml-clib==0.2.7
     # via ruamel-yaml
@@ -257,7 +257,7 @@ uritemplate==4.1.1
     # via
     #   coreapi
     #   drf-yasg
-urllib3==1.26.15
+urllib3==2.0.2
     # via requests
 vine==5.0.0
     # via

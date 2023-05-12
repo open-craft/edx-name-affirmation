@@ -18,7 +18,7 @@ asgiref==3.6.0
     #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   edx-celeryutils
-certifi==2022.12.7
+certifi==2023.5.7
     # via
     #   -r requirements/base.txt
     #   requests
@@ -257,13 +257,13 @@ pyyaml==6.0
     # via
     #   -r requirements/base.txt
     #   code-annotations
-requests==2.29.0
+requests==2.30.0
     # via
     #   -r requirements/base.txt
     #   coreapi
     #   edx-drf-extensions
     #   pyjwkest
-ruamel-yaml==0.17.22
+ruamel-yaml==0.17.24
     # via
     #   -r requirements/base.txt
     #   drf-yasg
@@ -305,7 +305,7 @@ uritemplate==4.1.1
     #   -r requirements/base.txt
     #   coreapi
     #   drf-yasg
-urllib3==1.26.15
+urllib3==2.0.2
     # via
     #   -r requirements/base.txt
     #   requests

@@ -173,7 +173,7 @@ pygments==2.15.1
     #   sphinx
 pyjwkest==1.4.2
     # via edx-drf-extensions
-pyjwt[crypto]==2.6.0
+pyjwt[crypto]==2.7.0
     # via
     #   drf-jwt
     #   edx-drf-extensions
@@ -204,7 +204,7 @@ requests==2.30.0
     #   sphinx
 restructuredtext-lint==1.4.0
     # via doc8
-ruamel-yaml==0.17.24
+ruamel-yaml==0.17.26
     # via drf-yasg
 ruamel-yaml-clib==0.2.7
     # via ruamel-yaml
@@ -243,7 +243,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
 sqlparse==0.4.4
     # via django
-stevedore==5.0.0
+stevedore==5.1.0
     # via
     #   code-annotations
     #   doc8

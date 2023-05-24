@@ -117,7 +117,7 @@ edx-django-utils==5.4.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.7.0
+edx-drf-extensions==8.8.0
     # via -r requirements/base.in
 edx-opaque-keys==2.3.0
     # via edx-drf-extensions
@@ -125,8 +125,6 @@ edx-sphinx-theme==3.1.0
     # via -r requirements/doc.in
 edx-toggles==5.0.0
     # via -r requirements/base.in
-future==0.18.3
-    # via pyjwkest
 idna==3.4
     # via requests
 imagesize==1.4.1
@@ -164,15 +162,11 @@ psutil==5.9.5
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pycryptodomex==3.17
-    # via pyjwkest
 pygments==2.15.1
     # via
     #   doc8
     #   readme-renderer
     #   sphinx
-pyjwkest==1.4.2
-    # via edx-drf-extensions
 pyjwt[crypto]==2.7.0
     # via
     #   drf-jwt
@@ -196,11 +190,10 @@ pyyaml==6.0
     # via code-annotations
 readme-renderer==37.3
     # via -r requirements/doc.in
-requests==2.30.0
+requests==2.31.0
     # via
     #   coreapi
     #   edx-drf-extensions
-    #   pyjwkest
     #   sphinx
 restructuredtext-lint==1.4.0
     # via doc8
@@ -217,7 +210,6 @@ six==1.16.0
     #   edx-drf-extensions
     #   edx-sphinx-theme
     #   pockets
-    #   pyjwkest
     #   python-dateutil
     #   sphinxcontrib-napoleon
 snowballstemmer==2.2.0

@@ -212,7 +212,7 @@ pylint-django==2.5.3
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-pylint-plugin-utils==0.8.1
+pylint-plugin-utils==0.8.2
     # via
     #   -r requirements/quality.txt
     #   pylint-celery
@@ -238,7 +238,7 @@ readme-renderer==37.3
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.30.0
+requests==2.31.0
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -325,7 +325,7 @@ types-docutils==0.19.1.9
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-typing-extensions==4.5.0
+typing-extensions==4.6.0
     # via
     #   -r requirements/quality.txt
     #   astroid

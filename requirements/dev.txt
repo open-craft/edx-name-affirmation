@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.6.0
+asgiref==3.7.2
     # via
     #   -r requirements/quality.txt
     #   django
@@ -185,7 +185,7 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==1.10.7
+pydantic==1.10.8
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
@@ -325,9 +325,10 @@ types-docutils==0.19.1.9
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-typing-extensions==4.6.0
+typing-extensions==4.6.2
     # via
     #   -r requirements/quality.txt
+    #   asgiref
     #   astroid
     #   pydantic
     #   pylint

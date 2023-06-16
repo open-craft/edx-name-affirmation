@@ -80,13 +80,13 @@ pbr==5.11.1
     # via stevedore
 pkginfo==1.9.6
     # via twine
-platformdirs==3.5.1
+platformdirs==3.5.3
     # via pylint
 pycodestyle==2.10.0
     # via -r requirements/quality.in
 pycparser==2.21
     # via cffi
-pydantic==1.10.8
+pydantic==1.10.9
     # via rstcheck-core
 pydocstyle==6.3.0
     # via -r requirements/quality.in
@@ -165,7 +165,7 @@ typing-extensions==4.6.3
     #   pydantic
     #   pylint
     #   rich
-urllib3==2.0.2
+urllib3==2.0.3
     # via
     #   requests
     #   twine

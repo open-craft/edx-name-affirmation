@@ -28,13 +28,13 @@ click-repl==0.3.0
     # via celery
 kombu==5.3.1
     # via celery
-prompt-toolkit==3.0.38
+prompt-toolkit==3.0.39
     # via click-repl
 python-dateutil==2.8.2
     # via celery
 six==1.16.0
     # via python-dateutil
-typing-extensions==4.6.3
+typing-extensions==4.7.1
     # via kombu
 tzdata==2023.3
     # via

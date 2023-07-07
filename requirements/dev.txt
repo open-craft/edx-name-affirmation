@@ -74,7 +74,7 @@ distlib==0.3.6
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==3.2.19
+django==3.2.20
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/quality.txt
@@ -156,7 +156,7 @@ pbr==5.11.1
     # via
     #   -r requirements/quality.txt
     #   stevedore
-pip-tools==6.13.0
+pip-tools==6.14.0
     # via -r requirements/pip-tools.txt
 pkginfo==1.9.6
     # via
@@ -185,7 +185,7 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==1.10.9
+pydantic==1.10.10
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
@@ -299,6 +299,7 @@ tomli==2.0.1
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
+    #   pip-tools
     #   pylint
     #   pyproject-hooks
     #   tox
@@ -325,7 +326,7 @@ types-docutils==0.19.1.9
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-typing-extensions==4.6.3
+typing-extensions==4.7.1
     # via
     #   -r requirements/quality.txt
     #   asgiref

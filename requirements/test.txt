@@ -36,7 +36,7 @@ charset-normalizer==3.2.0
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.1.4
+click==8.1.5
     # via
     #   -r requirements/base.txt
     #   celery
@@ -232,7 +232,7 @@ pytz==2023.3
     #   django
     #   djangorestframework
     #   drf-yasg
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   -r requirements/base.txt
     #   code-annotations

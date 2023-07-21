@@ -32,7 +32,7 @@ cffi==1.15.1
     #   pynacl
 charset-normalizer==3.2.0
     # via requests
-click==8.1.4
+click==8.1.5
     # via
     #   celery
     #   click-didyoumean
@@ -182,7 +182,7 @@ pytz==2023.3
     #   django
     #   djangorestframework
     #   drf-yasg
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   code-annotations
     #   drf-yasg
@@ -257,5 +257,5 @@ wcwidth==0.2.6
     # via prompt-toolkit
 webencodings==0.5.1
     # via bleach
-zipp==3.16.0
+zipp==3.16.2
     # via importlib-metadata

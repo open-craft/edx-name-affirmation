@@ -46,7 +46,7 @@ cryptography==41.0.2
     # via pyjwt
 django==3.2.20
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
     #   django-config-models
     #   django-crum
@@ -71,9 +71,9 @@ django-model-utils==4.3.1
     # via
     #   -r requirements/base.in
     #   edx-celeryutils
-django-simple-history==3.0.0
+django-simple-history==3.1.1
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/constraints.txt
     #   -r requirements/base.in
 django-waffle==4.0.0
     # via

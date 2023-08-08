@@ -72,3 +72,7 @@ TEMPLATES = [{
         ],
     },
 }]
+
+
+# disable indexing on history_date
+SIMPLE_HISTORY_DATE_INDEX = False

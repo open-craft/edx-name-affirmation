@@ -14,6 +14,10 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.3.6] - 2023-07-28
+~~~~~~~~~~~~~~~~~~~~
+* Upgrade django-simple-history. Added new migration. Fixed packages upgrade issues.
+
 [2.3.5] - 2022-09-09
 ~~~~~~~~~~~~~~~~~~~~
 * Fix bug that prevents a verified name from being updated if the user already has an approved verified name associated with a proctored exam attempt

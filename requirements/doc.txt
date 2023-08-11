@@ -48,7 +48,7 @@ click-repl==0.3.0
     # via celery
 code-annotations==1.5.0
     # via edx-toggles
-cryptography==41.0.2
+cryptography==41.0.3
     # via pyjwt
 django==3.2.20
     # via
@@ -67,7 +67,7 @@ django==3.2.20
     #   edx-drf-extensions
     #   edx-toggles
     #   jsonfield
-django-config-models==2.4.0
+django-config-models==2.5.0
     # via -r requirements/base.in
 django-crum==0.7.9
     # via
@@ -110,7 +110,7 @@ edx-api-doc-tools==1.7.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.3
     # via -r requirements/base.in
-edx-django-utils==5.6.0
+edx-django-utils==5.7.0
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -118,11 +118,11 @@ edx-django-utils==5.6.0
     #   edx-toggles
 edx-drf-extensions==8.8.0
     # via -r requirements/base.in
-edx-opaque-keys==2.3.0
+edx-opaque-keys==2.4.0
     # via edx-drf-extensions
 edx-sphinx-theme==3.1.0
     # via -r requirements/doc.in
-edx-toggles==5.0.0
+edx-toggles==5.1.0
     # via -r requirements/base.in
 idna==3.4
     # via requests
@@ -158,7 +158,7 @@ psutil==5.9.5
     # via edx-django-utils
 pycparser==2.21
     # via cffi
-pygments==2.15.1
+pygments==2.16.1
     # via
     #   doc8
     #   readme-renderer

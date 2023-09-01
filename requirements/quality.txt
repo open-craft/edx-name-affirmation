@@ -18,7 +18,7 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==3.2.0
     # via requests
-click==8.1.6
+click==8.1.7
     # via
     #   click-log
     #   code-annotations
@@ -114,7 +114,7 @@ pytz==2023.3
     # via django
 pyyaml==6.0.1
     # via code-annotations
-readme-renderer==40.0
+readme-renderer==41.0
     # via twine
 requests==2.31.0
     # via
@@ -134,7 +134,7 @@ rstcheck-core==1.0.3
     # via rstcheck
 secretstorage==3.3.3
     # via keyring
-shellingham==1.5.0.post1
+shellingham==1.5.3
     # via typer
 six==1.16.0
     # via

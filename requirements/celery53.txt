@@ -12,7 +12,7 @@ backports-zoneinfo[tzdata]==0.2.1
     #   kombu
 billiard==4.1.0
     # via celery
-celery==5.3.1
+celery==5.3.4
     # via -r requirements/celery53.in
 click==8.1.7
     # via
@@ -26,7 +26,7 @@ click-plugins==1.1.1
     # via celery
 click-repl==0.3.0
     # via celery
-kombu==5.3.1
+kombu==5.3.2
     # via celery
 prompt-toolkit==3.0.39
     # via click-repl

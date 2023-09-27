@@ -2,7 +2,7 @@
 URLs for edx_name_affirmation.
 """
 
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from edx_name_affirmation import views
 
@@ -14,7 +14,7 @@ urlpatterns = [
         name='verified_name'
     ),
 
-    path(
+    re_path(
         r'edx_name_affirmation/v1/verified_name/(?P<verified_name_id>\d+)$',
         views.VerifiedNameView.as_view(), name='verified_name_by_id'
     ),

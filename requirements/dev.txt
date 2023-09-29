@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==2.15.6
+astroid==2.15.8
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -102,7 +102,7 @@ importlib-metadata==6.8.0
     #   rstcheck
     #   rstcheck-core
     #   twine
-importlib-resources==6.0.1
+importlib-resources==6.1.0
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -197,11 +197,11 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.3.0
+pydantic==2.4.1
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-pydantic-core==2.6.3
+pydantic-core==2.10.1
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -213,7 +213,7 @@ pygments==2.16.1
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==2.17.5
+pylint==2.17.6
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -350,7 +350,7 @@ typing-extensions==4.8.0
     #   rstcheck
     #   rstcheck-core
     #   typer
-urllib3==2.0.4
+urllib3==2.0.5
     # via
     #   -r requirements/quality.txt
     #   requests

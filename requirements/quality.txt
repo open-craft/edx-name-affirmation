@@ -8,7 +8,7 @@ annotated-types==0.5.0
     # via pydantic
 asgiref==3.7.2
     # via django
-astroid==2.15.6
+astroid==2.15.8
     # via
     #   pylint
     #   pylint-celery
@@ -52,7 +52,7 @@ importlib-metadata==6.8.0
     #   rstcheck
     #   rstcheck-core
     #   twine
-importlib-resources==6.0.1
+importlib-resources==6.1.0
     # via keyring
 isort==5.12.0
     # via
@@ -92,9 +92,9 @@ pycodestyle==2.11.0
     # via -r requirements/quality.in
 pycparser==2.21
     # via cffi
-pydantic==2.3.0
+pydantic==2.4.1
     # via rstcheck-core
-pydantic-core==2.6.3
+pydantic-core==2.10.1
     # via pydantic
 pydocstyle==6.3.0
     # via -r requirements/quality.in
@@ -102,7 +102,7 @@ pygments==2.16.1
     # via
     #   readme-renderer
     #   rich
-pylint==2.17.5
+pylint==2.17.6
     # via
     #   edx-lint
     #   pylint-celery
@@ -174,7 +174,7 @@ typing-extensions==4.8.0
     #   rstcheck
     #   rstcheck-core
     #   typer
-urllib3==2.0.4
+urllib3==2.0.5
     # via
     #   requests
     #   twine

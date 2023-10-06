@@ -14,9 +14,9 @@ astroid==2.15.8
     #   pylint-celery
 certifi==2023.7.22
     # via requests
-cffi==1.15.1
+cffi==1.16.0
     # via cryptography
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
 click==8.1.7
     # via
@@ -86,13 +86,13 @@ pbr==5.11.1
     # via stevedore
 pkginfo==1.9.6
     # via twine
-platformdirs==3.10.0
+platformdirs==3.11.0
     # via pylint
 pycodestyle==2.11.0
     # via -r requirements/quality.in
 pycparser==2.21
     # via cffi
-pydantic==2.4.1
+pydantic==2.4.2
     # via rstcheck-core
 pydantic-core==2.10.1
     # via pydantic
@@ -102,7 +102,7 @@ pygments==2.16.1
     # via
     #   readme-renderer
     #   rich
-pylint==2.17.6
+pylint==2.17.7
     # via
     #   edx-lint
     #   pylint-celery
@@ -132,7 +132,7 @@ requests-toolbelt==1.0.0
     # via twine
 rfc3986==2.0.0
     # via twine
-rich==13.5.3
+rich==13.6.0
     # via
     #   twine
     #   typer
@@ -174,7 +174,7 @@ typing-extensions==4.8.0
     #   rstcheck
     #   rstcheck-core
     #   typer
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   requests
     #   twine

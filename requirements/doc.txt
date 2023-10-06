@@ -10,7 +10,7 @@ amqp==5.1.1
     # via kombu
 asgiref==3.7.2
     # via django
-babel==2.12.1
+babel==2.13.0
     # via sphinx
 backports-zoneinfo[tzdata]==0.2.1
     # via
@@ -24,11 +24,11 @@ celery==5.3.4
     #   edx-celeryutils
 certifi==2023.7.22
     # via requests
-cffi==1.15.1
+cffi==1.16.0
     # via
     #   cryptography
     #   pynacl
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
 click==8.1.7
     # via
@@ -144,7 +144,7 @@ newrelic==9.1.0
     # via edx-django-utils
 nh3==0.2.14
     # via readme-renderer
-packaging==23.1
+packaging==23.2
     # via
     #   drf-yasg
     #   sphinx
@@ -244,14 +244,14 @@ tzdata==2023.3
     #   celery
 uritemplate==4.1.1
     # via drf-yasg
-urllib3==2.0.5
+urllib3==2.0.6
     # via requests
 vine==5.0.0
     # via
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.2.6
+wcwidth==0.2.8
     # via prompt-toolkit
 zipp==3.17.0
     # via importlib-metadata

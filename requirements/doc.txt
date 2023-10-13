@@ -48,7 +48,7 @@ code-annotations==1.5.0
     # via edx-toggles
 cryptography==41.0.4
     # via pyjwt
-django==3.2.21
+django==3.2.22
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in

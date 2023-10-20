@@ -102,7 +102,7 @@ edx-django-utils==5.7.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.10.0
+edx-drf-extensions==8.12.0
     # via -r requirements/base.in
 edx-opaque-keys==2.5.1
     # via edx-drf-extensions
@@ -128,7 +128,7 @@ pbr==5.11.1
     # via stevedore
 prompt-toolkit==3.0.39
     # via click-repl
-psutil==5.9.5
+psutil==5.9.6
     # via edx-django-utils
 pycparser==2.21
     # via cffi

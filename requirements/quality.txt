@@ -88,7 +88,7 @@ pkginfo==1.9.6
     # via twine
 platformdirs==3.11.0
     # via pylint
-pycodestyle==2.11.0
+pycodestyle==2.11.1
     # via -r requirements/quality.in
 pycparser==2.21
     # via cffi

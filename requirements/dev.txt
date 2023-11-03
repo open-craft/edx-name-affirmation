@@ -56,7 +56,7 @@ colorama==0.4.6
     # via
     #   -r requirements/quality.txt
     #   typer
-cryptography==41.0.4
+cryptography==41.0.5
     # via
     #   -r requirements/quality.txt
     #   secretstorage
@@ -84,7 +84,7 @@ edx-i18n-tools==1.3.0
     # via -r requirements/dev.in
 edx-lint==5.3.6
     # via -r requirements/quality.txt
-filelock==3.12.4
+filelock==3.13.1
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -358,7 +358,7 @@ virtualenv==20.24.6
     # via
     #   -r requirements/ci.txt
     #   tox
-wheel==0.41.2
+wheel==0.41.3
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

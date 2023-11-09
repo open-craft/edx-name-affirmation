@@ -31,7 +31,7 @@ cffi==1.16.0
     #   cryptography
 chardet==5.2.0
     # via diff-cover
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -70,7 +70,7 @@ distlib==0.3.7
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==3.2.22
+django==3.2.23
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/quality.txt
@@ -102,7 +102,7 @@ importlib-metadata==6.8.0
     #   rstcheck
     #   rstcheck-core
     #   twine
-importlib-resources==6.1.0
+importlib-resources==6.1.1
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -316,7 +316,7 @@ tomli==2.0.1
     #   pylint
     #   pyproject-hooks
     #   tox
-tomlkit==0.12.1
+tomlkit==0.12.2
     # via
     #   -r requirements/quality.txt
     #   pylint

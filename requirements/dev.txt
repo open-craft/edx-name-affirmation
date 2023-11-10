@@ -324,11 +324,6 @@ tox==3.28.0
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/ci.txt
-    #   tox-battery
-tox-battery==0.6.2
-    # via
-    #   -r requirements/ci.txt
-    #   -r requirements/dev.in
 twine==4.0.2
     # via -r requirements/quality.txt
 typer[all]==0.9.0

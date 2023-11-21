@@ -14,11 +14,11 @@ backports-zoneinfo[tzdata]==0.2.1
     #   kombu
 billiard==4.2.0
     # via celery
-celery==5.3.4
+celery==5.3.5
     # via
     #   -c requirements/constraints.txt
     #   edx-celeryutils
-certifi==2023.7.22
+certifi==2023.11.17
     # via requests
 cffi==1.16.0
     # via
@@ -102,7 +102,7 @@ edx-django-utils==5.8.0
     #   django-config-models
     #   edx-drf-extensions
     #   edx-toggles
-edx-drf-extensions==8.13.0
+edx-drf-extensions==8.13.1
     # via -r requirements/base.in
 edx-opaque-keys==2.5.1
     # via edx-drf-extensions
@@ -116,17 +116,17 @@ jinja2==3.1.2
     # via code-annotations
 jsonfield==3.1.0
     # via edx-celeryutils
-kombu==5.3.3
+kombu==5.3.4
     # via celery
 markupsafe==2.1.3
     # via jinja2
-newrelic==9.1.1
+newrelic==9.2.0
     # via edx-django-utils
 packaging==23.2
     # via drf-yasg
-pbr==5.11.1
+pbr==6.0.0
     # via stevedore
-prompt-toolkit==3.0.39
+prompt-toolkit==3.0.41
     # via click-repl
 psutil==5.9.6
     # via edx-django-utils
@@ -180,12 +180,12 @@ tzdata==2023.3
     #   celery
 uritemplate==4.1.1
     # via drf-yasg
-urllib3==2.0.7
+urllib3==2.1.0
     # via requests
 vine==5.1.0
     # via
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.2.9
+wcwidth==0.2.11
     # via prompt-toolkit

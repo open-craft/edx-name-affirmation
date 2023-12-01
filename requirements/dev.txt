@@ -65,7 +65,7 @@ colorama==0.4.6
     #   -r requirements/quality.txt
     #   tox
     #   typer
-cryptography==41.0.5
+cryptography==41.0.7
     # via
     #   -r requirements/quality.txt
     #   secretstorage
@@ -98,7 +98,7 @@ filelock==3.13.1
     #   -r requirements/ci.txt
     #   tox
     #   virtualenv
-idna==3.4
+idna==3.6
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -203,17 +203,17 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.5.1
+pydantic==2.5.2
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-pydantic-core==2.14.3
+pydantic-core==2.14.5
     # via
     #   -r requirements/quality.txt
     #   pydantic
 pydocstyle==6.3.0
     # via -r requirements/quality.txt
-pygments==2.17.1
+pygments==2.17.2
     # via
     #   -r requirements/quality.txt
     #   diff-cover
@@ -331,7 +331,7 @@ tomlkit==0.12.3
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.11.3
+tox==4.11.4
     # via -r requirements/ci.txt
 twine==4.0.2
     # via -r requirements/quality.txt
@@ -358,11 +358,11 @@ urllib3==2.1.0
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.24.6
+virtualenv==20.24.7
     # via
     #   -r requirements/ci.txt
     #   tox
-wheel==0.41.3
+wheel==0.42.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

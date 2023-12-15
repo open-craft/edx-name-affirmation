@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==3.0.1
+astroid==3.0.2
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -75,7 +75,7 @@ dill==0.3.7
     # via
     #   -r requirements/quality.txt
     #   pylint
-distlib==0.3.7
+distlib==0.3.8
     # via
     #   -r requirements/ci.txt
     #   virtualenv
@@ -102,7 +102,7 @@ idna==3.6
     # via
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==6.8.0
+importlib-metadata==7.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -115,7 +115,7 @@ importlib-resources==6.1.1
     # via
     #   -r requirements/quality.txt
     #   keyring
-isort==5.12.0
+isort==5.13.2
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -159,7 +159,7 @@ more-itertools==10.1.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-classes
-nh3==0.2.14
+nh3==0.2.15
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -170,7 +170,7 @@ packaging==23.2
     #   build
     #   pyproject-api
     #   tox
-path==16.7.1
+path==16.9.0
     # via edx-i18n-tools
 pbr==6.0.0
     # via
@@ -182,9 +182,8 @@ pkginfo==1.9.6
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==3.11.0
+platformdirs==4.1.0
     # via
-    #   -c requirements/common_constraints.txt
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   pylint
@@ -219,7 +218,7 @@ pygments==2.17.2
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==3.0.2
+pylint==3.0.3
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -340,7 +339,7 @@ typer[all]==0.9.0
     #   -r requirements/quality.txt
     #   rstcheck
     #   typer
-typing-extensions==4.8.0
+typing-extensions==4.9.0
     # via
     #   -r requirements/quality.txt
     #   annotated-types
@@ -358,7 +357,7 @@ urllib3==2.1.0
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.24.7
+virtualenv==20.25.0
     # via
     #   -r requirements/ci.txt
     #   tox

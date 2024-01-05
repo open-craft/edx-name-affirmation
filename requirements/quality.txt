@@ -46,7 +46,7 @@ edx-lint==5.3.6
     # via -r requirements/quality.in
 idna==3.6
     # via requests
-importlib-metadata==7.0.0
+importlib-metadata==7.0.1
     # via
     #   keyring
     #   rstcheck
@@ -90,9 +90,9 @@ pycodestyle==2.11.1
     # via -r requirements/quality.in
 pycparser==2.21
     # via cffi
-pydantic==2.5.2
+pydantic==2.5.3
     # via rstcheck-core
-pydantic-core==2.14.5
+pydantic-core==2.14.6
     # via pydantic
 pydocstyle==6.3.0
     # via -r requirements/quality.in

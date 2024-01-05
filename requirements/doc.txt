@@ -126,7 +126,7 @@ idna==3.6
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==7.0.0
+importlib-metadata==7.0.1
     # via sphinx
 inflection==0.5.1
     # via drf-yasg
@@ -154,7 +154,7 @@ pockets==0.9.1
     # via sphinxcontrib-napoleon
 prompt-toolkit==3.0.43
     # via click-repl
-psutil==5.9.6
+psutil==5.9.7
     # via edx-django-utils
 pycparser==2.21
     # via cffi
@@ -239,7 +239,7 @@ typing-extensions==4.9.0
     #   asgiref
     #   edx-opaque-keys
     #   kombu
-tzdata==2023.3
+tzdata==2023.4
     # via
     #   backports-zoneinfo
     #   celery

@@ -65,11 +65,11 @@ colorama==0.4.6
     #   -r requirements/quality.txt
     #   tox
     #   typer
-cryptography==41.0.7
+cryptography==42.0.0
     # via
     #   -r requirements/quality.txt
     #   secretstorage
-diff-cover==8.0.2
+diff-cover==8.0.3
     # via -r requirements/dev.in
 dill==0.3.7
     # via
@@ -128,7 +128,7 @@ jeepney==0.8.0
     #   -r requirements/quality.txt
     #   keyring
     #   secretstorage
-jinja2==3.1.2
+jinja2==3.1.3
     # via
     #   -r requirements/quality.txt
     #   code-annotations
@@ -143,7 +143,7 @@ markdown-it-py==3.0.0
     # via
     #   -r requirements/quality.txt
     #   rich
-markupsafe==2.1.3
+markupsafe==2.1.4
     # via
     #   -r requirements/quality.txt
     #   jinja2
@@ -330,7 +330,7 @@ tomlkit==0.12.3
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.11.4
+tox==4.12.1
     # via -r requirements/ci.txt
 twine==4.0.2
     # via -r requirements/quality.txt

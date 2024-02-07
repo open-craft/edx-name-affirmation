@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==3.0.2
+astroid==3.0.3
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -25,7 +25,7 @@ cachetools==5.3.2
     # via
     #   -r requirements/ci.txt
     #   tox
-certifi==2023.11.17
+certifi==2024.2.2
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -55,7 +55,7 @@ click-log==0.4.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-code-annotations==1.5.0
+code-annotations==1.6.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -65,7 +65,7 @@ colorama==0.4.6
     #   -r requirements/quality.txt
     #   tox
     #   typer
-cryptography==42.0.1
+cryptography==42.0.2
     # via
     #   -r requirements/quality.txt
     #   secretstorage
@@ -79,7 +79,7 @@ distlib==0.3.8
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==3.2.23
+django==3.2.24
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/quality.txt
@@ -143,7 +143,7 @@ markdown-it-py==3.0.0
     # via
     #   -r requirements/quality.txt
     #   rich
-markupsafe==2.1.4
+markupsafe==2.1.5
     # via
     #   -r requirements/quality.txt
     #   jinja2
@@ -170,7 +170,7 @@ packaging==23.2
     #   build
     #   pyproject-api
     #   tox
-path==16.9.0
+path==16.10.0
     # via edx-i18n-tools
 pbr==6.0.0
     # via
@@ -182,7 +182,7 @@ pkginfo==1.9.6
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==4.1.0
+platformdirs==4.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -202,11 +202,11 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.6.0
+pydantic==2.6.1
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-pydantic-core==2.16.1
+pydantic-core==2.16.2
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -246,11 +246,11 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-python-slugify==8.0.2
+python-slugify==8.0.3
     # via
     #   -r requirements/quality.txt
     #   code-annotations
-pytz==2023.4
+pytz==2024.1
     # via
     #   -r requirements/quality.txt
     #   django

@@ -97,7 +97,7 @@ edx-api-doc-tools==1.7.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.5
     # via -r requirements/base.in
-edx-django-utils==5.10.1
+edx-django-utils==5.11.0
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -121,9 +121,9 @@ kombu==5.3.5
     # via celery
 markupsafe==2.1.5
     # via jinja2
-newrelic==9.7.0
+newrelic==9.7.1
     # via edx-django-utils
-packaging==23.2
+packaging==24.0
     # via drf-yasg
 pbr==6.0.0
     # via stevedore

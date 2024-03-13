@@ -106,7 +106,7 @@ idna==3.6
     # via
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==7.0.1
+importlib-metadata==7.0.2
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -115,7 +115,7 @@ importlib-metadata==7.0.1
     #   rstcheck
     #   rstcheck-core
     #   twine
-importlib-resources==6.1.2
+importlib-resources==6.1.3
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -167,7 +167,7 @@ nh3==0.2.15
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
-packaging==23.2
+packaging==24.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
@@ -180,7 +180,7 @@ pbr==6.0.0
     # via
     #   -r requirements/quality.txt
     #   stevedore
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
 pkginfo==1.10.0
     # via
@@ -206,7 +206,7 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.6.3
+pydantic==2.6.4
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
@@ -331,7 +331,7 @@ tomlkit==0.12.4
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.13.0
+tox==4.14.1
     # via -r requirements/ci.txt
 twine==5.0.0
     # via -r requirements/quality.txt
@@ -361,7 +361,7 @@ virtualenv==20.25.1
     # via
     #   -r requirements/ci.txt
     #   tox
-wheel==0.42.0
+wheel==0.43.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

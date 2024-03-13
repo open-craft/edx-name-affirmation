@@ -109,7 +109,7 @@ edx-api-doc-tools==1.7.0
     # via -r requirements/base.in
 edx-celeryutils==1.2.5
     # via -r requirements/base.in
-edx-django-utils==5.10.1
+edx-django-utils==5.11.0
     # via
     #   -r requirements/base.in
     #   django-config-models
@@ -127,7 +127,7 @@ idna==3.6
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==7.0.1
+importlib-metadata==7.0.2
     # via sphinx
 inflection==0.5.1
     # via drf-yasg
@@ -141,11 +141,11 @@ kombu==5.3.5
     # via celery
 markupsafe==2.1.5
     # via jinja2
-newrelic==9.7.0
+newrelic==9.7.1
     # via edx-django-utils
 nh3==0.2.15
     # via readme-renderer
-packaging==23.2
+packaging==24.0
     # via
     #   drf-yasg
     #   sphinx

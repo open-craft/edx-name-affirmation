@@ -17,6 +17,10 @@ astroid==3.1.0
     #   -r requirements/quality.txt
     #   pylint
     #   pylint-celery
+backports-tarfile==1.0.0
+    # via
+    #   -r requirements/quality.txt
+    #   jaraco-context
 backports-zoneinfo==0.2.1
     # via
     #   -r requirements/quality.txt
@@ -54,12 +58,12 @@ click==8.1.7
     #   code-annotations
     #   edx-lint
     #   pip-tools
-    #   typer-slim
+    #   typer
 click-log==0.4.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-code-annotations==1.7.0
+code-annotations==1.8.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -126,7 +130,7 @@ jaraco-classes==3.4.0
     # via
     #   -r requirements/quality.txt
     #   keyring
-jaraco-context==4.3.0
+jaraco-context==5.3.0
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -148,7 +152,7 @@ keyring==25.1.0
     # via
     #   -r requirements/quality.txt
     #   twine
-lxml==5.2.0
+lxml==5.2.1
     # via edx-i18n-tools
 markdown-it-py==3.0.0
     # via
@@ -182,7 +186,7 @@ packaging==24.0
     #   build
     #   pyproject-api
     #   tox
-path==16.10.0
+path==16.14.0
     # via edx-i18n-tools
 pbr==6.0.0
     # via
@@ -289,7 +293,7 @@ rich==13.7.1
     # via
     #   -r requirements/quality.txt
     #   twine
-    #   typer-slim
+    #   typer
 rstcheck==6.2.1
     # via -r requirements/quality.txt
 rstcheck-core==1.2.1
@@ -303,7 +307,7 @@ secretstorage==3.3.3
 shellingham==1.5.4
     # via
     #   -r requirements/quality.txt
-    #   typer-slim
+    #   typer
 six==1.16.0
     # via
     #   -r requirements/quality.txt
@@ -343,20 +347,11 @@ tox==4.14.2
     # via -r requirements/ci.txt
 twine==5.0.0
     # via -r requirements/quality.txt
-typer[all]==0.12.0
+typer[all]==0.12.2
     # via
     #   -r requirements/quality.txt
     #   rstcheck
-typer-cli==0.12.0
-    # via
-    #   -r requirements/quality.txt
-    #   typer
-typer-slim[standard]==0.12.0
-    # via
-    #   -r requirements/quality.txt
-    #   typer
-    #   typer-cli
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   -r requirements/quality.txt
     #   annotated-types
@@ -368,7 +363,7 @@ typing-extensions==4.10.0
     #   rich
     #   rstcheck
     #   rstcheck-core
-    #   typer-slim
+    #   typer
 urllib3==2.2.1
     # via
     #   -r requirements/quality.txt

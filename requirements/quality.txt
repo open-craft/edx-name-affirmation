@@ -12,6 +12,8 @@ astroid==3.1.0
     # via
     #   pylint
     #   pylint-celery
+backports-tarfile==1.0.0
+    # via jaraco-context
 backports-zoneinfo==0.2.1
     # via django
 certifi==2024.2.2
@@ -25,10 +27,10 @@ click==8.1.7
     #   click-log
     #   code-annotations
     #   edx-lint
-    #   typer-slim
+    #   typer
 click-log==0.4.0
     # via edx-lint
-code-annotations==1.7.0
+code-annotations==1.8.0
     # via edx-lint
 cryptography==42.0.5
     # via secretstorage
@@ -61,7 +63,7 @@ isort==5.13.2
     #   pylint
 jaraco-classes==3.4.0
     # via keyring
-jaraco-context==4.3.0
+jaraco-context==5.3.0
     # via keyring
 jaraco-functools==4.0.0
     # via keyring
@@ -138,7 +140,7 @@ rfc3986==2.0.0
 rich==13.7.1
     # via
     #   twine
-    #   typer-slim
+    #   typer
 rstcheck==6.2.1
     # via -r requirements/quality.in
 rstcheck-core==1.2.1
@@ -146,7 +148,7 @@ rstcheck-core==1.2.1
 secretstorage==3.3.3
     # via keyring
 shellingham==1.5.4
-    # via typer-slim
+    # via typer
 six==1.16.0
     # via edx-lint
 snowballstemmer==2.2.0
@@ -163,15 +165,9 @@ tomlkit==0.12.4
     # via pylint
 twine==5.0.0
     # via -r requirements/quality.in
-typer[all]==0.12.0
+typer[all]==0.12.2
     # via rstcheck
-typer-cli==0.12.0
-    # via typer
-typer-slim[standard]==0.12.0
-    # via
-    #   typer
-    #   typer-cli
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   annotated-types
     #   asgiref
@@ -182,7 +178,7 @@ typing-extensions==4.10.0
     #   rich
     #   rstcheck
     #   rstcheck-core
-    #   typer-slim
+    #   typer
 urllib3==2.2.1
     # via
     #   requests

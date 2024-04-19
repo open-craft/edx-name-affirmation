@@ -145,7 +145,7 @@ edx-toggles==5.2.0
     # via -r requirements/base.txt
 exceptiongroup==1.2.0
     # via pytest
-idna==3.6
+idna==3.7
     # via
     #   -r requirements/base.txt
     #   requests
@@ -249,7 +249,7 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   python-dateutil
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via
     #   -r requirements/base.txt
     #   django

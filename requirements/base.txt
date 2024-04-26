@@ -16,7 +16,7 @@ backports-zoneinfo[tzdata]==0.2.1
     #   kombu
 billiard==4.2.0
     # via celery
-celery==5.3.6
+celery==5.4.0
     # via
     #   -c requirements/constraints.txt
     #   edx-celeryutils
@@ -90,6 +90,8 @@ djangorestframework==3.15.1
     #   drf-yasg
     #   edx-api-doc-tools
     #   edx-drf-extensions
+dnspython==2.6.1
+    # via pymongo
 drf-jwt==1.19.2
     # via edx-drf-extensions
 drf-yasg==1.21.7
@@ -106,7 +108,7 @@ edx-django-utils==5.12.0
     #   edx-toggles
 edx-drf-extensions==10.3.0
     # via -r requirements/base.in
-edx-opaque-keys==2.5.1
+edx-opaque-keys==2.9.0
     # via edx-drf-extensions
 edx-toggles==5.2.0
     # via -r requirements/base.in
@@ -122,7 +124,7 @@ kombu==5.3.7
     # via celery
 markupsafe==2.1.5
     # via jinja2
-newrelic==9.8.0
+newrelic==9.9.0
     # via edx-django-utils
 packaging==24.0
     # via drf-yasg
@@ -138,7 +140,7 @@ pyjwt[crypto]==2.8.0
     # via
     #   drf-jwt
     #   edx-drf-extensions
-pymongo==3.13.0
+pymongo==4.4.0
     # via edx-opaque-keys
 pynacl==1.5.0
     # via edx-django-utils

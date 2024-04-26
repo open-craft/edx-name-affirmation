@@ -12,7 +12,7 @@ backports-zoneinfo[tzdata]==0.2.1
     #   kombu
 billiard==4.2.0
     # via celery
-celery==5.3.6
+celery==5.4.0
     # via -r requirements/celery53.in
 click==8.1.7
     # via

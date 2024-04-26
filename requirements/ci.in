@@ -2,4 +2,5 @@
 
 -c constraints.txt
 
+coverage                  # Python code coverage
 tox                       # Virtualenv management for tests

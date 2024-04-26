@@ -37,7 +37,11 @@ jobs:
 
       - name: Run Coverage
         if: matrix.toxenv == 'django32'
-        uses: codecov/codecov-action@v2
+        uses: py-cov-action/python-coverage-comment-action@v3
         with:
-          flags: unittests
-          fail_ci_if_error: true
+          GITHUB_TOKEN: ${{ github.token }}
+          MINIMUM_GREEN: 95
+          MINIMUM_ORANGE: 84
+          ANNOTATE_MISSING_LINES: true
+          ANNOTATION_TYPE: error
+          uses: codecov/codecov-action@v2

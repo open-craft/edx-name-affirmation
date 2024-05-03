@@ -100,7 +100,7 @@ edx-api-doc-tools==1.8.0
     # via -r requirements/base.in
 edx-celeryutils==1.3.0
     # via -r requirements/base.in
-edx-django-utils==5.12.0
+edx-django-utils==5.13.0
     # via
     #   -r requirements/base.in
     #   django-config-models

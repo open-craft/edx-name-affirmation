@@ -101,7 +101,7 @@ edx-i18n-tools==1.6.0
     # via -r requirements/dev.in
 edx-lint==5.3.6
     # via -r requirements/quality.txt
-filelock==3.13.4
+filelock==3.14.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -264,7 +264,7 @@ pyproject-api==1.6.1
     # via
     #   -r requirements/ci.txt
     #   tox
-pyproject-hooks==1.0.0
+pyproject-hooks==1.1.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
@@ -343,13 +343,12 @@ tomli==2.0.1
     #   pip-tools
     #   pylint
     #   pyproject-api
-    #   pyproject-hooks
     #   tox
 tomlkit==0.12.4
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.14.2
+tox==4.15.0
     # via -r requirements/ci.txt
 twine==5.0.0
     # via -r requirements/quality.txt
@@ -375,7 +374,7 @@ urllib3==2.2.1
     #   -r requirements/quality.txt
     #   requests
     #   twine
-virtualenv==20.26.0
+virtualenv==20.26.1
     # via
     #   -r requirements/ci.txt
     #   tox

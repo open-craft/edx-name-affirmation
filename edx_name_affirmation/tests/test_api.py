@@ -103,6 +103,7 @@ class TestVerifiedNameAPI(TestCase):
         """
         Test that an empty verified_name or profile_name will raise an exception.
         """
+        field = ''
         if verified_name == '':
             field = 'verified_name'
         elif profile_name == '':

@@ -191,7 +191,7 @@ pyyaml==6.0.1
     #   drf-yasg
 readme-renderer==43.0
     # via -r requirements/doc.in
-requests==2.31.0
+requests==2.32.1
     # via
     #   edx-drf-extensions
     #   sphinx
@@ -257,5 +257,5 @@ vine==5.1.0
     #   kombu
 wcwidth==0.2.13
     # via prompt-toolkit
-zipp==3.18.1
+zipp==3.18.2
     # via importlib-metadata

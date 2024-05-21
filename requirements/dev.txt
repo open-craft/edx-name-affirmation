@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-annotated-types==0.7.0
+annotated-types==0.6.0
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -12,7 +12,7 @@ asgiref==3.8.1
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==3.2.2
+astroid==3.2.0
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -204,7 +204,7 @@ pkginfo==1.10.0
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==4.2.2
+platformdirs==4.2.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -240,7 +240,7 @@ pygments==2.18.0
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==3.2.2
+pylint==3.2.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -282,7 +282,7 @@ readme-renderer==43.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.32.1
+requests==2.31.0
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -350,7 +350,7 @@ tomlkit==0.12.5
     #   pylint
 tox==4.15.0
     # via -r requirements/ci.txt
-twine==5.1.0
+twine==5.0.0
     # via -r requirements/quality.txt
 typer[all]==0.12.3
     # via
@@ -382,7 +382,7 @@ wheel==0.43.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-zipp==3.18.2
+zipp==3.18.1
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt

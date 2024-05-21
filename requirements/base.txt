@@ -154,7 +154,7 @@ pyyaml==6.0.1
     # via
     #   code-annotations
     #   drf-yasg
-requests==2.32.1
+requests==2.31.0
     # via edx-drf-extensions
 semantic-version==2.10.0
     # via edx-drf-extensions

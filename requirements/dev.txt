@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -12,12 +12,12 @@ asgiref==3.8.1
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==3.2.0
+astroid==3.2.2
     # via
     #   -r requirements/quality.txt
     #   pylint
     #   pylint-celery
-backports-tarfile==1.1.1
+backports-tarfile==1.2.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-context
@@ -33,7 +33,7 @@ cachetools==5.3.3
     # via
     #   -r requirements/ci.txt
     #   tox
-certifi==2024.2.2
+certifi==2024.6.2
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -71,7 +71,7 @@ colorama==0.4.6
     # via
     #   -r requirements/ci.txt
     #   tox
-coverage==7.5.1
+coverage==7.5.3
     # via -r requirements/ci.txt
 cryptography==42.0.7
     # via
@@ -200,11 +200,11 @@ pbr==6.0.0
     #   stevedore
 pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
-pkginfo==1.10.0
+pkginfo==1.11.0
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -224,11 +224,11 @@ pycparser==2.22
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.7.1
+pydantic==2.7.3
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-pydantic-core==2.18.2
+pydantic-core==2.18.4
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -240,7 +240,7 @@ pygments==2.18.0
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==3.2.0
+pylint==3.2.2
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -282,7 +282,7 @@ readme-renderer==43.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.31.0
+requests==2.32.3
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -350,13 +350,13 @@ tomlkit==0.12.5
     #   pylint
 tox==4.15.0
     # via -r requirements/ci.txt
-twine==5.0.0
+twine==5.1.0
     # via -r requirements/quality.txt
 typer[all]==0.12.3
     # via
     #   -r requirements/quality.txt
     #   rstcheck
-typing-extensions==4.11.0
+typing-extensions==4.12.1
     # via
     #   -r requirements/quality.txt
     #   annotated-types
@@ -382,7 +382,7 @@ wheel==0.43.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-zipp==3.18.1
+zipp==3.19.1
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt

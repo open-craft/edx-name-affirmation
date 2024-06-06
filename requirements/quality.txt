@@ -4,19 +4,19 @@
 #
 #    make upgrade
 #
-annotated-types==0.6.0
+annotated-types==0.7.0
     # via pydantic
 asgiref==3.8.1
     # via django
-astroid==3.2.0
+astroid==3.2.2
     # via
     #   pylint
     #   pylint-celery
-backports-tarfile==1.1.1
+backports-tarfile==1.2.0
     # via jaraco-context
 backports-zoneinfo==0.2.1
     # via django
-certifi==2024.2.2
+certifi==2024.6.2
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -91,17 +91,17 @@ nh3==0.2.17
     # via readme-renderer
 pbr==6.0.0
     # via stevedore
-pkginfo==1.10.0
+pkginfo==1.11.0
     # via twine
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via pylint
 pycodestyle==2.11.1
     # via -r requirements/quality.in
 pycparser==2.22
     # via cffi
-pydantic==2.7.1
+pydantic==2.7.3
     # via rstcheck-core
-pydantic-core==2.18.2
+pydantic-core==2.18.4
     # via pydantic
 pydocstyle==6.3.0
     # via -r requirements/quality.in
@@ -109,7 +109,7 @@ pygments==2.18.0
     # via
     #   readme-renderer
     #   rich
-pylint==3.2.0
+pylint==3.2.2
     # via
     #   edx-lint
     #   pylint-celery
@@ -129,7 +129,7 @@ pyyaml==6.0.1
     # via code-annotations
 readme-renderer==43.0
     # via twine
-requests==2.31.0
+requests==2.32.3
     # via
     #   requests-toolbelt
     #   twine
@@ -163,11 +163,11 @@ tomli==2.0.1
     # via pylint
 tomlkit==0.12.5
     # via pylint
-twine==5.0.0
+twine==5.1.0
     # via -r requirements/quality.in
 typer[all]==0.12.3
     # via rstcheck
-typing-extensions==4.11.0
+typing-extensions==4.12.1
     # via
     #   annotated-types
     #   asgiref
@@ -183,7 +183,7 @@ urllib3==2.2.1
     # via
     #   requests
     #   twine
-zipp==3.18.1
+zipp==3.19.1
     # via
     #   importlib-metadata
     #   importlib-resources

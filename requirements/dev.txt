@@ -101,7 +101,7 @@ edx-i18n-tools==1.6.0
     # via -r requirements/dev.in
 edx-lint==5.3.6
     # via -r requirements/quality.txt
-filelock==3.14.0
+filelock==3.15.1
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -218,13 +218,13 @@ pluggy==1.5.0
     #   tox
 polib==1.2.0
     # via edx-i18n-tools
-pycodestyle==2.11.1
+pycodestyle==2.12.0
     # via -r requirements/quality.txt
 pycparser==2.22
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.7.3
+pydantic==2.7.4
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
@@ -369,7 +369,7 @@ typing-extensions==4.12.2
     #   rstcheck
     #   rstcheck-core
     #   typer
-urllib3==2.2.1
+urllib3==2.2.2
     # via
     #   -r requirements/quality.txt
     #   requests

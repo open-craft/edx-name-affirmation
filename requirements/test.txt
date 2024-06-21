@@ -176,7 +176,7 @@ markupsafe==2.1.5
     #   jinja2
 mock==5.1.0
     # via -r requirements/test.in
-newrelic==9.10.0
+newrelic==9.11.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -286,7 +286,7 @@ uritemplate==4.1.1
     # via
     #   -r requirements/base.txt
     #   drf-yasg
-urllib3==2.2.1
+urllib3==2.2.2
     # via
     #   -r requirements/base.txt
     #   requests

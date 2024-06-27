@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-20.04]
         python-version: ["3.8"]
         node-version: ["10"]
-        toxenv: [django32, django42, quality, pii_check, rst_validation]
+        toxenv: [django42, quality, pii_check, rst_validation]
 
     steps:
       - uses: actions/checkout@v1
@@ -36,7 +36,7 @@ jobs:
         run: tox
 
       - name: Run Coverage
-        if: matrix.toxenv == 'django32'
+        if: matrix.toxenv == 'django42'
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ github.token }}

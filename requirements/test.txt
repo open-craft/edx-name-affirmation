@@ -208,7 +208,7 @@ pyjwt[crypto]==2.8.0
     #   -r requirements/base.txt
     #   drf-jwt
     #   edx-drf-extensions
-pymongo==4.7.3
+pymongo==4.8.0
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys

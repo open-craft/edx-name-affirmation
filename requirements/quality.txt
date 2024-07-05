@@ -91,7 +91,7 @@ nh3==0.2.17
     # via readme-renderer
 pbr==6.0.0
     # via stevedore
-pkginfo==1.11.1
+pkginfo==1.10.0
     # via twine
 platformdirs==4.2.2
     # via pylint
@@ -99,9 +99,9 @@ pycodestyle==2.12.0
     # via -r requirements/quality.in
 pycparser==2.22
     # via cffi
-pydantic==2.7.4
+pydantic==2.8.0
     # via rstcheck-core
-pydantic-core==2.18.4
+pydantic-core==2.20.0
     # via pydantic
 pydocstyle==6.3.0
     # via -r requirements/quality.in
@@ -109,7 +109,7 @@ pygments==2.18.0
     # via
     #   readme-renderer
     #   rich
-pylint==3.2.3
+pylint==3.2.5
     # via
     #   edx-lint
     #   pylint-celery
@@ -163,7 +163,7 @@ tomli==2.0.1
     # via pylint
 tomlkit==0.12.5
     # via pylint
-twine==5.1.0
+twine==5.1.1
     # via -r requirements/quality.in
 typer[all]==0.12.3
     # via rstcheck

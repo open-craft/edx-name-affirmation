@@ -33,7 +33,7 @@ cachetools==5.3.3
     # via
     #   -r requirements/ci.txt
     #   tox
-certifi==2024.6.2
+certifi==2024.7.4
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -87,7 +87,7 @@ distlib==0.3.8
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==4.2.13
+django==4.2.14
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/quality.txt
@@ -117,7 +117,6 @@ importlib-metadata==6.11.0
     #   -r requirements/quality.txt
     #   build
     #   keyring
-    #   rstcheck
     #   rstcheck-core
     #   twine
 importlib-resources==6.4.0
@@ -181,7 +180,7 @@ more-itertools==10.3.0
     #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
-nh3==0.2.17
+nh3==0.2.18
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -224,11 +223,11 @@ pycparser==2.22
     # via
     #   -r requirements/quality.txt
     #   cffi
-pydantic==2.8.0
+pydantic==2.8.2
     # via
     #   -r requirements/quality.txt
     #   rstcheck-core
-pydantic-core==2.20.0
+pydantic-core==2.20.1
     # via
     #   -r requirements/quality.txt
     #   pydantic
@@ -300,7 +299,7 @@ rich==13.7.1
     #   -r requirements/quality.txt
     #   twine
     #   typer
-rstcheck==6.2.1
+rstcheck==6.2.4
     # via -r requirements/quality.txt
 rstcheck-core==1.2.1
     # via
@@ -348,11 +347,11 @@ tomlkit==0.12.5
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.15.1
+tox==4.16.0
     # via -r requirements/ci.txt
 twine==5.1.1
     # via -r requirements/quality.txt
-typer[all]==0.12.3
+typer==0.12.3
     # via
     #   -r requirements/quality.txt
     #   rstcheck
@@ -366,7 +365,6 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   pylint
     #   rich
-    #   rstcheck
     #   rstcheck-core
     #   typer
 urllib3==2.2.2

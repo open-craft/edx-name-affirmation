@@ -64,9 +64,9 @@ code-annotations==1.8.0
     #   -r requirements/base.txt
     #   -r requirements/test.in
     #   edx-toggles
-coverage[toml]==7.5.4
+coverage[toml]==7.6.0
     # via pytest-cov
-cryptography==42.0.8
+cryptography==43.0.0
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -147,7 +147,7 @@ edx-opaque-keys==2.10.0
     #   edx-drf-extensions
 edx-toggles==5.2.0
     # via -r requirements/base.txt
-exceptiongroup==1.2.1
+exceptiongroup==1.2.2
     # via pytest
 idna==3.7
     # via
@@ -176,7 +176,7 @@ markupsafe==2.1.5
     #   jinja2
 mock==5.1.0
     # via -r requirements/test.in
-newrelic==9.11.0
+newrelic==9.12.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
@@ -216,7 +216,7 @@ pynacl==1.5.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-pytest==8.2.2
+pytest==8.3.2
     # via
     #   pytest-cov
     #   pytest-django
@@ -253,7 +253,7 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   python-dateutil
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via
     #   -r requirements/base.txt
     #   django

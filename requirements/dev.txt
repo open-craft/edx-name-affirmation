@@ -12,7 +12,7 @@ asgiref==3.8.1
     # via
     #   -r requirements/quality.txt
     #   django
-astroid==3.2.2
+astroid==3.2.4
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -29,7 +29,7 @@ build==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-cachetools==5.3.3
+cachetools==5.4.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -71,13 +71,13 @@ colorama==0.4.6
     # via
     #   -r requirements/ci.txt
     #   tox
-coverage==7.5.4
+coverage==7.6.0
     # via -r requirements/ci.txt
-cryptography==42.0.8
+cryptography==43.0.0
     # via
     #   -r requirements/quality.txt
     #   secretstorage
-diff-cover==9.1.0
+diff-cover==9.1.1
     # via -r requirements/dev.in
 dill==0.3.8
     # via
@@ -97,9 +97,9 @@ docutils==0.20.1
     #   -r requirements/quality.txt
     #   readme-renderer
     #   rstcheck-core
-edx-i18n-tools==1.6.0
+edx-i18n-tools==1.6.1
     # via -r requirements/dev.in
-edx-lint==5.3.6
+edx-lint==5.3.7
     # via -r requirements/quality.txt
 filelock==3.15.4
     # via
@@ -157,7 +157,7 @@ lxml[html-clean,html_clean]==5.2.2
     # via
     #   edx-i18n-tools
     #   lxml-html-clean
-lxml-html-clean==0.1.1
+lxml-html-clean==0.2.0
     # via lxml
 markdown-it-py==3.0.0
     # via
@@ -191,7 +191,7 @@ packaging==24.1
     #   build
     #   pyproject-api
     #   tox
-path==16.14.0
+path==17.0.0
     # via edx-i18n-tools
 pbr==6.0.0
     # via
@@ -239,7 +239,7 @@ pygments==2.18.0
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==3.2.5
+pylint==3.2.6
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -321,7 +321,7 @@ snowballstemmer==2.2.0
     # via
     #   -r requirements/quality.txt
     #   pydocstyle
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via
     #   -r requirements/quality.txt
     #   django
@@ -343,7 +343,7 @@ tomli==2.0.1
     #   pylint
     #   pyproject-api
     #   tox
-tomlkit==0.12.5
+tomlkit==0.13.0
     # via
     #   -r requirements/quality.txt
     #   pylint

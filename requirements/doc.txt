@@ -10,7 +10,7 @@ amqp==5.2.0
     # via kombu
 asgiref==3.8.1
     # via django
-babel==2.15.0
+babel==2.16.0
     # via sphinx
 backports-zoneinfo[tzdata]==0.2.1
     # via
@@ -26,7 +26,7 @@ celery==5.4.0
     #   edx-celeryutils
 certifi==2024.7.4
     # via requests
-cffi==1.16.0
+cffi==1.17.0
     # via
     #   cryptography
     #   pynacl
@@ -130,10 +130,8 @@ idna==3.7
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.11.0
-    # via
-    #   -c requirements/common_constraints.txt
-    #   sphinx
+importlib-metadata==8.2.0
+    # via sphinx
 inflection==0.5.1
     # via drf-yasg
 jinja2==3.1.4
@@ -146,7 +144,7 @@ kombu==5.4.0
     # via celery
 markupsafe==2.1.5
     # via jinja2
-newrelic==9.12.0
+newrelic==9.13.0
     # via edx-django-utils
 nh3==0.2.18
     # via readme-renderer
@@ -185,7 +183,7 @@ pytz==2024.1
     # via
     #   babel
     #   drf-yasg
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via
     #   code-annotations
     #   drf-yasg
@@ -257,5 +255,5 @@ vine==5.1.0
     #   kombu
 wcwidth==0.2.13
     # via prompt-toolkit
-zipp==3.19.2
+zipp==3.20.0
     # via importlib-metadata

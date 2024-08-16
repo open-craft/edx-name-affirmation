@@ -18,7 +18,7 @@ backports-zoneinfo==0.2.1
     # via django
 certifi==2024.7.4
     # via requests
-cffi==1.16.0
+cffi==1.17.0
     # via cryptography
 charset-normalizer==3.3.2
     # via requests
@@ -48,9 +48,8 @@ edx-lint==5.3.7
     # via -r requirements/quality.in
 idna==3.7
     # via requests
-importlib-metadata==6.11.0
+importlib-metadata==8.2.0
     # via
-    #   -c requirements/common_constraints.txt
     #   keyring
     #   rstcheck-core
     #   twine
@@ -82,7 +81,7 @@ mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
     # via markdown-it-py
-more-itertools==10.3.0
+more-itertools==10.4.0
     # via
     #   jaraco-classes
     #   jaraco-functools
@@ -124,7 +123,7 @@ pylint-plugin-utils==0.8.2
     #   pylint-django
 python-slugify==8.0.4
     # via code-annotations
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via code-annotations
 readme-renderer==43.0
     # via twine
@@ -181,7 +180,7 @@ urllib3==2.2.2
     # via
     #   requests
     #   twine
-zipp==3.19.2
+zipp==3.20.0
     # via
     #   importlib-metadata
     #   importlib-resources

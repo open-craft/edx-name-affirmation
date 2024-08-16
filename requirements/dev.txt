@@ -37,7 +37,7 @@ certifi==2024.7.4
     # via
     #   -r requirements/quality.txt
     #   requests
-cffi==1.16.0
+cffi==1.17.0
     # via
     #   -r requirements/quality.txt
     #   cryptography
@@ -110,9 +110,8 @@ idna==3.7
     # via
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==6.11.0
+importlib-metadata==8.2.0
     # via
-    #   -c requirements/common_constraints.txt
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
@@ -153,7 +152,7 @@ keyring==25.3.0
     # via
     #   -r requirements/quality.txt
     #   twine
-lxml==5.2.2
+lxml==5.3.0
     # via edx-i18n-tools
 markdown-it-py==3.0.0
     # via
@@ -171,7 +170,7 @@ mdurl==0.1.2
     # via
     #   -r requirements/quality.txt
     #   markdown-it-py
-more-itertools==10.3.0
+more-itertools==10.4.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-classes
@@ -268,7 +267,7 @@ python-slugify==8.0.4
     # via
     #   -r requirements/quality.txt
     #   code-annotations
-pyyaml==6.0.1
+pyyaml==6.0.2
     # via
     #   -r requirements/quality.txt
     #   code-annotations
@@ -343,7 +342,7 @@ tomlkit==0.13.0
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.17.0
+tox==4.17.1
     # via -r requirements/ci.txt
 twine==5.1.1
     # via -r requirements/quality.txt
@@ -376,7 +375,7 @@ wheel==0.44.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-zipp==3.19.2
+zipp==3.20.0
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt

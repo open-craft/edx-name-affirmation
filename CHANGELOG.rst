@@ -14,6 +14,11 @@ Change Log
 Unreleased
 ~~~~~~~~~~
 
+[2.4.0] - 2024-04-23
+~~~~~~~~~~~~~~~~~~~~
+* Added python3.11 support.
+
+
 [2.3.6] - 2023-07-28
 ~~~~~~~~~~~~~~~~~~~~
 * Upgrade django-simple-history. Added new migration. Fixed packages upgrade issues.

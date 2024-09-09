@@ -7,9 +7,15 @@ from model_utils.models import TimeStampedModel
 from simple_history.models import HistoricalRecords
 
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from edx_name_affirmation.statuses import VerifiedNameStatus
+
+try:
+    from lms.djangoapps.verify_student.models import SoftwareSecurePhotoVerification
+except ImportError:
+    SoftwareSecurePhotoVerification = None
 
 User = get_user_model()
 
@@ -44,6 +50,20 @@ class VerifiedName(TimeStampedModel):
         """ Meta class for this Django model """
         db_table = 'nameaffirmation_verifiedname'
         verbose_name = 'verified name'
+
+    @property
+    def verification_attempt_status(self):
+        "Returns the status associated with its SoftwareSecurePhotoVerification with verification_attempt_id if any."
+
+        if not self.verification_attempt_id or not SoftwareSecurePhotoVerification:
+            return None
+
+        try:
+            verification = SoftwareSecurePhotoVerification.objects.get(id=self.verification_attempt_id)
+            return verification.status
+
+        except ObjectDoesNotExist:
+            return None
 
 
 class VerifiedNameConfig(ConfigurationModel):

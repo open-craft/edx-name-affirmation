@@ -2,6 +2,7 @@
 All tests for edx_name_affirmation views
 """
 import json
+from unittest.mock import PropertyMock, patch
 
 import ddt
 
@@ -357,6 +358,7 @@ class VerifiedNameViewTests(NameAffirmationViewsTestCase):
             'verified_name': verified_name_obj.verified_name,
             'profile_name': verified_name_obj.profile_name,
             'verification_attempt_id': verified_name_obj.verification_attempt_id,
+            'verification_attempt_status': None,
             'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
             'status': verified_name_obj.status,
             'use_verified_name_for_certs': use_verified_name_for_certs,
@@ -377,6 +379,25 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
 
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content.decode('utf-8'))
+        self.assertEqual(data, expected_response)
+
+    @patch('edx_name_affirmation.api.VerifiedName.verification_attempt_status', new_callable=PropertyMock)
+    def test_get_with_idv_status(self, verification_attempt_status_mock):
+        mocked_idv_status = 'approved'
+
+        verification_attempt_status_mock.return_value = mocked_idv_status
+        verified_name_history = self._create_verified_name_history(self.user)
+        expected_response = self._get_expected_response(self.user, verified_name_history)
+
+        # replacing the expected response results with the mocked status
+        for row in expected_response['results']:
+            row['verification_attempt_status'] = mocked_idv_status
+
+        response = self.client.get(reverse('edx_name_affirmation:verified_name_history'))
+
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content.decode('utf-8'))
+
         self.assertEqual(data, expected_response)
 
     def test_get_bools(self):
@@ -456,6 +477,7 @@ class VerifiedNameHistoryViewTests(NameAffirmationViewsTestCase):
                 'verified_name': verified_name_obj.verified_name,
                 'profile_name': verified_name_obj.profile_name,
                 'verification_attempt_id': verified_name_obj.verification_attempt_id,
+                'verification_attempt_status': None,
                 'proctored_exam_attempt_id': verified_name_obj.proctored_exam_attempt_id,
                 'status': verified_name_obj.status
             }

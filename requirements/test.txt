@@ -74,7 +74,6 @@ ddt==1.7.2
     #   django-config-models
     #   django-crum
     #   django-model-utils
-    #   django-simple-history
     #   django-waffle
     #   djangorestframework
     #   drf-jwt
@@ -96,8 +95,10 @@ django-model-utils==5.0.0
     # via
     #   -r requirements/base.txt
     #   edx-celeryutils
-django-simple-history==3.7.0
-    # via -r requirements/base.txt
+django-simple-history==3.0.0
+    # via
+    #   -c requirements/common_constraints.txt
+    #   -r requirements/base.txt
 django-waffle==4.1.0
     # via
     #   -r requirements/base.txt

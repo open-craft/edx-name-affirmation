@@ -33,6 +33,10 @@ certifi==2024.8.30
     # via
     #   -r requirements/quality.txt
     #   requests
+cffi==1.17.1
+    # via
+    #   -r requirements/quality.txt
+    #   cryptography
 chardet==5.2.0
     # via
     #   -r requirements/ci.txt
@@ -65,6 +69,10 @@ colorama==0.4.6
     #   tox
 coverage==7.6.1
     # via -r requirements/ci.txt
+cryptography==43.0.1
+    # via
+    #   -r requirements/quality.txt
+    #   secretstorage
 diff-cover==9.1.1
     # via -r requirements/dev.in
 dill==0.3.8
@@ -119,6 +127,11 @@ jaraco-functools==4.0.2
     # via
     #   -r requirements/quality.txt
     #   keyring
+jeepney==0.8.0
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
+    #   secretstorage
 jinja2==3.1.4
     # via
     #   -r requirements/quality.txt
@@ -128,8 +141,12 @@ keyring==25.3.0
     # via
     #   -r requirements/quality.txt
     #   twine
-lxml[html_clean]==5.3.0
-    # via edx-i18n-tools
+lxml[html-clean,html_clean]==5.3.0
+    # via
+    #   edx-i18n-tools
+    #   lxml-html-clean
+lxml-html-clean==0.2.2
+    # via lxml
 markdown-it-py==3.0.0
     # via
     #   -r requirements/quality.txt
@@ -190,6 +207,10 @@ polib==1.2.0
     # via edx-i18n-tools
 pycodestyle==2.12.1
     # via -r requirements/quality.txt
+pycparser==2.22
+    # via
+    #   -r requirements/quality.txt
+    #   cffi
 pydantic==2.9.0
     # via
     #   -r requirements/quality.txt
@@ -272,6 +293,10 @@ rstcheck-core==1.2.1
     # via
     #   -r requirements/quality.txt
     #   rstcheck
+secretstorage==3.3.3
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
 shellingham==1.5.4
     # via
     #   -r requirements/quality.txt

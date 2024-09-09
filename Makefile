@@ -31,7 +31,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
-PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
+PIP_COMPILE = pip-compile --rebuild $(PIP_COMPILE_OPTS)
 
 COMMON_CONSTRAINTS_TXT=requirements/common_constraints.txt
 .PHONY: $(COMMON_CONSTRAINTS_TXT)
@@ -55,7 +55,6 @@ upgrade: $(COMMON_CONSTRAINTS_TXT)
 	# Let tox control the Django version for tests
 	sed '/^[dD]jango==/d' requirements/test.txt > requirements/test.tmp
 	mv requirements/test.tmp requirements/test.txt
-	rm requirements/*.txt.tmp
 
 quality-python: ## Run python linters
 	tox -e quality
